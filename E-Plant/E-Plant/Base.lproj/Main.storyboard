@@ -160,7 +160,22 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Add Knowledge" id="gCo-zc-bMj"/>
+                    <navigationItem key="navigationItem" title="Add Knowledge" id="gCo-zc-bMj">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="b1O-DI-DUd">
+                            <connections>
+                                <action selector="cancelButton:" destination="ADo-4D-um0" id="UW9-rf-aCr"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="Ef6-8r-UQO">
+                            <connections>
+                                <action selector="saveButton:" destination="ADo-4D-um0" id="TrD-bI-gWK"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="articleField" destination="bmK-5U-ygz" id="tBh-bF-YF6"/>
+                        <outlet property="titleLabel" destination="qQL-dR-9u0" id="L5o-BY-sRf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m3i-jm-8fR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
