@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8AA9BE0C1FA03DC10018BD7F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA9BE0B1FA03DC10018BD7F /* CoreData.framework */; };
+		8AA9BE131FA041600018BD7F /* KnowledgeBase+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE111FA041600018BD7F /* KnowledgeBase+CoreDataClass.swift */; };
+		8AA9BE141FA041600018BD7F /* KnowledgeBase+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE121FA041600018BD7F /* KnowledgeBase+CoreDataProperties.swift */; };
+		8AA9BE161FA048170018BD7F /* soilKnowledgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE151FA048170018BD7F /* soilKnowledgeCell.swift */; };
+		8AA9BE1A1FA0496A0018BD7F /* SoilKnowledgeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE191FA0496A0018BD7F /* SoilKnowledgeTableViewController.swift */; };
+		8AA9BE1C1FA0499C0018BD7F /* AddSoilKnowledgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE1B1FA0499C0018BD7F /* AddSoilKnowledgeViewController.swift */; };
 		D8774EC41F9C510B0026BEF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8774EC31F9C510B0026BEF7 /* AppDelegate.swift */; };
 		D8774EC61F9C510B0026BEF7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8774EC51F9C510B0026BEF7 /* ViewController.swift */; };
 		D8774EC91F9C510B0026BEF7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8774EC71F9C510B0026BEF7 /* Main.storyboard */; };
@@ -35,6 +41,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8AA9BE0B1FA03DC10018BD7F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		8AA9BE111FA041600018BD7F /* KnowledgeBase+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KnowledgeBase+CoreDataClass.swift"; sourceTree = "<group>"; };
+		8AA9BE121FA041600018BD7F /* KnowledgeBase+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KnowledgeBase+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8AA9BE151FA048170018BD7F /* soilKnowledgeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = soilKnowledgeCell.swift; sourceTree = "<group>"; };
+		8AA9BE191FA0496A0018BD7F /* SoilKnowledgeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoilKnowledgeTableViewController.swift; sourceTree = "<group>"; };
+		8AA9BE1B1FA0499C0018BD7F /* AddSoilKnowledgeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSoilKnowledgeViewController.swift; sourceTree = "<group>"; };
 		D8774EC01F9C510B0026BEF7 /* E-Plant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-Plant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8774EC31F9C510B0026BEF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8774EC51F9C510B0026BEF7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AA9BE0C1FA03DC10018BD7F /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,13 +89,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8AA9BE0A1FA03DC10018BD7F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8AA9BE0B1FA03DC10018BD7F /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8AA9BE171FA049190018BD7F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8AA9BE151FA048170018BD7F /* soilKnowledgeCell.swift */,
+				8AA9BE191FA0496A0018BD7F /* SoilKnowledgeTableViewController.swift */,
+				8AA9BE1B1FA0499C0018BD7F /* AddSoilKnowledgeViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		8AA9BE181FA049300018BD7F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D8774EC51F9C510B0026BEF7 /* ViewController.swift */,
+				D8774EC71F9C510B0026BEF7 /* Main.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		D8774EB71F9C510A0026BEF7 = {
 			isa = PBXGroup;
 			children = (
+				8AA9BE111FA041600018BD7F /* KnowledgeBase+CoreDataClass.swift */,
+				8AA9BE121FA041600018BD7F /* KnowledgeBase+CoreDataProperties.swift */,
 				D8774EC21F9C510B0026BEF7 /* E-Plant */,
 				D8774EDA1F9C510B0026BEF7 /* E-PlantTests */,
 				D8774EE51F9C510B0026BEF7 /* E-PlantUITests */,
 				D8774EC11F9C510B0026BEF7 /* Products */,
+				8AA9BE0A1FA03DC10018BD7F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,9 +142,9 @@
 		D8774EC21F9C510B0026BEF7 /* E-Plant */ = {
 			isa = PBXGroup;
 			children = (
+				8AA9BE181FA049300018BD7F /* View */,
+				8AA9BE171FA049190018BD7F /* Controller */,
 				D8774EC31F9C510B0026BEF7 /* AppDelegate.swift */,
-				D8774EC51F9C510B0026BEF7 /* ViewController.swift */,
-				D8774EC71F9C510B0026BEF7 /* Main.storyboard */,
 				D8774ECD1F9C510B0026BEF7 /* Assets.xcassets */,
 				D8774ECF1F9C510B0026BEF7 /* LaunchScreen.storyboard */,
 				D8774ED21F9C510B0026BEF7 /* Info.plist */,
@@ -263,7 +306,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8774EC61F9C510B0026BEF7 /* ViewController.swift in Sources */,
+				8AA9BE161FA048170018BD7F /* soilKnowledgeCell.swift in Sources */,
+				8AA9BE1A1FA0496A0018BD7F /* SoilKnowledgeTableViewController.swift in Sources */,
+				8AA9BE141FA041600018BD7F /* KnowledgeBase+CoreDataProperties.swift in Sources */,
+				8AA9BE131FA041600018BD7F /* KnowledgeBase+CoreDataClass.swift in Sources */,
 				D8774ECC1F9C510B0026BEF7 /* E_Plant.xcdatamodeld in Sources */,
+				8AA9BE1C1FA0499C0018BD7F /* AddSoilKnowledgeViewController.swift in Sources */,
 				D8774EC41F9C510B0026BEF7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -511,6 +559,7 @@
 				D8774EED1F9C510B0026BEF7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D8774EEE1F9C510B0026BEF7 /* Build configuration list for PBXNativeTarget "E-PlantTests" */ = {
 			isa = XCConfigurationList;
@@ -519,6 +568,7 @@
 				D8774EF01F9C510B0026BEF7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D8774EF11F9C510B0026BEF7 /* Build configuration list for PBXNativeTarget "E-PlantUITests" */ = {
 			isa = XCConfigurationList;
@@ -527,6 +577,7 @@
 				D8774EF31F9C510B0026BEF7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

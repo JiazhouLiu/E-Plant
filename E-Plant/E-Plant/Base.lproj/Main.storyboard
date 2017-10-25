@@ -28,7 +28,7 @@
             </objects>
             <point key="canvasLocation" x="56" y="259"/>
         </scene>
-        <!--View Controller-->
+        <!--Knowledge Base-->
         <scene sceneID="Lbw-6I-ENA">
             <objects>
                 <viewController id="srU-ck-i0y" sceneMemberID="viewController">
@@ -45,7 +45,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Soil Knowledge"/>
                                 <connections>
-                                    <segue destination="ccF-E4-bAJ" kind="show" identifier="soilCategory" id="fSg-MR-Lfl"/>
+                                    <segue destination="WRI-YE-ZMn" kind="show" id="MvD-gP-hFL"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6xC-WW-U8l">
@@ -75,7 +75,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="PAT-ox-lk6"/>
+                    <navigationItem key="navigationItem" title="Knowledge Base" id="PAT-ox-lk6"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="44H-EX-ftA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -84,19 +84,32 @@
         <!--Soil Knowledge-->
         <scene sceneID="6Js-ms-I4V">
             <objects>
-                <tableViewController title="Soil Knowledge" id="ccF-E4-bAJ" sceneMemberID="viewController">
+                <tableViewController title="Soil Knowledge" id="ccF-E4-bAJ" customClass="SoilKnowledgeTableViewController" customModule="E_Plant" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="khd-Qt-9Lr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="FDi-hu-ee3">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SoilKnowledgeCell" id="FDi-hu-ee3" customClass="soilKnowledgeCell" customModule="E_Plant" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FDi-hu-ee3" id="Emk-QC-Ceg">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="       Title" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KIu-Kd-lgV">
+                                            <rect key="frame" x="139" y="8" width="97" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="titleLabel" destination="KIu-Kd-lgV" id="Rdy-UC-JEJ"/>
+                                    <segue destination="hqJ-Qx-3H4" kind="show" identifier="soilknowledgeCell" trigger="accessoryAction" id="wyx-sA-fqW"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -104,10 +117,88 @@
                             <outlet property="delegate" destination="ccF-E4-bAJ" id="uwQ-8X-3Ai"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Soil Knowledge" id="Jeo-8P-crI">
+                        <barButtonItem key="rightBarButtonItem" title="+" id="9vo-iD-KSj">
+                            <connections>
+                                <segue destination="tgK-D2-imN" kind="show" id="F6N-qy-5FG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="26f-uW-JW1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1929" y="1145"/>
+            <point key="canvasLocation" x="3152.8000000000002" y="1144.6776611694154"/>
+        </scene>
+        <!--Add Knowledge-->
+        <scene sceneID="Bad-Vs-1Xy">
+            <objects>
+                <viewController title="Add Knowledge" id="ADo-4D-um0" customClass="AddSoilKnowledgeViewController" customModule="E_Plant" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LyE-DX-WLR"/>
+                        <viewControllerLayoutGuide type="bottom" id="bTh-ci-u8k"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="e9u-is-Ncj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Title" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qQL-dR-9u0">
+                                <rect key="frame" x="16" y="84" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Write your knowledge here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bmK-5U-ygz">
+                                <rect key="frame" x="16" y="134" width="343" height="453"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Knowledge" id="gCo-zc-bMj"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m3i-jm-8fR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5176.8000000000002" y="214.54272863568218"/>
+        </scene>
+        <!--Soil Knowledge Detail-->
+        <scene sceneID="QvC-hx-gsO">
+            <objects>
+                <viewController title="Soil Knowledge Detail" id="hqJ-Qx-3H4" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fE3-4h-Ygq"/>
+                        <viewControllerLayoutGuide type="bottom" id="Som-82-D1L"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QIT-MM-wbu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qep-eE-JqQ">
+                                <rect key="frame" x="28" y="84" width="300" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Articles" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Pi4-jj-hlb">
+                                <rect key="frame" x="0.0" y="113" width="375" height="477"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ULN-1d-nt8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4248.8000000000002" y="1163.568215892054"/>
         </scene>
         <!--Plant Knowledge-->
         <scene sceneID="1kC-PH-I6e">
@@ -132,10 +223,12 @@
                             <outlet property="delegate" destination="wgs-sE-gpN" id="pms-MG-cam"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AgG-Dd-L8O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2012" y="1850"/>
+            <point key="canvasLocation" x="2215" y="1846"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="qKF-wv-ute">
@@ -240,5 +333,42 @@
             </objects>
             <point key="canvasLocation" x="55" y="1301"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Vut-r8-CQy">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tgK-D2-imN" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mO7-dn-OAZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ADo-4D-um0" kind="relationship" relationship="rootViewController" id="Nt9-rh-fTM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aKW-Vq-oLI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4249" y="215"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="80u-v3-WOY">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WRI-YE-ZMn" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1uo-aU-P0A">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ccF-E4-bAJ" kind="relationship" relationship="rootViewController" id="huG-HI-vUH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IPK-Sa-w8N" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2213.5999999999999" y="1144.6776611694154"/>
+        </scene>
     </scenes>
+    <color key="tintColor" red="1" green="0.35865688610000002" blue="0.1478832068" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
