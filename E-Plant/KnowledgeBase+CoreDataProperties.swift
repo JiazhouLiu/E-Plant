@@ -21,3 +21,5 @@ extension KnowledgeBase {
     @NSManaged public var title: String?
 
 }
+
+

@@ -10,13 +10,14 @@ import UIKit
 import CoreData
 
 protocol addKnowledgeDelegate {
-    func addKnowledge(knowledge: newKnowledge)
+    func addKnowledge(knowledge: NewKnowledge)
     }
 
 class AddSoilKnowledgeViewController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var titleField: UITextField!
+    
     @IBOutlet weak var articleField: UITextView!
+    @IBOutlet weak var titleField: UITextField!
     
     var knowlege: KnowledgeBase!
     var managedContext: NSManagedObjectContext?
@@ -50,34 +51,42 @@ class AddSoilKnowledgeViewController: UIViewController, UITextFieldDelegate {
         return appDelegate.persistentContainer.viewContext
     }
     
-    @IBAction func saveButton(_ sender: Any) {
-         let isPresentingInAddMode = presentingViewController is UITabBarController
-         if isPresentingInAddMode {
+   
+    
+    @IBAction func SaveButton(_ sender: UIBarButtonItem) {
+        let isPresentingInAddMode = presentingViewController is UITabBarController
+        print("test11111111")
+        if isPresentingInAddMode {
+             print("test2222222")
             if (titleField.text!.trimmingCharacters(in: .whitespaces).isEmpty){  // the name cannot be empty
                 showAlert(title: "title")
             }
             else {
                 let newTitle = titleField.text
                 let newArticle = articleField.text
-                let newItem = newKnowledge(title: newTitle!, category: "soil Knowledge", article: newArticle!)
+                let newItem = NewKnowledge(title: newTitle!, category: "soil Knowledge", article: newArticle!)
                 self.delegate!.addKnowledge(knowledge: newItem)
                 dismiss(animated: true, completion: nil)
             }
         }
     }
     
-    @IBAction func cancelButton(_ sender: Any) {
+   
+    
+    
+   
+    @IBAction func cancelButton(_ sender: UIBarButtonItem) {
         // Dismiss the view controller depending on the context it was presented
         let isPresentingInAddMode = presentingViewController is UITabBarController
+        print("test11111111")
         if isPresentingInAddMode {
+            print("test222222")
             dismiss(animated: true, completion: nil)
         } else {
-            
+            print("test33333")
             navigationController!.popViewController(animated: true)
         }
     }
-    
-    
     
     
     

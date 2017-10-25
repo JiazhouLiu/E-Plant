@@ -8,7 +8,7 @@
 
 import UIKit
 
-class newKnowledge: NSObject {
+class NewKnowledge: NSObject {
     var title:String?
     var category:String?
     var article:String?

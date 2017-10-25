@@ -10,7 +10,8 @@ import UIKit
 
 class soilKnowledgeCell: UITableViewCell {
 
-    @IBOutlet weak var titleLabel: UITextField!
+    
+    @IBOutlet weak var titleLabel: UILabel!
     
     
     override func awakeFromNib() {

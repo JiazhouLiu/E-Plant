@@ -14,6 +14,7 @@
 		8AA9BE1A1FA0496A0018BD7F /* SoilKnowledgeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE191FA0496A0018BD7F /* SoilKnowledgeTableViewController.swift */; };
 		8AA9BE1C1FA0499C0018BD7F /* AddSoilKnowledgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE1B1FA0499C0018BD7F /* AddSoilKnowledgeViewController.swift */; };
 		8AA9BE1F1FA04ADC0018BD7F /* newKnowledge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE1E1FA04ADC0018BD7F /* newKnowledge.swift */; };
+		8AA9BE231FA08A0C0018BD7F /* SoilKnowledgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE221FA08A0C0018BD7F /* SoilKnowledgeViewController.swift */; };
 		D8774EC41F9C510B0026BEF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8774EC31F9C510B0026BEF7 /* AppDelegate.swift */; };
 		D8774EC61F9C510B0026BEF7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8774EC51F9C510B0026BEF7 /* ViewController.swift */; };
 		D8774EC91F9C510B0026BEF7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8774EC71F9C510B0026BEF7 /* Main.storyboard */; };
@@ -49,6 +50,7 @@
 		8AA9BE191FA0496A0018BD7F /* SoilKnowledgeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoilKnowledgeTableViewController.swift; sourceTree = "<group>"; };
 		8AA9BE1B1FA0499C0018BD7F /* AddSoilKnowledgeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSoilKnowledgeViewController.swift; sourceTree = "<group>"; };
 		8AA9BE1E1FA04ADC0018BD7F /* newKnowledge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newKnowledge.swift; sourceTree = "<group>"; };
+		8AA9BE221FA08A0C0018BD7F /* SoilKnowledgeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoilKnowledgeViewController.swift; sourceTree = "<group>"; };
 		D8774EC01F9C510B0026BEF7 /* E-Plant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-Plant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8774EC31F9C510B0026BEF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8774EC51F9C510B0026BEF7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				8AA9BE151FA048170018BD7F /* soilKnowledgeCell.swift */,
 				8AA9BE191FA0496A0018BD7F /* SoilKnowledgeTableViewController.swift */,
 				8AA9BE1B1FA0499C0018BD7F /* AddSoilKnowledgeViewController.swift */,
+				8AA9BE221FA08A0C0018BD7F /* SoilKnowledgeViewController.swift */,
 			);
 			name = soilknowledge;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 			files = (
 				D8774EC61F9C510B0026BEF7 /* ViewController.swift in Sources */,
 				8AA9BE161FA048170018BD7F /* soilKnowledgeCell.swift in Sources */,
+				8AA9BE231FA08A0C0018BD7F /* SoilKnowledgeViewController.swift in Sources */,
 				8AA9BE1A1FA0496A0018BD7F /* SoilKnowledgeTableViewController.swift in Sources */,
 				8AA9BE141FA041600018BD7F /* KnowledgeBase+CoreDataProperties.swift in Sources */,
 				8AA9BE131FA041600018BD7F /* KnowledgeBase+CoreDataClass.swift in Sources */,
