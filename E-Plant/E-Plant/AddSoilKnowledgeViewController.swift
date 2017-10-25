@@ -56,10 +56,14 @@ class AddSoilKnowledgeViewController: UIViewController, UITextFieldDelegate {
     @IBAction func SaveButton(_ sender: UIBarButtonItem) {
         let isPresentingInAddMode = presentingViewController is UITabBarController
         print("test11111111")
-        if isPresentingInAddMode {
+        if !isPresentingInAddMode {
              print("test2222222")
             if (titleField.text!.trimmingCharacters(in: .whitespaces).isEmpty){  // the name cannot be empty
                 showAlert(title: "title")
+            }
+            else if(articleField.text!.trimmingCharacters(in: .whitespaces).isEmpty){
+                
+                showAlert(title: "Article")
             }
             else {
                 let newTitle = titleField.text
@@ -79,7 +83,7 @@ class AddSoilKnowledgeViewController: UIViewController, UITextFieldDelegate {
         // Dismiss the view controller depending on the context it was presented
         let isPresentingInAddMode = presentingViewController is UITabBarController
         print("test11111111")
-        if isPresentingInAddMode {
+        if !isPresentingInAddMode {
             print("test222222")
             dismiss(animated: true, completion: nil)
         } else {
