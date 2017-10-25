@@ -134,6 +134,11 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Soil Knowledge" id="Jeo-8P-crI">
+                        <barButtonItem key="leftBarButtonItem" title="back" id="XT5-xa-8u3">
+                            <connections>
+                                <action selector="backbutton:" destination="ccF-E4-bAJ" id="Svq-BS-H9L"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="+" id="9vo-iD-KSj">
                             <connections>
                                 <segue destination="tgK-D2-imN" kind="presentation" identifier="addSoilKnowledge" modalPresentationStyle="formSheet" id="hGN-lZ-Scu"/>
@@ -429,6 +434,7 @@
                     <connections>
                         <outlet property="articleField" destination="5xX-FG-dd7" id="rgr-VV-xJO"/>
                         <outlet property="titleField" destination="Fgw-Xs-aBm" id="4OY-GA-LSR"/>
+                        <outlet property="typeSegment" destination="2BO-DQ-vlC" id="eQz-nW-Dzq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Wu-zw-88W" userLabel="First Responder" sceneMemberID="firstResponder"/>

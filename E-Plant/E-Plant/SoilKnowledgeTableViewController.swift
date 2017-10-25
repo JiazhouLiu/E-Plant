@@ -61,6 +61,7 @@ class SoilKnowledgeTableViewController: UITableViewController,UISearchBarDelegat
           let knowledge = filteredKnowledgeList![indexPath.row]
           cell.titleLabel.text = knowledge.title
           return cell
+       
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -79,6 +80,36 @@ class SoilKnowledgeTableViewController: UITableViewController,UISearchBarDelegat
         
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            managedContext?.delete(filteredKnowledgeList![indexPath.row])
+            filteredKnowledgeList!.remove(at: indexPath.row)
+            
+            // Delete the row from the data source
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.tableView.reloadSections(NSIndexSet(index:0) as IndexSet, with: .fade)
+            do{
+                try managedContext?.save()
+            }
+            catch let error{
+                print("Could not save: \(error)")
+            }
+        }
+        
+        
+    }
+    
+    
+    
+    func createManagedCategory(name: String) -> Category {
+        let category = NSEntityDescription.insertNewObject(forEntityName: "Category", into: managedContext!) as! Category
+        category.name = name
+       
+        return category
+    }
+
+    
+    
     
     func createManagedKnowledge(title: String,category: String, article:String) -> KnowledgeBase {
         let knowledge = NSEntityDescription.insertNewObject(forEntityName: "KnowledgeBase", into: managedContext!) as! KnowledgeBase
@@ -88,13 +119,16 @@ class SoilKnowledgeTableViewController: UITableViewController,UISearchBarDelegat
         return knowledge
     }
     
+    
+    
     func createDefaultItems() {
-        let newItem = NewKnowledge()
-        newItem.title = "Choose Soil"
-        newItem.article = "123"
-        newItem.category = "Soil"
-        print("test" + (newItem.title)! + "!!!!!")
-        addKnowledge(knowledge: newItem)
+        let soil = createManagedCategory(name: "Soil")
+        let water = createManagedCategory(name: "Water")
+        let plant = createManagedCategory(name: "Plant")
+        soil.addToMembers(createManagedKnowledge(title: "How to Choose Soil", category: "Soil", article: "123"))
+        water.addToMembers(createManagedKnowledge(title: "How to save water", category: "Water", article: "123"))
+        plant.addToMembers(createManagedKnowledge(title: "How to grow plant", category: "Plant", article: "123"))
+        appDelegate?.saveContext()
     }
     
     
@@ -111,7 +145,8 @@ class SoilKnowledgeTableViewController: UITableViewController,UISearchBarDelegat
         
         do {
             KnowledgeBaseList = try managedContext?.fetch(knowledgeFetch) as? [KnowledgeBase]
-            filteredKnowledgeList = KnowledgeBaseList
+            filteredKnowledgeList = KnowledgeBaseList?.filter({ (knowledge) -> Bool in return
+                (knowledge.category?.contains("Soil"))!})
         } catch {
             fatalError("Failed to fetch Knowledge Base: \(error)")
         }
@@ -129,6 +164,21 @@ class SoilKnowledgeTableViewController: UITableViewController,UISearchBarDelegat
         fetchAllKnowledges()
         self.tableView.reloadData()
     }
+    
+    @IBAction func backbutton(_ sender: UIBarButtonItem) {
+        // Dismiss the view controller depending on the context it was presented
+        let isPresentingInAddMode = presentingViewController is UITabBarController
+        print("test11111111")
+        if isPresentingInAddMode {
+            print("test222222")
+            dismiss(animated: true, completion: nil)
+        } else {
+            print("test33333")
+            navigationController!.popViewController(animated: true)
+        }
+        
+    }
+    
 
     
 }

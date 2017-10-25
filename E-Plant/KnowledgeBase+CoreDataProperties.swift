@@ -19,7 +19,6 @@ extension KnowledgeBase {
     @NSManaged public var article: String?
     @NSManaged public var category: String?
     @NSManaged public var title: String?
+    @NSManaged public var type: Category?
 
 }
-
-

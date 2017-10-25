@@ -18,6 +18,7 @@ class AddSoilKnowledgeViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var articleField: UITextView!
     @IBOutlet weak var titleField: UITextField!
+    @IBOutlet weak var typeSegment: UISegmentedControl!
     
     var knowlege: KnowledgeBase!
     var managedContext: NSManagedObjectContext?
@@ -68,7 +69,23 @@ class AddSoilKnowledgeViewController: UIViewController, UITextFieldDelegate {
             else {
                 let newTitle = titleField.text
                 let newArticle = articleField.text
-                let newItem = NewKnowledge(title: newTitle!, category: "soil Knowledge", article: newArticle!)
+                var newCategory: String?
+                switch (typeSegment.selectedSegmentIndex) {
+                    
+                case 0:
+                     newCategory = "Soil"
+                     break
+                case 1:
+                    newCategory = "Plant"
+                    break
+                case 2:
+                    newCategory = "Water"
+                    break
+                default:
+                    newCategory = "Soil"
+                    break
+                }
+                let newItem = NewKnowledge(title: newTitle!, category: newCategory!, article: newArticle!)
                 self.delegate!.addKnowledge(knowledge: newItem)
                 dismiss(animated: true, completion: nil)
             }
