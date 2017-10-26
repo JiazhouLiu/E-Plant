@@ -11,7 +11,13 @@ import CoreData
 
 protocol addKnowledgeDelegate {
     func addKnowledge(knowledge: NewKnowledge)
+    
     }
+
+protocol addPlantKnowledgeDelegate {
+    func addPlantKnowledge(knowledge: NewKnowledge)
+    
+}
 
 class AddSoilKnowledgeViewController: UIViewController, UITextFieldDelegate {
     
@@ -24,7 +30,8 @@ class AddSoilKnowledgeViewController: UIViewController, UITextFieldDelegate {
     var managedContext: NSManagedObjectContext?
     var appDelegate: AppDelegate?
     var delegate: addKnowledgeDelegate?
-
+    var delegate2: addPlantKnowledgeDelegate?
+    var plantDelegate: addPlantKnowledgeDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
         titleField.delegate = self
@@ -86,7 +93,13 @@ class AddSoilKnowledgeViewController: UIViewController, UITextFieldDelegate {
                     break
                 }
                 let newItem = NewKnowledge(title: newTitle!, category: newCategory!, article: newArticle!)
+                if(newCategory == "Soil"){
                 self.delegate!.addKnowledge(knowledge: newItem)
+                }
+                else if(newCategory == "Plant"){
+                    self.plantDelegate!.addPlantKnowledge(knowledge: newItem)
+                }
+                
                 dismiss(animated: true, completion: nil)
             }
         }

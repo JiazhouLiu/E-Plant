@@ -149,7 +149,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="26f-uW-JW1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3152.8000000000002" y="729.98500749625191"/>
+            <point key="canvasLocation" x="3153" y="376"/>
         </scene>
         <!--Soil Knowledge Detail-->
         <scene sceneID="QvC-hx-gsO">
@@ -195,24 +195,37 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ULN-1d-nt8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4615" y="730"/>
+            <point key="canvasLocation" x="5369" y="376"/>
         </scene>
         <!--Plant Knowledge-->
         <scene sceneID="1kC-PH-I6e">
             <objects>
-                <tableViewController title="Plant Knowledge" id="wgs-sE-gpN" sceneMemberID="viewController">
+                <tableViewController title="Plant Knowledge" id="wgs-sE-gpN" customClass="PlantTableViewController" customModule="E_Plant" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="7np-Uh-VXK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="YLw-ms-5pU">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlantKnowledgeCell" id="YLw-ms-5pU" customClass="PlantTableViewCell" customModule="E_Plant" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YLw-ms-5pU" id="OWj-sM-OCf">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5TR-7b-Nfe">
+                                            <rect key="frame" x="8" y="8" width="359" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="titleLabel" destination="5TR-7b-Nfe" id="45M-Ee-G4D"/>
+                                    <segue destination="uPw-f7-oRJ" kind="show" identifier="plantKnowledgeDetail" id="XKt-OB-ap2"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -222,9 +235,14 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Plant Knowledge" id="man-ED-lyl">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="zhb-9C-6iU">
+                            <connections>
+                                <action selector="cancelButton:" destination="wgs-sE-gpN" id="r9e-YH-pia"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="+" id="60e-zP-dIp">
                             <connections>
-                                <segue destination="tgK-D2-imN" kind="show" identifier="PlantSegeue" id="LDU-A8-9j5"/>
+                                <segue destination="tgK-D2-imN" kind="show" identifier="addPlantKnowledge" id="LDU-A8-9j5"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -232,7 +250,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AgG-Dd-L8O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3153" y="1845"/>
+            <point key="canvasLocation" x="3152.8000000000002" y="1844.5277361319343"/>
         </scene>
         <!--Water Knowledge-->
         <scene sceneID="qKF-wv-ute">
@@ -270,7 +288,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G5Z-75-WEe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3220" y="2759"/>
+            <point key="canvasLocation" x="3220" y="2964"/>
         </scene>
         <!--About E-Plant-->
         <scene sceneID="0A2-rO-6hI">
@@ -372,7 +390,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aKW-Vq-oLI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4735" y="1867"/>
+            <point key="canvasLocation" x="5369" y="1890"/>
         </scene>
         <!--Add Knowledge-->
         <scene sceneID="qkx-Zw-EKz">
@@ -439,7 +457,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Wu-zw-88W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5978.3999999999996" y="1866.1169415292354"/>
+            <point key="canvasLocation" x="6876" y="1890"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="80u-v3-WOY">
@@ -493,7 +511,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WDU-02-nhi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2213.5999999999999" y="2759.3703148425789"/>
+            <point key="canvasLocation" x="2214" y="2964"/>
         </scene>
         <!--Water Knowledge Detail-->
         <scene sceneID="sBU-hs-RkQ">
@@ -527,11 +545,49 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KyV-Ik-zrA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3220" y="3599"/>
+            <point key="canvasLocation" x="3220" y="3833"/>
+        </scene>
+        <!--Plant Knowledge Detail-->
+        <scene sceneID="ShF-cx-FGg">
+            <objects>
+                <viewController title="Plant Knowledge Detail" id="uPw-f7-oRJ" customClass="PlantViewController" customModule="E_Plant" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0gb-Wv-rKq"/>
+                        <viewControllerLayoutGuide type="bottom" id="ljm-86-abq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fVg-ax-Wk3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oIM-Ll-UnS">
+                                <rect key="frame" x="8" y="87" width="361" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="123" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="igo-KH-gMR">
+                                <rect key="frame" x="8" y="120" width="367" height="503"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="articleField" destination="igo-KH-gMR" id="ez7-vA-xsJ"/>
+                        <outlet property="titleLabel" destination="oIM-Ll-UnS" id="bbS-Yh-A6X"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BTn-Fh-Xda" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4077.5999999999999" y="1492.8035982008996"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="hGN-lZ-Scu"/>
+        <segue reference="LDU-A8-9j5"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.35865688610000002" blue="0.1478832068" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
