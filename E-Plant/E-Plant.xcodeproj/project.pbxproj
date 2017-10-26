@@ -166,9 +166,9 @@
 		8AA9BE3A1FA0AEF30018BD7F /* waterknowledge */ = {
 			isa = PBXGroup;
 			children = (
-				8AA9BE421FA194D90018BD7F /* WaterViewController.swift */,
-				8AA9BE441FA194EB0018BD7F /* WaterTableViewController.swift */,
 				8AA9BE461FA194FA0018BD7F /* WaterTableViewCell.swift */,
+				8AA9BE441FA194EB0018BD7F /* WaterTableViewController.swift */,
+				8AA9BE421FA194D90018BD7F /* WaterViewController.swift */,
 			);
 			name = waterknowledge;
 			sourceTree = "<group>";

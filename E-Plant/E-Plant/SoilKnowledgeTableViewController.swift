@@ -27,9 +27,10 @@ class SoilKnowledgeTableViewController: UITableViewController,UISearchBarDelegat
         managedContext = appDelegate.persistentContainer.viewContext
         fetchAllKnowledges()
         
-       if KnowledgeBaseList?.count == 0 {
+       if filteredKnowledgeList?.count == 0 {
+          print("test11111")
           createDefaultItems()
-            fetchAllKnowledges()
+          fetchAllKnowledges()
        }
     }
 
@@ -123,11 +124,7 @@ class SoilKnowledgeTableViewController: UITableViewController,UISearchBarDelegat
     
     func createDefaultItems() {
         let soil = createManagedCategory(name: "Soil")
-        let water = createManagedCategory(name: "Water")
-        let plant = createManagedCategory(name: "Plant")
         soil.addToMembers(createManagedKnowledge(title: "How to Choose Soil", category: "Soil", article: "123"))
-        water.addToMembers(createManagedKnowledge(title: "How to save water", category: "Water", article: "123"))
-        plant.addToMembers(createManagedKnowledge(title: "How to grow plant", category: "Plant", article: "123"))
         appDelegate?.saveContext()
     }
     

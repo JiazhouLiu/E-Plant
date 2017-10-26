@@ -88,6 +88,25 @@ class PlantTableViewController: UITableViewController,addPlantKnowledgeDelegate 
         
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            managedContext?.delete(filteredKnowledgeList![indexPath.row])
+            filteredKnowledgeList!.remove(at: indexPath.row)
+            
+            // Delete the row from the data source
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.tableView.reloadSections(NSIndexSet(index:0) as IndexSet, with: .fade)
+            do{
+                try managedContext?.save()
+            }
+            catch let error{
+                print("Could not save: \(error)")
+            }
+        }
+        
+        
+    }
+    
     
     
     

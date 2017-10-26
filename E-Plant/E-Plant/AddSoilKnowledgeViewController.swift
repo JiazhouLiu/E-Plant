@@ -19,6 +19,11 @@ protocol addPlantKnowledgeDelegate {
     
 }
 
+protocol addWaterKnowledgeDelegate {
+    func addWaterKnowledge(knowledge: NewKnowledge)
+    
+}
+
 class AddSoilKnowledgeViewController: UIViewController, UITextFieldDelegate {
     
     
@@ -30,7 +35,7 @@ class AddSoilKnowledgeViewController: UIViewController, UITextFieldDelegate {
     var managedContext: NSManagedObjectContext?
     var appDelegate: AppDelegate?
     var delegate: addKnowledgeDelegate?
-    
+    var waterDelegate: addWaterKnowledgeDelegate?
     var plantDelegate: addPlantKnowledgeDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +69,7 @@ class AddSoilKnowledgeViewController: UIViewController, UITextFieldDelegate {
     @IBAction func SaveButton(_ sender: UIBarButtonItem) {
         let isPresentingInAddMode = presentingViewController is UITabBarController
         print("test11111111")
-        if !isPresentingInAddMode {
+        if isPresentingInAddMode {
              print("test2222222")
             if (titleField.text!.trimmingCharacters(in: .whitespaces).isEmpty){  // the name cannot be empty
                 showAlert(title: "title")
@@ -99,6 +104,10 @@ class AddSoilKnowledgeViewController: UIViewController, UITextFieldDelegate {
                 else if(newCategory == "Plant"){
                     self.plantDelegate!.addPlantKnowledge(knowledge: newItem)
                 }
+                else if(newCategory == "Water"){
+                    self.waterDelegate!.addWaterKnowledge(knowledge: newItem)
+                }
+
                 
                 dismiss(animated: true, completion: nil)
             }
@@ -113,7 +122,7 @@ class AddSoilKnowledgeViewController: UIViewController, UITextFieldDelegate {
         // Dismiss the view controller depending on the context it was presented
         let isPresentingInAddMode = presentingViewController is UITabBarController
         print("test11111111")
-        if !isPresentingInAddMode {
+        if isPresentingInAddMode {
             print("test222222")
             dismiss(animated: true, completion: nil)
         } else {
