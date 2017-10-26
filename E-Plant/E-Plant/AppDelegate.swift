@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
+        // Customize bottom tab bar text color
+        UITabBar.appearance().tintColor = UIColor(red: 119/255.0, green: 211/255.0, blue: 83/255.0, alpha: 1.0)
         // Override point for customization after application launch.
         return true
     }
