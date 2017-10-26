@@ -71,7 +71,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="How to Save Water"/>
                                 <connections>
-                                    <segue destination="Bhh-dc-Zst" kind="show" identifier="Water Category" id="4vr-yr-YGG"/>
+                                    <segue destination="23V-n7-bQ1" kind="show" id="uWA-Cb-ZB9"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2h2-26-g2f">
@@ -255,18 +255,27 @@
         <!--Water Knowledge-->
         <scene sceneID="qKF-wv-ute">
             <objects>
-                <tableViewController id="23V-n7-bQ1" sceneMemberID="viewController">
+                <tableViewController id="23V-n7-bQ1" customClass="WaterTableViewController" customModule="E_Plant" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="33y-PJ-FP3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="hKU-y9-2U9">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="hKU-y9-2U9" customClass="PlantTableViewCell" customModule="E_Plant" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hKU-y9-2U9" id="1Aw-YY-t8x">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mDc-nx-eru">
+                                            <rect key="frame" x="90" y="8" width="194" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <segue destination="umy-v0-jF7" kind="show" id="cD9-62-1wp"/>
@@ -288,7 +297,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G5Z-75-WEe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3220" y="2964"/>
+            <point key="canvasLocation" x="2214" y="2845"/>
         </scene>
         <!--About E-Plant-->
         <scene sceneID="0A2-rO-6hI">
@@ -495,28 +504,10 @@
             </objects>
             <point key="canvasLocation" x="2213.5999999999999" y="1845.4272863568217"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="gCJ-dv-wZ3">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Bhh-dc-Zst" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="T8Y-WX-0KP">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="23V-n7-bQ1" kind="relationship" relationship="rootViewController" id="u8A-4U-4AP"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WDU-02-nhi" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2214" y="2964"/>
-        </scene>
         <!--Water Knowledge Detail-->
         <scene sceneID="sBU-hs-RkQ">
             <objects>
-                <viewController title="Water Knowledge Detail" id="umy-v0-jF7" sceneMemberID="viewController">
+                <viewController title="Water Knowledge Detail" id="umy-v0-jF7" customClass="WaterViewController" customModule="E_Plant" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="noi-jz-t3E"/>
                         <viewControllerLayoutGuide type="bottom" id="7Mg-Sy-Dn3"/>
@@ -547,7 +538,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KyV-Ik-zrA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3220" y="3833"/>
+            <point key="canvasLocation" x="2214" y="3564"/>
         </scene>
         <!--Plant Knowledge Detail-->
         <scene sceneID="ShF-cx-FGg">
@@ -596,7 +587,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="LDU-A8-9j5"/>
+        <segue reference="Kmm-WA-Trv"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.35865688610000002" blue="0.1478832068" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
