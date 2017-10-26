@@ -30,7 +30,7 @@ class AddSoilKnowledgeViewController: UIViewController, UITextFieldDelegate {
     var managedContext: NSManagedObjectContext?
     var appDelegate: AppDelegate?
     var delegate: addKnowledgeDelegate?
-    var delegate2: addPlantKnowledgeDelegate?
+    
     var plantDelegate: addPlantKnowledgeDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()

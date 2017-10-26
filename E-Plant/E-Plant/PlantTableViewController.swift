@@ -81,7 +81,7 @@ class PlantTableViewController: UITableViewController,addPlantKnowledgeDelegate 
             
         else if(segue.identifier == "addPlantKnowledge"){
             let destination: AddSoilKnowledgeViewController = segue.destination.childViewControllers[0] as! AddSoilKnowledgeViewController
-            destination.delegate2 = self
+            destination.plantDelegate = self
         }
         
         
