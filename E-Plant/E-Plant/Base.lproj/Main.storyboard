@@ -578,6 +578,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Plant Knowledge" id="7Qw-0W-TLF">
+                        <barButtonItem key="leftBarButtonItem" title="back" id="0Nk-ha-nf8">
+                            <connections>
+                                <action selector="BackButton:" destination="uPw-f7-oRJ" id="jeX-yk-BeI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="articleField" destination="igo-KH-gMR" id="ez7-vA-xsJ"/>
                         <outlet property="titleLabel" destination="oIM-Ll-UnS" id="bbS-Yh-A6X"/>

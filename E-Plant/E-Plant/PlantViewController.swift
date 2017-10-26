@@ -29,14 +29,18 @@ class PlantViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
+    @IBAction func BackButton(_ sender: UIBarButtonItem) {
+        // Dismiss the view controller depending on the context it was presented
+        let isPresentingInAddMode = presentingViewController is UITabBarController
+        if isPresentingInAddMode {
+            print("test111111")
+            dismiss(animated: true, completion: nil)
+        } else {
+            print("test22222")
+            
+            navigationController!.popViewController(animated: true)
+        }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
     }
-    */
-
+    
 }

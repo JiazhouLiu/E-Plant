@@ -20,6 +20,9 @@
 		8AA9BE3D1FA0AF830018BD7F /* PlantTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE3C1FA0AF830018BD7F /* PlantTableViewController.swift */; };
 		8AA9BE3F1FA0AF9B0018BD7F /* PlantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE3E1FA0AF9B0018BD7F /* PlantTableViewCell.swift */; };
 		8AA9BE411FA0B16F0018BD7F /* PlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE401FA0B16F0018BD7F /* PlantViewController.swift */; };
+		8AA9BE431FA194D90018BD7F /* WaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE421FA194D90018BD7F /* WaterViewController.swift */; };
+		8AA9BE451FA194EB0018BD7F /* WaterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE441FA194EB0018BD7F /* WaterTableViewController.swift */; };
+		8AA9BE471FA194FA0018BD7F /* WaterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE461FA194FA0018BD7F /* WaterTableViewCell.swift */; };
 		D8774EC41F9C510B0026BEF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8774EC31F9C510B0026BEF7 /* AppDelegate.swift */; };
 		D8774EC61F9C510B0026BEF7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8774EC51F9C510B0026BEF7 /* ViewController.swift */; };
 		D8774EC91F9C510B0026BEF7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8774EC71F9C510B0026BEF7 /* Main.storyboard */; };
@@ -61,6 +64,9 @@
 		8AA9BE3C1FA0AF830018BD7F /* PlantTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlantTableViewController.swift; sourceTree = "<group>"; };
 		8AA9BE3E1FA0AF9B0018BD7F /* PlantTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlantTableViewCell.swift; sourceTree = "<group>"; };
 		8AA9BE401FA0B16F0018BD7F /* PlantViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlantViewController.swift; sourceTree = "<group>"; };
+		8AA9BE421FA194D90018BD7F /* WaterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterViewController.swift; sourceTree = "<group>"; };
+		8AA9BE441FA194EB0018BD7F /* WaterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterTableViewController.swift; sourceTree = "<group>"; };
+		8AA9BE461FA194FA0018BD7F /* WaterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterTableViewCell.swift; sourceTree = "<group>"; };
 		D8774EC01F9C510B0026BEF7 /* E-Plant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-Plant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8774EC31F9C510B0026BEF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8774EC51F9C510B0026BEF7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -160,6 +166,9 @@
 		8AA9BE3A1FA0AEF30018BD7F /* waterknowledge */ = {
 			isa = PBXGroup;
 			children = (
+				8AA9BE421FA194D90018BD7F /* WaterViewController.swift */,
+				8AA9BE441FA194EB0018BD7F /* WaterTableViewController.swift */,
+				8AA9BE461FA194FA0018BD7F /* WaterTableViewCell.swift */,
 			);
 			name = waterknowledge;
 			sourceTree = "<group>";
@@ -372,7 +381,10 @@
 				8AA9BE3D1FA0AF830018BD7F /* PlantTableViewController.swift in Sources */,
 				8AA9BE361FA0AB130018BD7F /* KnowledgeBase+CoreDataClass.swift in Sources */,
 				8AA9BE161FA048170018BD7F /* soilKnowledgeCell.swift in Sources */,
+				8AA9BE451FA194EB0018BD7F /* WaterTableViewController.swift in Sources */,
+				8AA9BE431FA194D90018BD7F /* WaterViewController.swift in Sources */,
 				8AA9BE231FA08A0C0018BD7F /* SoilKnowledgeViewController.swift in Sources */,
+				8AA9BE471FA194FA0018BD7F /* WaterTableViewCell.swift in Sources */,
 				8AA9BE1A1FA0496A0018BD7F /* SoilKnowledgeTableViewController.swift in Sources */,
 				8AA9BE391FA0AB130018BD7F /* Category+CoreDataProperties.swift in Sources */,
 				8AA9BE3F1FA0AF9B0018BD7F /* PlantTableViewCell.swift in Sources */,
