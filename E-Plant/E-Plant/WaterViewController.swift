@@ -16,6 +16,8 @@ class WaterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleLabel.text = knowledge.title
+        articleField.text = knowledge.article
 
         // Do any additional setup after loading the view.
     }
@@ -26,14 +28,18 @@ class WaterViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func backButton(_ sender: Any) {
+        // Dismiss the view controller depending on the context it was presented
+        let isPresentingInAddMode = presentingViewController is UITabBarController
+        if isPresentingInAddMode {
+            print("test111111")
+            dismiss(animated: true, completion: nil)
+        } else {
+            print("test22222")
+            
+            navigationController!.popViewController(animated: true)
+        }
     }
-    */
+   
 
 }

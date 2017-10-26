@@ -74,7 +74,7 @@ class PlantTableViewController: UITableViewController,addPlantKnowledgeDelegate 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "plantKnowledgeDetail") {
-            let selectedCategory = KnowledgeBaseList![(tableView.indexPathForSelectedRow?.row)!]
+            let selectedCategory = filteredKnowledgeList![(tableView.indexPathForSelectedRow?.row)!]
             let destination: PlantViewController = segue.destination as! PlantViewController
             destination.knowledge = selectedCategory
         }

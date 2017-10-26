@@ -67,7 +67,7 @@ class SoilKnowledgeTableViewController: UITableViewController,UISearchBarDelegat
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "soilKnowledgeDetail") {
-            let selectedCategory = KnowledgeBaseList![(tableView.indexPathForSelectedRow?.row)!]
+            let selectedCategory = filteredKnowledgeList![(tableView.indexPathForSelectedRow?.row)!]
             let destination: SoilKnowledgeViewController = segue.destination as! SoilKnowledgeViewController
             destination.knowledge = selectedCategory
         }

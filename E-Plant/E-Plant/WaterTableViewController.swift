@@ -76,7 +76,7 @@ class WaterTableViewController: UITableViewController,addWaterKnowledgeDelegate{
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "waterKnowledgeDetail") {
-            let selectedCategory = KnowledgeBaseList![(tableView.indexPathForSelectedRow?.row)!]
+            let selectedCategory = filteredKnowledgeList![(tableView.indexPathForSelectedRow?.row)!]
             let destination: WaterViewController = segue.destination as! WaterViewController
             destination.knowledge = selectedCategory
         }

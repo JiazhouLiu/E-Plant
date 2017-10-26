@@ -166,7 +166,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Soil Knowledge" id="Jeo-8P-crI">
-                        <barButtonItem key="leftBarButtonItem" title="back" id="XT5-xa-8u3">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="XT5-xa-8u3">
                             <connections>
                                 <action selector="backbutton:" destination="ccF-E4-bAJ" id="Svq-BS-H9L"/>
                             </connections>
@@ -202,7 +202,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Articles" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Pi4-jj-hlb">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Articles" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pi4-jj-hlb">
                                 <rect key="frame" x="0.0" y="113" width="375" height="477"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -214,7 +214,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Soil Knowledge" id="H3M-Ng-X5Z">
-                        <barButtonItem key="leftBarButtonItem" title="back" id="aR4-Vh-SAK">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="aR4-Vh-SAK">
                             <connections>
                                 <action selector="cancelButton:" destination="hqJ-Qx-3H4" id="KGu-wr-zaZ"/>
                             </connections>
@@ -533,7 +533,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Articles" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="YJO-gI-RUC">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Articles" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YJO-gI-RUC">
                                 <rect key="frame" x="0.0" y="113" width="375" height="477"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -544,6 +544,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Water Knowledge Detail" id="Vum-4z-TWU">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="93P-6d-pb3">
+                            <connections>
+                                <action selector="backButton:" destination="umy-v0-jF7" id="gVm-UL-YxP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="articleField" destination="YJO-gI-RUC" id="taj-qF-Z3o"/>
@@ -573,7 +580,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="123" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="igo-KH-gMR">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="123" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igo-KH-gMR">
                                 <rect key="frame" x="8" y="120" width="367" height="503"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -584,7 +591,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Plant Knowledge" id="7Qw-0W-TLF">
-                        <barButtonItem key="leftBarButtonItem" title="back" id="0Nk-ha-nf8">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="0Nk-ha-nf8">
                             <connections>
                                 <action selector="BackButton:" destination="uPw-f7-oRJ" id="jeX-yk-BeI"/>
                             </connections>
@@ -620,7 +627,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="rr1-9G-E5b"/>
+        <segue reference="hGN-lZ-Scu"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.35865688610000002" blue="0.1478832068" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
