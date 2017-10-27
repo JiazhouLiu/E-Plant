@@ -9,9 +9,10 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
+import CoreLocation
 
 // Dashboard screen for plants
-class Dashboard_PlantsVC: UIViewController {
+class Dashboard_PlantsVC: UIViewController, CLLocationManagerDelegate {
 
     // IBOutlets
     @IBOutlet weak var dateLabel: UILabel!
@@ -21,6 +22,7 @@ class Dashboard_PlantsVC: UIViewController {
     @IBOutlet weak var customView2: UIView!
     @IBOutlet weak var customView3: UIView!
     
+    // plants segment labels
     @IBOutlet weak var currentPlantNumLabel: UILabel!
     @IBOutlet weak var currentPlantNumFixedLabel: UILabel!
     @IBOutlet weak var healthyPlantNumLabel: UILabel!
@@ -32,14 +34,38 @@ class Dashboard_PlantsVC: UIViewController {
     @IBOutlet weak var historyPlantNumLabel: UILabel!
     @IBOutlet weak var historyPlantNumFixedLabel: UILabel!
     
+    // segment control
+    @IBOutlet weak var dashboardSegment: UISegmentedControl!
+    
+    // water segment labels
+    @IBOutlet weak var todayUsageFixedLabel: UILabel!
+    @IBOutlet weak var todayUsageLabel: UILabel!
+    @IBOutlet weak var dailyAveUsageFixedLabel: UILabel!
+    @IBOutlet weak var dailyAveUsageLabel: UILabel!
+    @IBOutlet weak var monthlyUsageFixedLabel: UILabel!
+    @IBOutlet weak var monthlyUsageLabel: UILabel!
+    
+    // top right weather info
+    @IBOutlet weak var weatherImage: UIImageView!
+    @IBOutlet weak var temperature: UILabel!
+    
+    // background Image
+    @IBOutlet weak var backgroundImage: UIImageView!
     
     
     // Activity Indicator
     var spinner: UIActivityIndicatorView!
     
+    // weather variables
+    let locationManager = CLLocationManager()
+    var currentLocation: CLLocation!
+    var timerStarted = false
+    var onlineWeather: OnlineWeather!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // set view border for UI good looking
         customView1.layer.borderWidth = 1
         customView1.layer.borderColor = UIColor.init(red:52/255.0, green:63/255.0, blue:75/255.0, alpha: 1.0).cgColor
         customView2.layer.borderWidth = 1
@@ -47,9 +73,18 @@ class Dashboard_PlantsVC: UIViewController {
         customView3.layer.borderWidth = 1
         customView3.layer.borderColor = UIColor.init(red:52/255.0, green:63/255.0, blue:75/255.0, alpha: 1.0).cgColor
         logOutBtn.tintColor = UIColor.red
+        
+        // location manager setup
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startMonitoringSignificantLocationChanges()
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
+        // check location service status
+        locationAuthStatus()
         // refresh current date and print on screen
         let date = Date()
         let formatter = DateFormatter()
@@ -87,6 +122,7 @@ class Dashboard_PlantsVC: UIViewController {
         }
     }
     
+    
     //Date String Helper Functions -> day of the week
     func getDayOfWeek(today:String)->String? {
         let formatter  = DateFormatter()
@@ -118,6 +154,56 @@ class Dashboard_PlantsVC: UIViewController {
             return nil
         }
     }
+    
+    func startTimer(){
+        if !timerStarted {
+            _ = Timer.scheduledTimer(timeInterval: 1, target: self,selector: #selector(Dashboard_PlantsVC.refreshOnlineWeather), userInfo: nil, repeats: true)
+            timerStarted = true
+        }
+    }
+    
+    func refreshOnlineWeather() {
+        onlineWeather = OnlineWeather()
+        onlineWeather.downloadOnlineWeatherDetails {
+            self.updateOnlineUI()
+        }
+    }
+    
+    // check auth status to make request if needed
+    func locationAuthStatus(){
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+            currentLocation = locationManager.location
+            let lat = currentLocation.coordinate.latitude
+            let long = currentLocation.coordinate.longitude
+            if lat != nil && long != nil {
+                Location.sharedInstance.latitude = lat
+                Location.sharedInstance.longitude = long
+            }else {
+                Location.sharedInstance.latitude = -37.876398
+                Location.sharedInstance.longitude = 145.0548502
+            }
+            startTimer()
+        }else {
+            locationManager.requestWhenInUseAuthorization()
+            //locationAuthStatus()
+        }
+    }
+    
+    // if changed auth status then show user location
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == CLAuthorizationStatus.authorizedWhenInUse {
+            currentLocation = locationManager.location
+            Location.sharedInstance.latitude = currentLocation.coordinate.latitude
+            Location.sharedInstance.longitude = currentLocation.coordinate.longitude
+            startTimer()
+        }
+    }
+    
+    // update data
+    func updateOnlineUI() {
+        temperature.text = "\(onlineWeather.temperature) °C"
+        weatherImage.image = UIImage(named: "\(onlineWeather.weather) Mini")
+    }
 
     // log out button pressed
     @IBAction func logOutBtnPressed(_ sender: Any) {
@@ -139,5 +225,57 @@ class Dashboard_PlantsVC: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    @IBAction func segmentChange(_ sender: Any) {
+        if dashboardSegment.selectedSegmentIndex == 0 {
+            showPlantSeg()
+            
+        }else if dashboardSegment.selectedSegmentIndex == 1{
+            showWaterSeg()
+        }
+    }
+    
+    func showPlantSeg() {
+        currentPlantNumLabel.isHidden = false
+        currentPlantNumFixedLabel.isHidden = false
+        healthyPlantNumLabel.isHidden = false
+        healthyPlantNumFixedLabel.isHidden = false
+        warningPlantNumLabel.isHidden = false
+        warningPlantNumFixedLabel.isHidden = false
+        dangerPlantNumLabel.isHidden = false
+        dangerPlantNumFixedLabel.isHidden = false
+        historyPlantNumLabel.isHidden = false
+        historyPlantNumFixedLabel.isHidden = false
+        
+        todayUsageLabel.isHidden = true
+        todayUsageFixedLabel.isHidden = true
+        dailyAveUsageLabel.isHidden = true
+        dailyAveUsageFixedLabel.isHidden = true
+        monthlyUsageLabel.isHidden = true
+        monthlyUsageFixedLabel.isHidden = true
+        
+        backgroundImage.image = #imageLiteral(resourceName: "plantsBackground")
+    }
+    
+    func showWaterSeg() {
+        currentPlantNumLabel.isHidden = true
+        currentPlantNumFixedLabel.isHidden = true
+        healthyPlantNumLabel.isHidden = true
+        healthyPlantNumFixedLabel.isHidden = true
+        warningPlantNumLabel.isHidden = true
+        warningPlantNumFixedLabel.isHidden = true
+        dangerPlantNumLabel.isHidden = true
+        dangerPlantNumFixedLabel.isHidden = true
+        historyPlantNumLabel.isHidden = true
+        historyPlantNumFixedLabel.isHidden = true
+        
+        todayUsageLabel.isHidden = false
+        todayUsageFixedLabel.isHidden = false
+        dailyAveUsageLabel.isHidden = false
+        dailyAveUsageFixedLabel.isHidden = false
+        monthlyUsageLabel.isHidden = false
+        monthlyUsageFixedLabel.isHidden = false
+        
+        backgroundImage.image = #imageLiteral(resourceName: "waterBackground")
+    }
 
 }

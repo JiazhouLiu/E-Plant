@@ -25,6 +25,11 @@
 		8AA9BE431FA194D90018BD7F /* WaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE421FA194D90018BD7F /* WaterViewController.swift */; };
 		8AA9BE451FA194EB0018BD7F /* WaterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE441FA194EB0018BD7F /* WaterTableViewController.swift */; };
 		8AA9BE471FA194FA0018BD7F /* WaterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE461FA194FA0018BD7F /* WaterTableViewCell.swift */; };
+		D86893FB1FA313A30024D666 /* OnlineWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86893FA1FA313A30024D666 /* OnlineWeather.swift */; };
+		D86893FD1FA314230024D666 /* LocalTemperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86893FC1FA314230024D666 /* LocalTemperature.swift */; };
+		D86893FF1FA314730024D666 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86893FE1FA314730024D666 /* Constants.swift */; };
+		D86894011FA314B00024D666 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86894001FA314B00024D666 /* Location.swift */; };
+		D86894031FA314C70024D666 /* LocalMoisture.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86894021FA314C70024D666 /* LocalMoisture.swift */; };
 		D8774EC41F9C510B0026BEF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8774EC31F9C510B0026BEF7 /* AppDelegate.swift */; };
 		D8774EC91F9C510B0026BEF7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8774EC71F9C510B0026BEF7 /* Main.storyboard */; };
 		D8774ECC1F9C510B0026BEF7 /* E_Plant.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D8774ECA1F9C510B0026BEF7 /* E_Plant.xcdatamodeld */; };
@@ -90,6 +95,11 @@
 		8AA9BE461FA194FA0018BD7F /* WaterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterTableViewCell.swift; sourceTree = "<group>"; };
 		98E12EFCE85706BFBE708403 /* Pods-E-Plant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-Plant.release.xcconfig"; path = "Pods/Target Support Files/Pods-E-Plant/Pods-E-Plant.release.xcconfig"; sourceTree = "<group>"; };
 		A9DB042C520C5D2799C0DDCA /* Pods-E-PlantTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-PlantTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-E-PlantTests/Pods-E-PlantTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D86893FA1FA313A30024D666 /* OnlineWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlineWeather.swift; sourceTree = "<group>"; };
+		D86893FC1FA314230024D666 /* LocalTemperature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalTemperature.swift; sourceTree = "<group>"; };
+		D86893FE1FA314730024D666 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D86894001FA314B00024D666 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		D86894021FA314C70024D666 /* LocalMoisture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalMoisture.swift; sourceTree = "<group>"; };
 		D8774EC01F9C510B0026BEF7 /* E-Plant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-Plant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8774EC31F9C510B0026BEF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8774EC81F9C510B0026BEF7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -201,6 +211,11 @@
 				8AA9BE341FA0AB130018BD7F /* Category+CoreDataClass.swift */,
 				8AA9BE1E1FA04ADC0018BD7F /* newKnowledge.swift */,
 				D8A770D81FA2279700E89805 /* ApplicationUser.swift */,
+				D86893FA1FA313A30024D666 /* OnlineWeather.swift */,
+				D86893FC1FA314230024D666 /* LocalTemperature.swift */,
+				D86893FE1FA314730024D666 /* Constants.swift */,
+				D86894001FA314B00024D666 /* Location.swift */,
+				D86894021FA314C70024D666 /* LocalMoisture.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -566,6 +581,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-E-Plant/Pods-E-Plant-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -573,6 +589,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -655,6 +672,7 @@
 			files = (
 				D8A770D91FA2279700E89805 /* ApplicationUser.swift in Sources */,
 				8AA9BE371FA0AB130018BD7F /* KnowledgeBase+CoreDataProperties.swift in Sources */,
+				D86894031FA314C70024D666 /* LocalMoisture.swift in Sources */,
 				D8A770CD1FA2142100E89805 /* CustomizableTextField.swift in Sources */,
 				D8A770E31FA246A100E89805 /* Dashboard_PlantsVC.swift in Sources */,
 				8AA9BE381FA0AB130018BD7F /* Category+CoreDataClass.swift in Sources */,
@@ -663,6 +681,7 @@
 				D8A770D21FA2202200E89805 /* SignUpTVC.swift in Sources */,
 				D8A770D01FA2200F00E89805 /* SignInVC.swift in Sources */,
 				8AA9BE361FA0AB130018BD7F /* KnowledgeBase+CoreDataClass.swift in Sources */,
+				D86893FD1FA314230024D666 /* LocalTemperature.swift in Sources */,
 				8AA9BE161FA048170018BD7F /* soilKnowledgeCell.swift in Sources */,
 				8AA9BE451FA194EB0018BD7F /* WaterTableViewController.swift in Sources */,
 				D8A770CC1FA2142100E89805 /* CustomizableButton.swift in Sources */,
@@ -672,8 +691,11 @@
 				D8A770DC1FA236DE00E89805 /* ForgotPasswordVC.swift in Sources */,
 				8AA9BE231FA08A0C0018BD7F /* SoilKnowledgeViewController.swift in Sources */,
 				D8A770CE1FA2142100E89805 /* CustomizableTextView.swift in Sources */,
+				D86893FB1FA313A30024D666 /* OnlineWeather.swift in Sources */,
 				8AA9BE471FA194FA0018BD7F /* WaterTableViewCell.swift in Sources */,
+				D86894011FA314B00024D666 /* Location.swift in Sources */,
 				D8A770DE1FA236F200E89805 /* UpdateProfileTVC.swift in Sources */,
+				D86893FF1FA314730024D666 /* Constants.swift in Sources */,
 				D8A770D51FA2244D00E89805 /* AuthService.swift in Sources */,
 				8AA9BE1A1FA0496A0018BD7F /* SoilKnowledgeTableViewController.swift in Sources */,
 				8AA9BE391FA0AB130018BD7F /* Category+CoreDataProperties.swift in Sources */,
