@@ -2,7 +2,7 @@
 //  Garden+CoreDataProperties.swift
 //  E-Plant
 //
-//  Created by Jiazhou Liu on 27/10/17.
+//  Created by Jiazhou Liu on 28/10/17.
 //  Copyright © 2017 Monash University. All rights reserved.
 //
 
@@ -16,17 +16,20 @@ extension Garden {
         return NSFetchRequest<Garden>(entityName: "Garden")
     }
 
-    @NSManaged public var name: String?
+    @NSManaged public var dateAdded: NSDate?
+    @NSManaged public var lastWaterTime: NSDate?
     @NSManaged public var latitude: Double
     @NSManaged public var longitude: Double
-    @NSManaged public var dateAdded: NSDate?
-    @NSManaged public var waterUsageUnit: Double
-    @NSManaged public var waterUsageQty: Int16
+    @NSManaged public var name: String?
     @NSManaged public var orderNo: Int16
     @NSManaged public var sensorNo: Int16
-    @NSManaged public var lastWaterTime: NSDate?
-    @NSManaged public var toPlant: NSSet?
+    @NSManaged public var waterUsageQty: Int16
+    @NSManaged public var waterUsageUnit: Double
+    @NSManaged public var sensorStatus: String?
+    @NSManaged public var customOrder: Bool
+    @NSManaged public var lastWaterQty: Int16
     @NSManaged public var toImage: Image?
+    @NSManaged public var toPlant: NSSet?
 
 }
 

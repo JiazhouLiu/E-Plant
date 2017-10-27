@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 import CoreLocation
+import CoreData
 
 // Dashboard screen for plants
 class Dashboard_PlantsVC: UIViewController, CLLocationManagerDelegate {
@@ -27,7 +28,7 @@ class Dashboard_PlantsVC: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var currentPlantNumFixedLabel: UILabel!
     @IBOutlet weak var healthyPlantNumLabel: UILabel!
     @IBOutlet weak var healthyPlantNumFixedLabel: UILabel!
-    @IBOutlet weak var warningPlantNumLabel: UIView!
+    @IBOutlet weak var warningPlantNumLabel: UILabel!
     @IBOutlet weak var warningPlantNumFixedLabel: UILabel!
     @IBOutlet weak var dangerPlantNumLabel: UILabel!
     @IBOutlet weak var dangerPlantNumFixedLabel: UILabel!
@@ -62,6 +63,17 @@ class Dashboard_PlantsVC: UIViewController, CLLocationManagerDelegate {
     var timerStarted = false
     var onlineWeather: OnlineWeather!
     
+    // plant and water variable
+    var plants = [Plant]()
+    var currentPlantsNo = 0
+    var healthyPlantsNo = 0
+    var warningPlantsNo = 0
+    var dangerPlantsNo = 0
+    
+    var gardens = [Garden]()
+    var todayUsage = 0.0
+    var totalUsage = 0.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -85,6 +97,11 @@ class Dashboard_PlantsVC: UIViewController, CLLocationManagerDelegate {
         
         // check location service status
         locationAuthStatus()
+        
+        // fetch plant and water data
+        fetchPlantData()
+        fetchWaterData()
+        
         // refresh current date and print on screen
         let date = Date()
         let formatter = DateFormatter()
@@ -276,6 +293,85 @@ class Dashboard_PlantsVC: UIViewController, CLLocationManagerDelegate {
         monthlyUsageFixedLabel.isHidden = false
         
         backgroundImage.image = #imageLiteral(resourceName: "waterBackground")
+    }
+    
+    func fetchPlantData() {
+        let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
+        
+        self.plants.removeAll()
+        do {
+            self.plants = try context.fetch(fetchRequest)
+        } catch {
+            let error = error as NSError
+            print("\(error)")
+        }
+
+        for item in plants {
+            if item.condition == "healthy" {
+                healthyPlantsNo += 1
+            }
+            if item.condition == "warning" {
+                warningPlantsNo += 1
+            }
+            if item.condition == "danger" {
+                dangerPlantsNo += 1
+            }
+            if item.toGarden != nil {
+                currentPlantsNo += 1
+            }
+        }
+        historyPlantNumLabel.text = "\(self.plants.count)"
+        healthyPlantNumLabel.text = "\(healthyPlantsNo)"
+        warningPlantNumLabel.text = "\(warningPlantsNo)"
+        dangerPlantNumLabel.text = "\(dangerPlantsNo)"
+        currentPlantNumLabel.text = "\(currentPlantsNo)"
+        
+    }
+    
+    func fetchWaterData() {
+        let fetchRequest: NSFetchRequest<Garden> = Garden.fetchRequest()
+        var earlistDate = Date()
+        let currentDate = Date()
+        self.gardens.removeAll()
+        do {
+            self.gardens = try context.fetch(fetchRequest)
+        } catch {
+            let error = error as NSError
+            print("\(error)")
+        }
+        
+        for item in gardens {
+            if let waterTime = item.lastWaterTime{
+                let waterTimeToDate = waterTime as Date
+                if (waterTimeToDate < earlistDate){
+                    earlistDate = waterTimeToDate
+                }
+                let today = Calendar.current.isDateInToday(waterTimeToDate)
+                if today {
+                    todayUsage = todayUsage + (Double(item.lastWaterQty) * item.waterUsageUnit)
+                }
+            }
+            totalUsage = totalUsage + (Double(item.waterUsageQty) * item.waterUsageUnit)
+            
+        }
+        let calendar = NSCalendar.current
+        
+        let date1 = calendar.startOfDay(for: earlistDate)
+        let date2 = calendar.startOfDay(for: currentDate)
+        
+        let components = calendar.dateComponents([.day], from: date1, to: date2)
+        let duration = components.day
+        var dailyUsage = 0.0
+        if duration != 0{
+            dailyUsage = totalUsage/Double(duration!)
+        }
+        let monthlyUsage = dailyUsage * 30.0 / 1000
+        
+        todayUsageLabel.text = "\(todayUsage) L"
+        dailyAveUsageLabel.text = "\(dailyUsage) L"
+        monthlyUsageLabel.text = "\(monthlyUsage) kL"
+        
+        
     }
 
 }

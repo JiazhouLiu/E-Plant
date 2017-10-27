@@ -5,13 +5,16 @@
         <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KnowledgeBase" inverseName="type" inverseEntity="KnowledgeBase" syncable="YES"/>
     </entity>
     <entity name="Garden" representedClassName="Garden" syncable="YES">
+        <attribute name="customOrder" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="dateAdded" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="lastWaterQty" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="lastWaterTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="orderNo" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="sensorNo" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="sensorStatus" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="waterUsageQty" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="waterUsageUnit" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="toImage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" inverseName="toGarden" inverseEntity="Image" syncable="YES"/>
@@ -50,10 +53,10 @@
     </entity>
     <elements>
         <element name="Category" positionX="-54" positionY="18" width="128" height="75"/>
-        <element name="KnowledgeBase" positionX="-63" positionY="-18" width="128" height="120"/>
-        <element name="Garden" positionX="-54" positionY="27" width="128" height="210"/>
-        <element name="Plant" positionX="-45" positionY="81" width="128" height="195"/>
+        <element name="Garden" positionX="-54" positionY="27" width="128" height="255"/>
         <element name="Image" positionX="-36" positionY="99" width="128" height="90"/>
+        <element name="KnowledgeBase" positionX="-63" positionY="-18" width="128" height="120"/>
         <element name="Note" positionX="-27" positionY="108" width="128" height="120"/>
+        <element name="Plant" positionX="-45" positionY="81" width="128" height="195"/>
     </elements>
 </model>

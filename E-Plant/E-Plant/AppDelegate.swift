@@ -21,6 +21,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Customize bottom tab bar text color
         UITabBar.appearance().tintColor = UIColor(red: 119/255.0, green: 211/255.0, blue: 83/255.0, alpha: 1.0)
         // Override point for customization after application launch.
+        if Auth.auth().currentUser != nil{
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "TabBarController")
+            
+            self.window?.rootViewController = initialViewController
+            self.window?.makeKeyAndVisible()
+        }
         return true
     }
 
@@ -94,4 +104,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
-
+let ad = UIApplication.shared.delegate as! AppDelegate // shortcut for appDelegate
+let context = ad.persistentContainer.viewContext // shortcut for managedObjectContext
