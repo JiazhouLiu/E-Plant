@@ -2,7 +2,7 @@
 //  KnowledgeBase+CoreDataProperties.swift
 //  E-Plant
 //
-//  Created by 郁雨润 on 25/10/17.
+//  Created by Jiazhou Liu on 27/10/17.
 //  Copyright © 2017 Monash University. All rights reserved.
 //
 
@@ -20,5 +20,6 @@ extension KnowledgeBase {
     @NSManaged public var category: String?
     @NSManaged public var title: String?
     @NSManaged public var type: Category?
+    @NSManaged public var toPlant: Plant?
 
 }

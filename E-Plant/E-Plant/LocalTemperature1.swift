@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-class LocalTemperature: NSObject {
+class LocalTemperature1: NSObject {
     var _temperature: Double!
     var _pressure: Double!
     var _received: Bool!
@@ -40,7 +40,7 @@ class LocalTemperature: NSObject {
     func downloadLocalWeatherDetails(completed: @escaping DownloadComplete) {
         // Alamofire download
         
-        let localTempURL = URL(string: CURRENT_LOCAL_TEMP_DATABASE_URL)!
+        let localTempURL = URL(string: CURRENT_LOCAL_TEMP_DATABASE_URL_1)!
         Alamofire.request(localTempURL).responseJSON { response in
             let result = response.result
             //print(result.value)

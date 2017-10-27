@@ -13,10 +13,8 @@
 		8AA9BE161FA048170018BD7F /* soilKnowledgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE151FA048170018BD7F /* soilKnowledgeCell.swift */; };
 		8AA9BE1A1FA0496A0018BD7F /* SoilKnowledgeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE191FA0496A0018BD7F /* SoilKnowledgeTableViewController.swift */; };
 		8AA9BE1C1FA0499C0018BD7F /* AddSoilKnowledgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE1B1FA0499C0018BD7F /* AddSoilKnowledgeViewController.swift */; };
-		8AA9BE1F1FA04ADC0018BD7F /* newKnowledge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE1E1FA04ADC0018BD7F /* newKnowledge.swift */; };
+		8AA9BE1F1FA04ADC0018BD7F /* NewKnowledge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE1E1FA04ADC0018BD7F /* NewKnowledge.swift */; };
 		8AA9BE231FA08A0C0018BD7F /* SoilKnowledgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE221FA08A0C0018BD7F /* SoilKnowledgeViewController.swift */; };
-		8AA9BE361FA0AB130018BD7F /* KnowledgeBase+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE321FA0AB130018BD7F /* KnowledgeBase+CoreDataClass.swift */; };
-		8AA9BE371FA0AB130018BD7F /* KnowledgeBase+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE331FA0AB130018BD7F /* KnowledgeBase+CoreDataProperties.swift */; };
 		8AA9BE381FA0AB130018BD7F /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE341FA0AB130018BD7F /* Category+CoreDataClass.swift */; };
 		8AA9BE391FA0AB130018BD7F /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE351FA0AB130018BD7F /* Category+CoreDataProperties.swift */; };
 		8AA9BE3D1FA0AF830018BD7F /* PlantTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE3C1FA0AF830018BD7F /* PlantTableViewController.swift */; };
@@ -26,10 +24,24 @@
 		8AA9BE451FA194EB0018BD7F /* WaterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE441FA194EB0018BD7F /* WaterTableViewController.swift */; };
 		8AA9BE471FA194FA0018BD7F /* WaterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE461FA194FA0018BD7F /* WaterTableViewCell.swift */; };
 		D86893FB1FA313A30024D666 /* OnlineWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86893FA1FA313A30024D666 /* OnlineWeather.swift */; };
-		D86893FD1FA314230024D666 /* LocalTemperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86893FC1FA314230024D666 /* LocalTemperature.swift */; };
+		D86893FD1FA314230024D666 /* LocalTemperature1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86893FC1FA314230024D666 /* LocalTemperature1.swift */; };
 		D86893FF1FA314730024D666 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86893FE1FA314730024D666 /* Constants.swift */; };
 		D86894011FA314B00024D666 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86894001FA314B00024D666 /* Location.swift */; };
-		D86894031FA314C70024D666 /* LocalMoisture.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86894021FA314C70024D666 /* LocalMoisture.swift */; };
+		D86894031FA314C70024D666 /* LocalMoisture1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86894021FA314C70024D666 /* LocalMoisture1.swift */; };
+		D86894051FA34A1F0024D666 /* LocalTemperature2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86894041FA34A1F0024D666 /* LocalTemperature2.swift */; };
+		D86894071FA34A300024D666 /* LocalTemperature3.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86894061FA34A300024D666 /* LocalTemperature3.swift */; };
+		D86894091FA34A4C0024D666 /* LocalMoisture2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86894081FA34A4C0024D666 /* LocalMoisture2.swift */; };
+		D868940B1FA34A570024D666 /* LocalMoisture3.swift in Sources */ = {isa = PBXBuildFile; fileRef = D868940A1FA34A570024D666 /* LocalMoisture3.swift */; };
+		D868943A1FA355100024D666 /* Plant+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86894301FA355100024D666 /* Plant+CoreDataClass.swift */; };
+		D868943B1FA355100024D666 /* Plant+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86894311FA355100024D666 /* Plant+CoreDataProperties.swift */; };
+		D868943C1FA355100024D666 /* KnowledgeBase+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86894321FA355100024D666 /* KnowledgeBase+CoreDataClass.swift */; };
+		D868943D1FA355100024D666 /* KnowledgeBase+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86894331FA355100024D666 /* KnowledgeBase+CoreDataProperties.swift */; };
+		D868943E1FA355100024D666 /* Image+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86894341FA355100024D666 /* Image+CoreDataClass.swift */; };
+		D868943F1FA355100024D666 /* Image+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86894351FA355100024D666 /* Image+CoreDataProperties.swift */; };
+		D86894401FA355100024D666 /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86894361FA355100024D666 /* Note+CoreDataClass.swift */; };
+		D86894411FA355100024D666 /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86894371FA355100024D666 /* Note+CoreDataProperties.swift */; };
+		D86894421FA355100024D666 /* Garden+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86894381FA355100024D666 /* Garden+CoreDataClass.swift */; };
+		D86894431FA355100024D666 /* Garden+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86894391FA355100024D666 /* Garden+CoreDataProperties.swift */; };
 		D8774EC41F9C510B0026BEF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8774EC31F9C510B0026BEF7 /* AppDelegate.swift */; };
 		D8774EC91F9C510B0026BEF7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8774EC71F9C510B0026BEF7 /* Main.storyboard */; };
 		D8774ECC1F9C510B0026BEF7 /* E_Plant.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D8774ECA1F9C510B0026BEF7 /* E_Plant.xcdatamodeld */; };
@@ -81,10 +93,8 @@
 		8AA9BE151FA048170018BD7F /* soilKnowledgeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = soilKnowledgeCell.swift; sourceTree = "<group>"; };
 		8AA9BE191FA0496A0018BD7F /* SoilKnowledgeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoilKnowledgeTableViewController.swift; sourceTree = "<group>"; };
 		8AA9BE1B1FA0499C0018BD7F /* AddSoilKnowledgeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSoilKnowledgeViewController.swift; sourceTree = "<group>"; };
-		8AA9BE1E1FA04ADC0018BD7F /* newKnowledge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newKnowledge.swift; sourceTree = "<group>"; };
+		8AA9BE1E1FA04ADC0018BD7F /* NewKnowledge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewKnowledge.swift; sourceTree = "<group>"; };
 		8AA9BE221FA08A0C0018BD7F /* SoilKnowledgeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoilKnowledgeViewController.swift; sourceTree = "<group>"; };
-		8AA9BE321FA0AB130018BD7F /* KnowledgeBase+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "KnowledgeBase+CoreDataClass.swift"; path = "../KnowledgeBase+CoreDataClass.swift"; sourceTree = "<group>"; };
-		8AA9BE331FA0AB130018BD7F /* KnowledgeBase+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "KnowledgeBase+CoreDataProperties.swift"; path = "../KnowledgeBase+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8AA9BE341FA0AB130018BD7F /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Category+CoreDataClass.swift"; path = "../Category+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8AA9BE351FA0AB130018BD7F /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Category+CoreDataProperties.swift"; path = "../Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8AA9BE3C1FA0AF830018BD7F /* PlantTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlantTableViewController.swift; sourceTree = "<group>"; };
@@ -96,10 +106,24 @@
 		98E12EFCE85706BFBE708403 /* Pods-E-Plant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-Plant.release.xcconfig"; path = "Pods/Target Support Files/Pods-E-Plant/Pods-E-Plant.release.xcconfig"; sourceTree = "<group>"; };
 		A9DB042C520C5D2799C0DDCA /* Pods-E-PlantTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-PlantTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-E-PlantTests/Pods-E-PlantTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D86893FA1FA313A30024D666 /* OnlineWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlineWeather.swift; sourceTree = "<group>"; };
-		D86893FC1FA314230024D666 /* LocalTemperature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalTemperature.swift; sourceTree = "<group>"; };
+		D86893FC1FA314230024D666 /* LocalTemperature1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalTemperature1.swift; sourceTree = "<group>"; };
 		D86893FE1FA314730024D666 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D86894001FA314B00024D666 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		D86894021FA314C70024D666 /* LocalMoisture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalMoisture.swift; sourceTree = "<group>"; };
+		D86894021FA314C70024D666 /* LocalMoisture1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalMoisture1.swift; sourceTree = "<group>"; };
+		D86894041FA34A1F0024D666 /* LocalTemperature2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalTemperature2.swift; sourceTree = "<group>"; };
+		D86894061FA34A300024D666 /* LocalTemperature3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalTemperature3.swift; sourceTree = "<group>"; };
+		D86894081FA34A4C0024D666 /* LocalMoisture2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalMoisture2.swift; sourceTree = "<group>"; };
+		D868940A1FA34A570024D666 /* LocalMoisture3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalMoisture3.swift; sourceTree = "<group>"; };
+		D86894301FA355100024D666 /* Plant+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Plant+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D86894311FA355100024D666 /* Plant+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Plant+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D86894321FA355100024D666 /* KnowledgeBase+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KnowledgeBase+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D86894331FA355100024D666 /* KnowledgeBase+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KnowledgeBase+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D86894341FA355100024D666 /* Image+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D86894351FA355100024D666 /* Image+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D86894361FA355100024D666 /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D86894371FA355100024D666 /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D86894381FA355100024D666 /* Garden+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Garden+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D86894391FA355100024D666 /* Garden+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Garden+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D8774EC01F9C510B0026BEF7 /* E-Plant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-Plant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8774EC31F9C510B0026BEF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8774EC81F9C510B0026BEF7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -207,15 +231,23 @@
 				D8A770D31FA2243900E89805 /* Services */,
 				D8A770C61FA2140E00E89805 /* Customizable Elements */,
 				D8A770C51FA2133B00E89805 /* Generated */,
-				8AA9BE321FA0AB130018BD7F /* KnowledgeBase+CoreDataClass.swift */,
 				8AA9BE341FA0AB130018BD7F /* Category+CoreDataClass.swift */,
-				8AA9BE1E1FA04ADC0018BD7F /* newKnowledge.swift */,
+				D86894301FA355100024D666 /* Plant+CoreDataClass.swift */,
+				D86894321FA355100024D666 /* KnowledgeBase+CoreDataClass.swift */,
+				D86894341FA355100024D666 /* Image+CoreDataClass.swift */,
+				D86894361FA355100024D666 /* Note+CoreDataClass.swift */,
+				D86894381FA355100024D666 /* Garden+CoreDataClass.swift */,
+				8AA9BE1E1FA04ADC0018BD7F /* NewKnowledge.swift */,
 				D8A770D81FA2279700E89805 /* ApplicationUser.swift */,
 				D86893FA1FA313A30024D666 /* OnlineWeather.swift */,
-				D86893FC1FA314230024D666 /* LocalTemperature.swift */,
-				D86893FE1FA314730024D666 /* Constants.swift */,
+				D86893FC1FA314230024D666 /* LocalTemperature1.swift */,
+				D86894041FA34A1F0024D666 /* LocalTemperature2.swift */,
+				D86894061FA34A300024D666 /* LocalTemperature3.swift */,
+				D86894021FA314C70024D666 /* LocalMoisture1.swift */,
+				D86894081FA34A4C0024D666 /* LocalMoisture2.swift */,
+				D868940A1FA34A570024D666 /* LocalMoisture3.swift */,
 				D86894001FA314B00024D666 /* Location.swift */,
-				D86894021FA314C70024D666 /* LocalMoisture.swift */,
+				D86893FE1FA314730024D666 /* Constants.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -321,8 +353,12 @@
 		D8A770C51FA2133B00E89805 /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-				8AA9BE331FA0AB130018BD7F /* KnowledgeBase+CoreDataProperties.swift */,
 				8AA9BE351FA0AB130018BD7F /* Category+CoreDataProperties.swift */,
+				D86894311FA355100024D666 /* Plant+CoreDataProperties.swift */,
+				D86894331FA355100024D666 /* KnowledgeBase+CoreDataProperties.swift */,
+				D86894351FA355100024D666 /* Image+CoreDataProperties.swift */,
+				D86894371FA355100024D666 /* Note+CoreDataProperties.swift */,
+				D86894391FA355100024D666 /* Garden+CoreDataProperties.swift */,
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -671,20 +707,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8A770D91FA2279700E89805 /* ApplicationUser.swift in Sources */,
-				8AA9BE371FA0AB130018BD7F /* KnowledgeBase+CoreDataProperties.swift in Sources */,
-				D86894031FA314C70024D666 /* LocalMoisture.swift in Sources */,
+				D86894051FA34A1F0024D666 /* LocalTemperature2.swift in Sources */,
+				D86894031FA314C70024D666 /* LocalMoisture1.swift in Sources */,
+				D868943B1FA355100024D666 /* Plant+CoreDataProperties.swift in Sources */,
 				D8A770CD1FA2142100E89805 /* CustomizableTextField.swift in Sources */,
 				D8A770E31FA246A100E89805 /* Dashboard_PlantsVC.swift in Sources */,
 				8AA9BE381FA0AB130018BD7F /* Category+CoreDataClass.swift in Sources */,
+				D86894071FA34A300024D666 /* LocalTemperature3.swift in Sources */,
 				8AA9BE3D1FA0AF830018BD7F /* PlantTableViewController.swift in Sources */,
+				D868943E1FA355100024D666 /* Image+CoreDataClass.swift in Sources */,
+				D868943C1FA355100024D666 /* KnowledgeBase+CoreDataClass.swift in Sources */,
 				D8A770D71FA224B200E89805 /* DataService.swift in Sources */,
 				D8A770D21FA2202200E89805 /* SignUpTVC.swift in Sources */,
+				D86894401FA355100024D666 /* Note+CoreDataClass.swift in Sources */,
 				D8A770D01FA2200F00E89805 /* SignInVC.swift in Sources */,
-				8AA9BE361FA0AB130018BD7F /* KnowledgeBase+CoreDataClass.swift in Sources */,
-				D86893FD1FA314230024D666 /* LocalTemperature.swift in Sources */,
+				D86893FD1FA314230024D666 /* LocalTemperature1.swift in Sources */,
 				8AA9BE161FA048170018BD7F /* soilKnowledgeCell.swift in Sources */,
 				8AA9BE451FA194EB0018BD7F /* WaterTableViewController.swift in Sources */,
+				D86894421FA355100024D666 /* Garden+CoreDataClass.swift in Sources */,
+				D86894091FA34A4C0024D666 /* LocalMoisture2.swift in Sources */,
 				D8A770CC1FA2142100E89805 /* CustomizableButton.swift in Sources */,
+				D868940B1FA34A570024D666 /* LocalMoisture3.swift in Sources */,
+				D868943A1FA355100024D666 /* Plant+CoreDataClass.swift in Sources */,
 				D8A770E11FA2440600E89805 /* SettingsTVC.swift in Sources */,
 				D8A770CB1FA2142100E89805 /* CustomizableImageView.swift in Sources */,
 				8AA9BE431FA194D90018BD7F /* WaterViewController.swift in Sources */,
@@ -694,17 +738,21 @@
 				D86893FB1FA313A30024D666 /* OnlineWeather.swift in Sources */,
 				8AA9BE471FA194FA0018BD7F /* WaterTableViewCell.swift in Sources */,
 				D86894011FA314B00024D666 /* Location.swift in Sources */,
+				D86894431FA355100024D666 /* Garden+CoreDataProperties.swift in Sources */,
 				D8A770DE1FA236F200E89805 /* UpdateProfileTVC.swift in Sources */,
 				D86893FF1FA314730024D666 /* Constants.swift in Sources */,
 				D8A770D51FA2244D00E89805 /* AuthService.swift in Sources */,
 				8AA9BE1A1FA0496A0018BD7F /* SoilKnowledgeTableViewController.swift in Sources */,
 				8AA9BE391FA0AB130018BD7F /* Category+CoreDataProperties.swift in Sources */,
+				D868943F1FA355100024D666 /* Image+CoreDataProperties.swift in Sources */,
 				8AA9BE3F1FA0AF9B0018BD7F /* PlantTableViewCell.swift in Sources */,
 				D8774ECC1F9C510B0026BEF7 /* E_Plant.xcdatamodeld in Sources */,
 				8AA9BE411FA0B16F0018BD7F /* PlantViewController.swift in Sources */,
+				D868943D1FA355100024D666 /* KnowledgeBase+CoreDataProperties.swift in Sources */,
 				8AA9BE1C1FA0499C0018BD7F /* AddSoilKnowledgeViewController.swift in Sources */,
 				D8774EC41F9C510B0026BEF7 /* AppDelegate.swift in Sources */,
-				8AA9BE1F1FA04ADC0018BD7F /* newKnowledge.swift in Sources */,
+				8AA9BE1F1FA04ADC0018BD7F /* NewKnowledge.swift in Sources */,
+				D86894411FA355100024D666 /* Note+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
