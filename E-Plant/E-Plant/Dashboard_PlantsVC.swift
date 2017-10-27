@@ -17,6 +17,22 @@ class Dashboard_PlantsVC: UIViewController {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var welcomingMsgLabel: UILabel!
     @IBOutlet weak var logOutBtn: UIBarButtonItem!
+    @IBOutlet weak var customView1: UIView!
+    @IBOutlet weak var customView2: UIView!
+    @IBOutlet weak var customView3: UIView!
+    
+    @IBOutlet weak var currentPlantNumLabel: UILabel!
+    @IBOutlet weak var currentPlantNumFixedLabel: UILabel!
+    @IBOutlet weak var healthyPlantNumLabel: UILabel!
+    @IBOutlet weak var healthyPlantNumFixedLabel: UILabel!
+    @IBOutlet weak var warningPlantNumLabel: UIView!
+    @IBOutlet weak var warningPlantNumFixedLabel: UILabel!
+    @IBOutlet weak var dangerPlantNumLabel: UILabel!
+    @IBOutlet weak var dangerPlantNumFixedLabel: UILabel!
+    @IBOutlet weak var historyPlantNumLabel: UILabel!
+    @IBOutlet weak var historyPlantNumFixedLabel: UILabel!
+    
+    
     
     // Activity Indicator
     var spinner: UIActivityIndicatorView!
@@ -24,6 +40,12 @@ class Dashboard_PlantsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        customView1.layer.borderWidth = 1
+        customView1.layer.borderColor = UIColor.init(red:52/255.0, green:63/255.0, blue:75/255.0, alpha: 1.0).cgColor
+        customView2.layer.borderWidth = 1
+        customView2.layer.borderColor = UIColor.init(red:52/255.0, green:63/255.0, blue:75/255.0, alpha: 1.0).cgColor
+        customView3.layer.borderWidth = 1
+        customView3.layer.borderColor = UIColor.init(red:52/255.0, green:63/255.0, blue:75/255.0, alpha: 1.0).cgColor
         logOutBtn.tintColor = UIColor.red
     }
     
@@ -48,7 +70,7 @@ class Dashboard_PlantsVC: UIViewController {
         // setup spinner
         self.spinner = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height:40))
         self.spinner.color = UIColor.lightGray
-        self.spinner.center = welcomingMsgLabel.center
+        self.spinner.center = CGPoint(x: self.view.frame.width / 2, y: 100)
         self.view.addSubview(spinner)
         self.spinner.hidesWhenStopped = true
         self.spinner.startAnimating()
