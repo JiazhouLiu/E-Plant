@@ -124,3 +124,15 @@ extension UITableView {
     }
 }
 
+// check double format
+extension Double {
+    init?(myCustomFormat:String) {
+        guard let
+            standardDouble = Double(myCustomFormat),
+            let firstChar = myCustomFormat.characters.first,
+            let lastChar = myCustomFormat.characters.last, firstChar != "." && lastChar != "."
+            else { return nil }
+        self = standardDouble
+    }
+}
+

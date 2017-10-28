@@ -112,20 +112,20 @@ class GardenListTVC: UITableViewController, NSFetchedResultsControllerDelegate {
             // Delete the row from the data source
             let deletedGarden = controller.object(at: indexPath as IndexPath)
             // get all plants under this garden and delete them
-            var plants = [Plant]()
-            let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "toGarden == %@", deletedGarden)
-            
-            do {
-                plants = try context.fetch(fetchRequest)
-            } catch {
-                let error = error as NSError
-                print("\(error)")
-            }
-            //print(plants.count)
-            for item in plants{
-                context.delete(item)
-            }
+//            var plants = [Plant]()
+//            let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
+//            fetchRequest.predicate = NSPredicate(format: "toGarden == %@", deletedGarden)
+//            
+//            do {
+//                plants = try context.fetch(fetchRequest)
+//            } catch {
+//                let error = error as NSError
+//                print("\(error)")
+//            }
+//            //print(plants.count)
+//            for item in plants{
+//                context.delete(item)
+//            }
             context.delete(deletedGarden)
             
             ad.saveContext()
@@ -248,6 +248,7 @@ class GardenListTVC: UITableViewController, NSFetchedResultsControllerDelegate {
         let picture1 = Image(context: context)
         picture1.image = #imageLiteral(resourceName: "flowerGarden")
         garden1.toImage = picture1
+        garden1.sensorNo = 1
         
         let garden2 = Garden(context: context)
         garden2.name = "Vege Garden"
@@ -256,6 +257,7 @@ class GardenListTVC: UITableViewController, NSFetchedResultsControllerDelegate {
         let picture2 = Image(context: context)
         picture2.image = #imageLiteral(resourceName: "vegeGarden")
         garden2.toImage = picture2
+        garden2.sensorNo = 2
         
         
         ad.saveContext()
