@@ -468,7 +468,7 @@
                         <barButtonItem key="leftBarButtonItem" title="Edit List" id="RKR-1R-vvu"/>
                         <barButtonItem key="rightBarButtonItem" title="+" id="7hb-Zb-VBn">
                             <connections>
-                                <segue destination="F2t-xg-drJ" kind="show" id="5S2-N2-lo8"/>
+                                <segue destination="Ftw-Pb-TbK" kind="show" identifier="addPlantIdentifier" id="5S2-N2-lo8"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -2897,6 +2897,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Save" id="Am0-0q-Oo5">
                             <color key="tintColor" red="0.2295587892452487" green="0.88841887953367871" blue="0.3048038304350485" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="addPlantButton:" destination="F2t-xg-drJ" id="Syk-eT-9Rk"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -2909,7 +2912,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8TF-9r-6Yr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3918.8405797101454" y="950.54347826086962"/>
+            <point key="canvasLocation" x="4826.0869565217399" y="950.54347826086962"/>
         </scene>
         <!--Red Rose-->
         <scene sceneID="wIG-NY-1aw">
@@ -2930,6 +2933,9 @@
                                     <segment title="Profile"/>
                                     <segment title="Notes"/>
                                 </segments>
+                                <connections>
+                                    <action selector="changeView:" destination="rHy-JQ-vPF" eventType="valueChanged" id="7ts-08-viJ"/>
+                                </connections>
                             </segmentedControl>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gYW-Cf-BIZ">
                                 <rect key="frame" x="87" y="149" width="240" height="128"/>
@@ -2984,6 +2990,13 @@
                                 <color key="textColor" red="0.2295587892" green="0.88841887949999998" blue="0.30480383039999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxU-GV-rTJ">
+                                <rect key="frame" x="29" y="296" width="365" height="383"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -3000,9 +3013,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="articleField" destination="fxU-GV-rTJ" id="iRA-1g-3kh"/>
                         <outlet property="conditionLabel" destination="feo-71-2rF" id="7jR-X8-whF"/>
                         <outlet property="moistureLabel" destination="apg-Wg-kFz" id="Scm-7j-oj4"/>
                         <outlet property="plantImage" destination="gYW-Cf-BIZ" id="QSs-OO-oQ0"/>
+                        <outlet property="plantViewSegment" destination="rX2-DC-5OA" id="Fsi-De-hZl"/>
                         <outlet property="pressureLabel" destination="hIv-Kv-np5" id="wIb-AB-OjV"/>
                         <outlet property="tempLabel" destination="WyK-tE-QF5" id="bzH-9y-D9X"/>
                     </connections>
@@ -3028,6 +3043,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WnZ-RB-OBe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6760" y="1700"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ffj-J3-aqt">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ftw-Pb-TbK" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="C0R-Ti-AgQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="F2t-xg-drJ" kind="relationship" relationship="rootViewController" id="X3m-07-HBG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="if3-Pi-uXs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3918.8405797101454" y="950.54347826086962"/>
         </scene>
     </scenes>
     <resources>

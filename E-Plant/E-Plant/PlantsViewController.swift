@@ -12,6 +12,8 @@ class PlantsViewController: UIViewController {
 
     var plant:Plant!
     
+    @IBOutlet weak var plantViewSegment: UISegmentedControl!
+    @IBOutlet weak var articleField: UITextView!
     @IBOutlet weak var conditionLabel: UILabel!
     @IBOutlet weak var plantImage: UIImageView!
     @IBOutlet weak var moistureLabel: UILabel!
@@ -24,6 +26,8 @@ class PlantsViewController: UIViewController {
         plantImage.image = plant.toImage?.image as? UIImage
         conditionLabel.text = plant.condition
         self.title = plant.name
+        articleField.text = plant.toKB?.article
+        showPlantStatus()
         // Do any additional setup after loading the view.
     }
 
@@ -32,6 +36,13 @@ class PlantsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func showPlantStatus() {
+        articleField.isHidden = true
+    }
+    
+    func showPlantProfile() {
+        articleField.isHidden = false
+    }
 
     @IBAction func backButton(_ sender: Any) {
         // Dismiss the view controller depending on the context it was presented
@@ -46,5 +57,12 @@ class PlantsViewController: UIViewController {
         }
     }
     
+    @IBAction func changeView(_ sender: UISegmentedControl) {
+        if plantViewSegment.selectedSegmentIndex == 0 {
+            showPlantStatus()
+        }else if plantViewSegment.selectedSegmentIndex == 1{
+            showPlantProfile()
+        }
+    }
 
 }

@@ -68,10 +68,9 @@ class AddSoilKnowledgeViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func SaveButton(_ sender: UIBarButtonItem) {
         let isPresentingInAddMode = presentingViewController is UITabBarController
-        print("test11111111")
+       
         if isPresentingInAddMode {
-             print("test2222222")
-            if (titleField.text!.trimmingCharacters(in: .whitespaces).isEmpty){  // the name cannot be empty
+        if (titleField.text!.trimmingCharacters(in: .whitespaces).isEmpty){  // the name cannot be empty
                 showAlert(title: "title")
             }
             else if(articleField.text!.trimmingCharacters(in: .whitespaces).isEmpty){

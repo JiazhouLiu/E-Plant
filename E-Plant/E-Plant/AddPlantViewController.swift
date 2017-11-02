@@ -9,6 +9,11 @@
 import UIKit
 import CoreData
 
+protocol addPlantDelegate {
+    func addPlant(plant: newPlant)
+}
+
+
 class AddPlantViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var plantImage: UIImageView!
@@ -26,9 +31,11 @@ class AddPlantViewController: UIViewController,UIPickerViewDelegate, UIPickerVie
     var gardenList: [Garden]?
     var KnowledgeBaseList: [KnowledgeBase]?
     var filteredKnowledgeList: [KnowledgeBase]?
-    
+    var selectedGaeden: Garden?
     var managedContext: NSManagedObjectContext?
-
+    var plantDelegate: addPlantDelegate?
+    var garden: Garden?
+    var knowledgeBase: KnowledgeBase?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +69,7 @@ class AddPlantViewController: UIViewController,UIPickerViewDelegate, UIPickerVie
     func fetchAllKnowledges() {
         let gardenFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Garden")
         let knowledgeFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "KnowledgeBase")
+        
 
         
         do {
@@ -83,6 +91,8 @@ class AddPlantViewController: UIViewController,UIPickerViewDelegate, UIPickerVie
             fatalError("Failed to fetch Knowledge Base: \(error)")
         }
     }
+    
+    
 
     // pickerView configurations
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -97,8 +107,19 @@ class AddPlantViewController: UIViewController,UIPickerViewDelegate, UIPickerVie
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == kbPickerView {
             kbTF.text = kbArray[row]
+            for k in filteredKnowledgeList!{
+                if (k.title == kbTF.text){
+                    knowledgeBase = k
+                     print("check KB111111!!!!!!" + (knowledgeBase?.title)!)
+                }
+            }
         }else if pickerView == gardenKLPickerView {
             gardenTF.text = gardenKLArray[row]
+            for g in gardenList!{
+                if (g.name == gardenTF.text){
+                    garden = g
+                }
+            }
         }
         
     }
@@ -203,6 +224,50 @@ class AddPlantViewController: UIViewController,UIPickerViewDelegate, UIPickerVie
 
     }
     
+    
+    
+    
+    @IBAction func addPlantButton(_ sender: Any) {
+        
+        let isPresentingInAddMode = presentingViewController is UITabBarController
+        if isPresentingInAddMode {
+            if (kbTF.text!.trimmingCharacters(in: .whitespaces).isEmpty){  // the name cannot be empty
+                showAlert(title: "name")
+            }
+            else if(gardenTF.text!.trimmingCharacters(in: .whitespaces).isEmpty){
+                showAlert(title: "Garden")
+            }
+            else if(plantImage == nil){
+                plantImage.image = #imageLiteral(resourceName: "imagePlaceholder")
+            }
+            else {
+                let newName = kbTF.text
+                let newGardenName = gardenTF.text
+                let newCondition = "Good Condition"
+                let newKbTitle = "Plant"
+                let picture = Image(context: context)
+                picture.image = plantImage.image
+                
+                let newItem = newPlant(name:newName!, condition:newCondition, gardenName:newGardenName!,toImage:picture,knowledgeBaseTitle:newKbTitle,toGarden:garden!,toKB:knowledgeBase!)
+                self.plantDelegate!.addPlant(plant: newItem)
+                dismiss(animated: true, completion: nil)
+             }
+      }
+    }
+    
+    
+    // alert function
+    func showAlert(title: String){
+        let alertVC = UIAlertController(title: "Warning", message: "\(title) can not be empty", preferredStyle: UIAlertControllerStyle.alert)
+        let acSure = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive) { (UIAlertAction) -> Void in
+            print("click Sure")
+        }
+        alertVC.addAction(acSure)
+        self.present(alertVC, animated: true, completion: nil)
+    }
+    
+   
+
     
     
     

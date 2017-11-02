@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class MyPlantTableViewController: UITableViewController {
+class MyPlantTableViewController: UITableViewController,addPlantDelegate{
 
     var plantList: [Plant]?
     var filteredKnowledgeList: [Plant]?
@@ -50,6 +50,7 @@ class MyPlantTableViewController: UITableViewController {
         let plant = plantList![indexPath.row]
         cell.nameLabel.text = plant.name
         cell.conditionLabel.text = plant.condition
+        print(plant.toKB?.title)
         if (plant.toImage == nil){
            cell.plantImage.image = #imageLiteral(resourceName: "imagePlaceholder")
         }
@@ -66,6 +67,11 @@ class MyPlantTableViewController: UITableViewController {
             let destination: PlantsViewController = segue.destination as! PlantsViewController
             destination.plant = selectedCategory
         }
+        else if(segue.identifier == "addPlantIdentifier") {
+            let destination: AddPlantViewController = segue.destination.childViewControllers[0] as! AddPlantViewController
+            destination.plantDelegate = self
+        }
+        
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -99,7 +105,34 @@ class MyPlantTableViewController: UITableViewController {
             fatalError("Failed to fetch Knowledge Base: \(error)")
         }
     }
+    
+    func addPlant(plant:newPlant){
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        managedContext = appDelegate.persistentContainer.viewContext
+        let plant1 = NSEntityDescription.insertNewObject(forEntityName: "Plant", into: managedContext!) as! Plant
+        plant1.name = plant.name
+        plant1.condition = plant.condition
+        plant1.dateAdded = getCurrentDate()!
+        plant1.toImage = plant.toImage
+        plant1.toGarden = plant.toGarden
+        plant1.toKB = plant.toKB
+        let newNo = (plantList?.count)! + 1
+        plant1.orderNo = Int16(newNo)
+        plant1.gardenName = plant.gardenName
+        plant1.knowledgeBaseTitle = plant.knowledgeBaseTitle
+        appDelegate.saveContext()
+        fetchAllPlants()
+        self.tableView.reloadData()
+    }
 
+    // get current date
+    func getCurrentDate() -> NSDate?{
+        let currentDate = Date()
+        let calendar = NSCalendar.current
+        let date1 = calendar.startOfDay(for: currentDate as Date)
+        
+        return date1 as NSDate
+    }
     
 
 }

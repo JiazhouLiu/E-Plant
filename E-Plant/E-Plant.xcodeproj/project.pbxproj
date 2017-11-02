@@ -12,6 +12,7 @@
 		8A2D548C1FA9CC1500878490 /* AddPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2D548B1FA9CC1500878490 /* AddPlantViewController.swift */; };
 		8A2D548E1FA9CC5F00878490 /* MyPlantTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2D548D1FA9CC5F00878490 /* MyPlantTableViewController.swift */; };
 		8A2D54901FA9CC8300878490 /* MyPlantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2D548F1FA9CC8300878490 /* MyPlantTableViewCell.swift */; };
+		8A47E49D1FAB69D700A955DA /* newPlant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A47E49C1FAB69D700A955DA /* newPlant.swift */; };
 		8AA9BE0C1FA03DC10018BD7F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA9BE0B1FA03DC10018BD7F /* CoreData.framework */; };
 		8AA9BE161FA048170018BD7F /* soilKnowledgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE151FA048170018BD7F /* soilKnowledgeCell.swift */; };
 		8AA9BE1A1FA0496A0018BD7F /* SoilKnowledgeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE191FA0496A0018BD7F /* SoilKnowledgeTableViewController.swift */; };
@@ -102,6 +103,7 @@
 		8A2D548B1FA9CC1500878490 /* AddPlantViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPlantViewController.swift; sourceTree = "<group>"; };
 		8A2D548D1FA9CC5F00878490 /* MyPlantTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPlantTableViewController.swift; sourceTree = "<group>"; };
 		8A2D548F1FA9CC8300878490 /* MyPlantTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPlantTableViewCell.swift; sourceTree = "<group>"; };
+		8A47E49C1FAB69D700A955DA /* newPlant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newPlant.swift; sourceTree = "<group>"; };
 		8AA9BE0B1FA03DC10018BD7F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		8AA9BE151FA048170018BD7F /* soilKnowledgeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = soilKnowledgeCell.swift; sourceTree = "<group>"; };
 		8AA9BE191FA0496A0018BD7F /* SoilKnowledgeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoilKnowledgeTableViewController.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				D86894301FA355100024D666 /* Plant+CoreDataClass.swift */,
 				D86894341FA355100024D666 /* Image+CoreDataClass.swift */,
 				D86894361FA355100024D666 /* Note+CoreDataClass.swift */,
+				8A47E49C1FAB69D700A955DA /* newPlant.swift */,
 				8AA9BE1E1FA04ADC0018BD7F /* NewKnowledge.swift */,
 				D8A770D81FA2279700E89805 /* ApplicationUser.swift */,
 				D86893FA1FA313A30024D666 /* OnlineWeather.swift */,
@@ -776,6 +779,7 @@
 				D868940B1FA34A570024D666 /* LocalMoisture3.swift in Sources */,
 				D868943A1FA355100024D666 /* Plant+CoreDataClass.swift in Sources */,
 				D8A770E11FA2440600E89805 /* SettingsTVC.swift in Sources */,
+				8A47E49D1FAB69D700A955DA /* newPlant.swift in Sources */,
 				D8A770CB1FA2142100E89805 /* CustomizableImageView.swift in Sources */,
 				8AA9BE431FA194D90018BD7F /* WaterViewController.swift in Sources */,
 				D86894481FA35AD20024D666 /* GardenListTVC.swift in Sources */,
