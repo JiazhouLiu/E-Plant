@@ -13,7 +13,7 @@ class PlantViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var articleField: UITextView!
-     var knowledge: KnowledgeBase!
+    var knowledge: KnowledgeBase!
     
     override func viewDidLoad() {
         super.viewDidLoad()

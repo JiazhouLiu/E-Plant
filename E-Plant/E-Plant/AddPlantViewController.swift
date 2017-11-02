@@ -9,8 +9,11 @@
 import UIKit
 import CoreData
 
-class AddPlantViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource {
+class AddPlantViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    @IBOutlet weak var plantImage: UIImageView!
+    
+    @IBOutlet weak var imageButton: UIButton!
     
     @IBOutlet weak var kbTF: UITextField!
     @IBOutlet weak var gardenTF: UITextField!
@@ -145,5 +148,63 @@ class AddPlantViewController: UIViewController,UIPickerViewDelegate, UIPickerVie
         }
 
     }
+    
+    
+    @IBAction func chooseImage(_ sender: Any) {
+        let pickerController = UIImagePickerController();
+        pickerController.delegate = self
+        pickerController.allowsEditing = true
+        
+        // setup a new alert at the bottom to let user choose options
+        let alertController = UIAlertController(title: "Add a Picture", message: "Choose From ", preferredStyle: .actionSheet)
+        
+        // pick image from camera
+        let cameraAction = UIAlertAction(title: "Camera", style: .default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+                pickerController.sourceType = UIImagePickerControllerSourceType.camera
+                self.present(pickerController, animated: true, completion: nil)
+            }
+        }
+        
+        // pick image from photo library
+        let photosLibraryAction = UIAlertAction(title: "Photos Library", style: .default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
+                pickerController.sourceType = UIImagePickerControllerSourceType.photoLibrary
+                self.present(pickerController, animated: true, completion: nil)
+            }
+        }
+        
+        // pick image from saved photo album
+        let savedPhotoAction = UIAlertAction(title: "Saved Photo Album", style: .default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.savedPhotosAlbum) {
+                pickerController.sourceType = UIImagePickerControllerSourceType.savedPhotosAlbum
+                self.present(pickerController, animated: true, completion: nil)
+            }
+        }
+        
+        // cancel option
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
+        
+        alertController.addAction(cameraAction)
+        alertController.addAction(photosLibraryAction)
+        alertController.addAction(savedPhotoAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    // image picker controller handler when finish choose image
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            self.dismiss(animated: true, completion: nil)
+            self.plantImage.image = pickedImage
+            self.imageButton.setTitle("", for:.normal)
+        }
+
+    }
+    
+    
+    
+    
 
 }

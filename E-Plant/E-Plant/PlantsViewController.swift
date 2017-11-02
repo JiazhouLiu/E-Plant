@@ -10,9 +10,20 @@ import UIKit
 
 class PlantsViewController: UIViewController {
 
+    var plant:Plant!
+    
+    @IBOutlet weak var conditionLabel: UILabel!
+    @IBOutlet weak var plantImage: UIImageView!
+    @IBOutlet weak var moistureLabel: UILabel!
+    @IBOutlet weak var tempLabel: UILabel!
+    @IBOutlet weak var pressureLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        plantImage.image = plant.toImage?.image as? UIImage
+        conditionLabel.text = plant.condition
+        self.title = plant.name
         // Do any additional setup after loading the view.
     }
 
@@ -22,14 +33,18 @@ class PlantsViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func backButton(_ sender: Any) {
+        // Dismiss the view controller depending on the context it was presented
+        let isPresentingInAddMode = presentingViewController is UITabBarController
+        if isPresentingInAddMode {
+            print("test111111")
+            dismiss(animated: true, completion: nil)
+        } else {
+            print("test22222")
+            
+            navigationController!.popViewController(animated: true)
+        }
     }
-    */
+    
 
 }

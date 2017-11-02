@@ -18,6 +18,8 @@ class GardenListTVC: UITableViewController, NSFetchedResultsControllerDelegate {
     var customOrder:Bool = false
     // edit Btn IBOutlet
     @IBOutlet weak var editBtn: UIBarButtonItem!
+    var managedContext: NSManagedObjectContext?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -250,6 +252,21 @@ class GardenListTVC: UITableViewController, NSFetchedResultsControllerDelegate {
         garden1.toImage = picture1
         garden1.sensorNo = 1
         
+        let kb1 = KnowledgeBase(context: context)
+        kb1.title = "Rose"
+        kb1.article = "Rose"
+        kb1.category = "Plant"
+        
+        let plant1 = Plant(context: context)
+        plant1.name = "Rose"
+        plant1.condition = "good condition"
+        let picture3 = Image(context: context)
+        picture3.image = #imageLiteral(resourceName: "rose")
+        plant1.toImage = picture3
+        plant1.toGarden = garden1
+        plant1.toKB = kb1
+        
+        
         let garden2 = Garden(context: context)
         garden2.name = "Vege Garden"
         garden2.latitude = -37.910656
@@ -262,5 +279,9 @@ class GardenListTVC: UITableViewController, NSFetchedResultsControllerDelegate {
         
         ad.saveContext()
     }
+    
+    
+    
+    
 
 }
