@@ -67,6 +67,7 @@ class PlantTableViewController: UITableViewController,addPlantKnowledgeDelegate 
             KnowledgeBaseList = try managedContext?.fetch(knowledgeFetch) as? [KnowledgeBase]
             filteredKnowledgeList = KnowledgeBaseList?.filter({ (knowledge) -> Bool in return
                 (knowledge.category?.contains("Plant"))!})
+             let string = String(stringInterpolationSegment: filteredKnowledgeList?.count);            print(string)
         } catch {
             fatalError("Failed to fetch Knowledge Base: \(error)")
         }
