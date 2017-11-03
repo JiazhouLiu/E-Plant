@@ -254,7 +254,7 @@ class GardenListTVC: UITableViewController, NSFetchedResultsControllerDelegate {
         
         let kb1 = KnowledgeBase(context: context)
         kb1.title = "Rose"
-        kb1.article = "A rose is a woody perennial flowering plant of the genus Rosa, in the family Rosaceae, or the flower it bears. There are over a hundred species and thousands of cultivars. They form a group of plants that can be erect shrubs, climbing or trailing with stems that are often armed with sharp prickles. Flowers vary in size and shape and are usually large and showy, in colours ranging from white through yellows and reds. Most species are native to Asia, with smaller numbers native to Europe, North America, and northwestern Africa. Species, cultivars and hybrids are all widely grown for their beauty and often are fragrant. Roses have acquired cultural significance in many societies. Rose plants range in size from compact, miniature roses, to climbers that can reach seven meters in height. Different species hybridize easily, and this has been used in the development of the wide range of garden roses."
+        kb1.article = "Roses can withstand a wide range of temperatures. \n In general, hot, dry conditions are preferable to humid conditions. \n Roses adopt winter dormancy when temperatures fall below zero at night and less than 10°C in the day. \n With minimum night temperatures of 10°C and correspondingly warmer temperatures of 18°C to 25°C during the day, \n roses will happily flower non-stop for 12 months of the year, providing they have been watered, fertilized and groomed as required."
         kb1.category = "Plant"
         
         let plant1 = Plant(context: context)
@@ -276,6 +276,20 @@ class GardenListTVC: UITableViewController, NSFetchedResultsControllerDelegate {
         garden2.toImage = picture2
         garden2.sensorNo = 2
         
+        
+        let kb2 = KnowledgeBase(context: context)
+        kb2.title = "Mint"
+        kb2.article = "The mints will grow in a wide range of climates as shown by their popularity in home gardens all over Australia. Ideally, \n they require plenty of sun, growing best in the long midsummer days of the higher latitudes. \n For this reason, the Australian mint industry has developed mostly in Tasmania, particularly for oil production. \n Ideal growing temperatures for mint are warm sunny days (25°C) and cool nights (15°C). \n This is why, in the hotter climates, mint generally grows better in the more shaded areas of the garden."
+        kb2.category = "Plant"
+        
+        let plant2 = Plant(context: context)
+        plant2.name = "Mint"
+        plant2.condition = "good condition"
+        let picture4 = Image(context: context)
+        picture4.image = #imageLiteral(resourceName: "mint")
+        plant2.toImage = picture4
+        plant2.toGarden = garden2
+        plant2.toKB = kb2
         
         ad.saveContext()
     }

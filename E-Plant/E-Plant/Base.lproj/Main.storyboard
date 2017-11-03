@@ -465,13 +465,20 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="My Plants" id="yzp-m1-eHd">
-                        <barButtonItem key="leftBarButtonItem" title="Edit List" id="RKR-1R-vvu"/>
+                        <barButtonItem key="leftBarButtonItem" title="Edit List" id="RKR-1R-vvu">
+                            <connections>
+                                <action selector="editBtn:" destination="pAp-RG-Azl" id="mYf-JN-bAi"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="+" id="7hb-Zb-VBn">
                             <connections>
                                 <segue destination="Ftw-Pb-TbK" kind="show" identifier="addPlantIdentifier" id="5S2-N2-lo8"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="editBtn" destination="RKR-1R-vvu" id="C0H-S9-V2x"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RbP-BM-iw7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2730,35 +2737,6 @@
             </objects>
             <point key="canvasLocation" x="55.200000000000003" y="258.62068965517244"/>
         </scene>
-        <!--My Plants-->
-        <scene sceneID="liM-MS-OGG">
-            <objects>
-                <viewController id="aep-Zv-b3h" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="RrG-sm-gzI"/>
-                        <viewControllerLayoutGuide type="bottom" id="hBl-SC-Cye"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="HcZ-z6-iao">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDT-i8-4XU">
-                                <rect key="frame" x="184" y="353" width="47" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="See All"/>
-                                <connections>
-                                    <segue destination="pAp-RG-Azl" kind="show" id="bRc-Jz-Qnm"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="My Plants" id="O6X-t8-prs"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8Hs-hY-uVI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="994" y="950"/>
-        </scene>
         <!--Dashboard-->
         <scene sceneID="o0g-OK-JnI">
             <objects>
@@ -2781,6 +2759,7 @@
         <!--My Plants-->
         <scene sceneID="5Uy-eY-T7r">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4xb-vR-kVZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Wic-k5-pQ9" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My Plants" image="plantsIcon" id="8R4-N0-RKe"/>
                     <toolbarItems/>
@@ -2790,10 +2769,9 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="aep-Zv-b3h" kind="relationship" relationship="rootViewController" id="72z-KZ-iDI"/>
+                        <segue destination="pAp-RG-Azl" kind="relationship" relationship="rootViewController" id="m6h-Dr-m8u"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4xb-vR-kVZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="55" y="951"/>
         </scene>
@@ -3023,8 +3001,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Garden Temperature:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6XZ-80-3Qi">
-                                <rect key="frame" x="29" y="386.66666666666669" width="199" height="42"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Garden Temperature:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6XZ-80-3Qi">
+                                <rect key="frame" x="29" y="391" width="199" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="199" id="ilM-cL-VOo"/>
                                 </constraints>
@@ -3033,7 +3011,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Garden Pressure:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TKj-52-uF3">
-                                <rect key="frame" x="29" y="429.66666666666669" width="199" height="24"/>
+                                <rect key="frame" x="29" y="425" width="199" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -3130,25 +3108,26 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="WyK-tE-QF5" firstAttribute="centerY" secondItem="6XZ-80-3Qi" secondAttribute="centerY" id="0pT-s1-BOS"/>
-                            <constraint firstItem="hIv-Kv-np5" firstAttribute="centerY" secondItem="TKj-52-uF3" secondAttribute="centerY" id="316-Lx-2lv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="WyK-tE-QF5" secondAttribute="trailing" constant="68" id="3Vf-9T-8qH"/>
                             <constraint firstAttribute="bottom" secondItem="apg-Wg-kFz" secondAttribute="bottom" constant="346" id="3dB-nv-XeS"/>
+                            <constraint firstItem="apg-Wg-kFz" firstAttribute="leading" secondItem="hIv-Kv-np5" secondAttribute="leading" id="4H6-H6-zp4"/>
+                            <constraint firstItem="hIv-Kv-np5" firstAttribute="top" secondItem="WyK-tE-QF5" secondAttribute="bottom" constant="13" id="8zb-O6-Zm4"/>
                             <constraint firstItem="rX2-DC-5OA" firstAttribute="leading" secondItem="znI-XK-JsL" secondAttribute="leadingMargin" id="9bN-YS-8DK"/>
                             <constraint firstItem="OQE-gN-urg" firstAttribute="bottom" secondItem="MGo-oB-vHv" secondAttribute="top" id="DbE-MW-aqG"/>
                             <constraint firstItem="gYW-Cf-BIZ" firstAttribute="top" secondItem="rX2-DC-5OA" secondAttribute="bottom" constant="20" id="Faz-YU-bkW"/>
+                            <constraint firstItem="WyK-tE-QF5" firstAttribute="centerX" secondItem="hIv-Kv-np5" secondAttribute="centerX" id="Fw5-Z8-FCI"/>
                             <constraint firstItem="gYW-Cf-BIZ" firstAttribute="centerX" secondItem="znI-XK-JsL" secondAttribute="centerX" id="IeQ-ZW-bn1"/>
-                            <constraint firstItem="hIv-Kv-np5" firstAttribute="leading" secondItem="apg-Wg-kFz" secondAttribute="leading" id="J5Y-64-IAC"/>
                             <constraint firstItem="feo-71-2rF" firstAttribute="leading" secondItem="znI-XK-JsL" secondAttribute="leadingMargin" constant="23" id="MbG-Xk-uR6"/>
                             <constraint firstItem="OQE-gN-urg" firstAttribute="top" secondItem="gYW-Cf-BIZ" secondAttribute="top" id="Nzp-3L-9K5"/>
-                            <constraint firstItem="hIv-Kv-np5" firstAttribute="centerX" secondItem="WyK-tE-QF5" secondAttribute="centerX" id="PB1-rV-dpQ"/>
                             <constraint firstItem="6XZ-80-3Qi" firstAttribute="trailing" secondItem="TKj-52-uF3" secondAttribute="trailing" id="Seb-09-7D4"/>
-                            <constraint firstItem="hIv-Kv-np5" firstAttribute="top" secondItem="WyK-tE-QF5" secondAttribute="bottom" constant="13" id="VZB-kB-fkO"/>
+                            <constraint firstItem="hIv-Kv-np5" firstAttribute="top" secondItem="6XZ-80-3Qi" secondAttribute="bottom" constant="7" id="WRc-gz-ova"/>
                             <constraint firstItem="fxU-GV-rTJ" firstAttribute="trailing" secondItem="OQE-gN-urg" secondAttribute="trailing" id="Y6l-Ij-vnd"/>
                             <constraint firstItem="WyK-tE-QF5" firstAttribute="leading" secondItem="6XZ-80-3Qi" secondAttribute="trailing" constant="59" id="YPq-zn-fq4"/>
                             <constraint firstItem="rX2-DC-5OA" firstAttribute="trailing" secondItem="znI-XK-JsL" secondAttribute="trailingMargin" id="axB-6L-Mn1"/>
                             <constraint firstItem="WyK-tE-QF5" firstAttribute="top" secondItem="apg-Wg-kFz" secondAttribute="bottom" constant="7" id="dTH-Me-40N"/>
                             <constraint firstItem="apg-Wg-kFz" firstAttribute="baseline" secondItem="G4D-sj-ggO" secondAttribute="baseline" id="fTa-9I-Sax"/>
                             <constraint firstItem="rX2-DC-5OA" firstAttribute="top" secondItem="U1v-cl-iLO" secondAttribute="bottom" constant="26" id="g65-PU-n6C"/>
+                            <constraint firstItem="TKj-52-uF3" firstAttribute="centerY" secondItem="hIv-Kv-np5" secondAttribute="centerY" id="jKJ-ob-GxD"/>
                             <constraint firstAttribute="trailingMargin" secondItem="apg-Wg-kFz" secondAttribute="trailing" constant="45" id="kmb-rq-CB7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="feo-71-2rF" secondAttribute="trailing" constant="24" id="kzn-wc-AFL"/>
                             <constraint firstItem="TKj-52-uF3" firstAttribute="top" secondItem="6XZ-80-3Qi" secondAttribute="bottom" constant="1" id="mXz-oI-2Q5"/>

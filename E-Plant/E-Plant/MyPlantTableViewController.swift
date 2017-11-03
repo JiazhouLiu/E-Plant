@@ -15,8 +15,10 @@ class MyPlantTableViewController: UITableViewController,addPlantDelegate{
     var filteredKnowledgeList: [Plant]?
     var managedContext: NSManagedObjectContext?
     var appDelegate: AppDelegate?
+    var filterGarden: Garden?
     
 
+    @IBOutlet weak var editBtn: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,14 +95,27 @@ class MyPlantTableViewController: UITableViewController,addPlantDelegate{
         
     }
     
-
+    // enable move function
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    
+    
+    // filter the plant if user enter from the garden list
+    // otherwise will show all plants
     func fetchAllPlants() {
         let plantFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Plant")
         
         do {
-            plantList = try managedContext?.fetch(plantFetch) as? [Plant]
-             let string = String(stringInterpolationSegment: plantList?.count);
-              print(string)
+            if filterGarden?.name != nil{
+                filteredKnowledgeList = try managedContext?.fetch(plantFetch) as? [Plant]
+                plantList =  filteredKnowledgeList?.filter({ (plant) -> Bool in return
+                    (plant.toGarden?.isEqual(filterGarden))!})
+            }
+            else{
+              plantList = try managedContext?.fetch(plantFetch) as? [Plant]
+            }
         } catch {
             fatalError("Failed to fetch Knowledge Base: \(error)")
         }
@@ -134,5 +149,14 @@ class MyPlantTableViewController: UITableViewController,addPlantDelegate{
         return date1 as NSDate
     }
     
+    
+    @IBAction func editBtn(_ sender: Any) {
+        self.isEditing = !self.isEditing
+        if tableView.isEditing {
+            editBtn.title = "Save"
+        } else {
+            editBtn.title = "Edit List"
+        }
+    }
 
 }
