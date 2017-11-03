@@ -299,10 +299,11 @@ class Dashboard_PlantsVC: UIViewController, CLLocationManagerDelegate {
         let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
         
         self.plants.removeAll()
+
+        currentPlantsNo = 0
         healthyPlantsNo = 0
         warningPlantsNo = 0
         dangerPlantsNo = 0
-        currentPlantsNo = 0
         do {
             self.plants = try context.fetch(fetchRequest)
         } catch {
