@@ -13,9 +13,9 @@
 		8A2D548E1FA9CC5F00878490 /* MyPlantTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2D548D1FA9CC5F00878490 /* MyPlantTableViewController.swift */; };
 		8A2D54901FA9CC8300878490 /* MyPlantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2D548F1FA9CC8300878490 /* MyPlantTableViewCell.swift */; };
 		8A47E49D1FAB69D700A955DA /* newPlant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A47E49C1FAB69D700A955DA /* newPlant.swift */; };
-		8A47E4A21FAC71FE00A955DA /* NotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A47E4A11FAC71FE00A955DA /* NotesTableViewCell.swift */; };
 		8A47E4A41FAC721400A955DA /* addNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A47E4A31FAC721400A955DA /* addNotesViewController.swift */; };
 		8A47E4A61FAC86AD00A955DA /* newContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A47E4A51FAC86AD00A955DA /* newContent.swift */; };
+		8A47E4A81FACE10A00A955DA /* NotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A47E4A71FACE10A00A955DA /* NotesTableViewCell.swift */; };
 		8AA9BE0C1FA03DC10018BD7F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA9BE0B1FA03DC10018BD7F /* CoreData.framework */; };
 		8AA9BE161FA048170018BD7F /* soilKnowledgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE151FA048170018BD7F /* soilKnowledgeCell.swift */; };
 		8AA9BE1A1FA0496A0018BD7F /* SoilKnowledgeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9BE191FA0496A0018BD7F /* SoilKnowledgeTableViewController.swift */; };
@@ -110,9 +110,9 @@
 		8A2D548D1FA9CC5F00878490 /* MyPlantTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPlantTableViewController.swift; sourceTree = "<group>"; };
 		8A2D548F1FA9CC8300878490 /* MyPlantTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPlantTableViewCell.swift; sourceTree = "<group>"; };
 		8A47E49C1FAB69D700A955DA /* newPlant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newPlant.swift; sourceTree = "<group>"; };
-		8A47E4A11FAC71FE00A955DA /* NotesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesTableViewCell.swift; sourceTree = "<group>"; };
 		8A47E4A31FAC721400A955DA /* addNotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addNotesViewController.swift; sourceTree = "<group>"; };
 		8A47E4A51FAC86AD00A955DA /* newContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newContent.swift; sourceTree = "<group>"; };
+		8A47E4A71FACE10A00A955DA /* NotesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesTableViewCell.swift; sourceTree = "<group>"; };
 		8AA9BE0B1FA03DC10018BD7F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		8AA9BE151FA048170018BD7F /* soilKnowledgeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = soilKnowledgeCell.swift; sourceTree = "<group>"; };
 		8AA9BE191FA0496A0018BD7F /* SoilKnowledgeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoilKnowledgeTableViewController.swift; sourceTree = "<group>"; };
@@ -234,7 +234,7 @@
 		8A47E49E1FAC71B300A955DA /* notes */ = {
 			isa = PBXGroup;
 			children = (
-				8A47E4A11FAC71FE00A955DA /* NotesTableViewCell.swift */,
+				8A47E4A71FACE10A00A955DA /* NotesTableViewCell.swift */,
 				8A47E4A31FAC721400A955DA /* addNotesViewController.swift */,
 			);
 			name = notes;
@@ -830,7 +830,6 @@
 				8AA9BE1A1FA0496A0018BD7F /* SoilKnowledgeTableViewController.swift in Sources */,
 				8AA9BE391FA0AB130018BD7F /* Category+CoreDataProperties.swift in Sources */,
 				D868943F1FA355100024D666 /* Image+CoreDataProperties.swift in Sources */,
-				8A47E4A21FAC71FE00A955DA /* NotesTableViewCell.swift in Sources */,
 				D86894451FA3588E0024D666 /* MaterialView.swift in Sources */,
 				D868945A1FA377070024D666 /* Garden+CoreDataProperties.swift in Sources */,
 				8AA9BE3F1FA0AF9B0018BD7F /* PlantTableViewCell.swift in Sources */,
@@ -845,6 +844,7 @@
 				D8774EC41F9C510B0026BEF7 /* AppDelegate.swift in Sources */,
 				8AA9BE1F1FA04ADC0018BD7F /* NewKnowledge.swift in Sources */,
 				D86894411FA355100024D666 /* Note+CoreDataProperties.swift in Sources */,
+				8A47E4A81FACE10A00A955DA /* NotesTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class PlantsViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,addNoteDelegate {
+class PlantsViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,addNoteDelegate,editNoteDelegate {
 
     var plant:Plant!
     var managedContext: NSManagedObjectContext?
@@ -25,6 +25,8 @@ class PlantsViewController: UIViewController,UITableViewDataSource,UITableViewDe
     @IBOutlet weak var addNotes: UIBarButtonItem!
     @IBOutlet weak var notesTableView: UITableView!
     var noteList: [Note]?
+    var filteredNoteList: [Note]?
+    var sensorStatus: String = "off line"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,8 +39,11 @@ class PlantsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         articleField.text = plant.toKB?.article
         
         showPlantStatus()
-        if noteList?.count == 0{
+        if filteredNoteList?.count == 0{
             addSampleNote()
+        }
+        if sensorStatus == "off line"{
+            offline()
         }
     }
 
@@ -51,6 +56,7 @@ class PlantsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         articleField.isHidden = true
         notesTableView.isHidden = true
         addNotes.isEnabled = false
+        conditionLabel.isHidden = false
         self.navigationController?.navigationItem.rightBarButtonItem?.tintColor = UIColor.clear;
     }
     
@@ -59,6 +65,7 @@ class PlantsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         addNotes.isEnabled = false
         self.navigationController?.navigationItem.rightBarButtonItem?.tintColor = UIColor.clear;
         notesTableView.isHidden = true
+        conditionLabel.isHidden = true
     }
     
     func showNotes() {
@@ -99,9 +106,13 @@ class PlantsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         let noteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
         
         do {
-            noteList = try managedContext?.fetch(noteFetch) as? [Note]
-            let string = String(stringInterpolationSegment: noteList?.count);
-            print(string)
+            filteredNoteList = try managedContext?.fetch(noteFetch) as? [Note]
+            noteList = filteredNoteList?.filter({ (note) -> Bool in return
+                (note.plantName?.contains(plant.name!))!})
+            
+//            noteList = try managedContext?.fetch(noteFetch) as? [Note]
+           
+           
         } catch {
             fatalError("Failed to fetch Knowledge Base: \(error)")
         }
@@ -126,6 +137,7 @@ class PlantsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         cell.titleLabel.text = note.title
         cell.timeLabel.text = convertDate(newDate: note.dateAdded!)
         cell.contentLabel.text = note.content
+       
         return cell
     }
     
@@ -151,6 +163,13 @@ class PlantsViewController: UIViewController,UITableViewDataSource,UITableViewDe
             let destination: addNotesViewController = segue.destination.childViewControllers[0] as! addNotesViewController
             destination.noteDelegate = self
         }
+        
+        if(segue.identifier == "editNotes") {
+            let destination: addNotesViewController = segue.destination as! addNotesViewController
+             let selectedNote = noteList![(notesTableView.indexPathForSelectedRow?.row)!]
+            destination.note = selectedNote
+            destination.editDelegate = self
+        }
     }
     
     func convertDate(newDate: NSDate) -> String {
@@ -165,9 +184,10 @@ class PlantsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         managedContext = appDelegate.persistentContainer.viewContext
          let note1 = NSEntityDescription.insertNewObject(forEntityName: "Note", into: managedContext!) as! Note
         note1.dateAdded = NSDate()
-        note1.title = "today's work"
+        note1.title = "today's work1"
         note1.content = "Water and cutting"
         note1.toPlant = plant
+        note1.plantName = "Mint"
         appDelegate.saveContext()
         fetchAllNotes()
         self.notesTableView.reloadData()
@@ -188,5 +208,26 @@ class PlantsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         self.notesTableView.reloadData()
     }
     
+    func editNote(){
+        fetchAllNotes()
+        self.notesTableView.reloadData()
+    }
+    
+    func offline(){
+        conditionLabel.text = "undefined"
+        moistureLabel.text = "undefined"
+        tempLabel.text = "undefined"
+        pressureLabel.text = "undefined"
+        
+        let alertVC = UIAlertController(title: "Warning", message: "Sensors are offline", preferredStyle: UIAlertControllerStyle.alert)
+        let acSure = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive) { (UIAlertAction) -> Void in
+            print("click Sure")
+        }
+        alertVC.addAction(acSure)
+        self.present(alertVC, animated: true, completion: nil)
+
+    }
+    
+   
 
 }

@@ -124,7 +124,9 @@ class SoilKnowledgeTableViewController: UITableViewController,UISearchBarDelegat
     
     func createDefaultItems() {
         let soil = createManagedCategory(name: "Soil")
-        soil.addToMembers(createManagedKnowledge(title: "How to Choose Soil", category: "Soil", article: "123"))
+        soil.addToMembers(createManagedKnowledge(title: "How to Choose Soil1", category: "Soil", article: "  Bark, ground: made from various tree barks. ... \n "))
+          soil.addToMembers(createManagedKnowledge(title: "How to Choose Soil2", category: "Soil", article: "  BCompost: excellent conditioner. \n Leaf mold: decomposed leaves that add nutrients and structure to soil. \n Lime: raises the pH of acid soil and helps loosen clay soil."))
+          soil.addToMembers(createManagedKnowledge(title: "How to Choose Soil3", category: "Soil", article: "  Manure: best if composted \n Peat moss: conditioner that helps soil retain water"))
         appDelegate?.saveContext()
     }
     

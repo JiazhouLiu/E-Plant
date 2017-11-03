@@ -7,9 +7,13 @@
 //
 
 import UIKit
-
+import CoreData
 protocol addNoteDelegate {
     func addNote(note: newContent)
+}
+
+protocol editNoteDelegate {
+    func editNote()
 }
 
 class addNotesViewController: UIViewController {
@@ -18,11 +22,22 @@ class addNotesViewController: UIViewController {
     
     @IBOutlet weak var contentField: UITextView!
     
+    @IBOutlet weak var editButton: UIBarButtonItem!
     var noteDelegate: addNoteDelegate?
-    
+    var editDelegate: editNoteDelegate?
+    var note: Note?
+    var managedContext: NSManagedObjectContext?
+    var appDelegate: AppDelegate?
+    var person = [NSManagedObject]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if note != nil{
+            titleField.text = note?.title
+            contentField.text = note?.content
+            editButton?.title = "edit"
+        }
 
         // Do any additional setup after loading the view.
     }
@@ -74,6 +89,43 @@ class addNotesViewController: UIViewController {
                 self.noteDelegate!.addNote(note: newItem)
                 dismiss(animated: true, completion: nil)
             }
+        }
+        else{
+            if (titleField.text!.trimmingCharacters(in: .whitespaces).isEmpty){  // the name cannot be empty
+                showAlert(title: "title")
+            }
+            else if(contentField.text!.trimmingCharacters(in: .whitespaces).isEmpty){
+                showAlert(title: "Article")
+            }
+            else {
+                let newName = titleField.text
+                let newArticle = contentField.text
+                let newDate = NSDate()
+                let detail = self.note
+
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                managedContext = appDelegate.persistentContainer.viewContext
+                let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
+                do {
+                    let results = try managedContext?.fetch(fetchRequest);
+                    person = results as! [NSManagedObject]
+                    let managedObject = detail
+                    managedObject!.setValue(newName, forKey: "title")
+                    managedObject!.setValue(newArticle, forKey: "content")
+                    managedObject!.setValue(newDate, forKey: "dateAdded")
+                    managedObject!.setValue(note?.plantName, forKey: "PlantName")
+                    managedObject!.setValue(note?.toPlant, forKey: "toPlant")
+                    
+                    try managedContext?.save()
+                }
+                catch let error as NSError {
+                    print("Could not Fetch \(error), \(error.userInfo)")
+                }
+                self.editDelegate!.editNote()
+                navigationController!.popViewController(animated: true)
+
+            }
+            
         }
         
     }
