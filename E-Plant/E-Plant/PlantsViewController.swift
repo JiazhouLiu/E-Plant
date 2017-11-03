@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import CoreData
 
-class PlantsViewController: UIViewController {
+class PlantsViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,addNoteDelegate {
 
     var plant:Plant!
-    
+    var managedContext: NSManagedObjectContext?
+    var appDelegate: AppDelegate?
     @IBOutlet weak var plantViewSegment: UISegmentedControl!
     @IBOutlet weak var articleField: UITextView!
     @IBOutlet weak var conditionLabel: UILabel!
@@ -20,15 +22,24 @@ class PlantsViewController: UIViewController {
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var pressureLabel: UILabel!
     
+    @IBOutlet weak var addNotes: UIBarButtonItem!
+    @IBOutlet weak var notesTableView: UITableView!
+    var noteList: [Note]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        managedContext = appDelegate.persistentContainer.viewContext
+        fetchAllNotes()
         plantImage.image = plant.toImage?.image as? UIImage
         conditionLabel.text = plant.condition
         self.title = plant.name
         articleField.text = plant.toKB?.article
+        
         showPlantStatus()
-        // Do any additional setup after loading the view.
+        if noteList?.count == 0{
+            addSampleNote()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,10 +49,25 @@ class PlantsViewController: UIViewController {
     
     func showPlantStatus() {
         articleField.isHidden = true
+        notesTableView.isHidden = true
+        addNotes.isEnabled = false
+        self.navigationController?.navigationItem.rightBarButtonItem?.tintColor = UIColor.clear;
     }
     
     func showPlantProfile() {
         articleField.isHidden = false
+        addNotes.isEnabled = false
+        self.navigationController?.navigationItem.rightBarButtonItem?.tintColor = UIColor.clear;
+        notesTableView.isHidden = true
+    }
+    
+    func showNotes() {
+        articleField.isHidden = true
+        conditionLabel.isHidden = true
+        addNotes.isEnabled = true
+        
+        notesTableView.isHidden = false
+        self.navigationController?.navigationItem.rightBarButtonItem?.tintColor = UIColor.blue;
     }
 
     @IBAction func backButton(_ sender: Any) {
@@ -63,6 +89,104 @@ class PlantsViewController: UIViewController {
         }else if plantViewSegment.selectedSegmentIndex == 1{
             showPlantProfile()
         }
+        else if plantViewSegment.selectedSegmentIndex == 2{
+            showNotes() 
+        }
     }
+    
+    
+    func fetchAllNotes() {
+        let noteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
+        
+        do {
+            noteList = try managedContext?.fetch(noteFetch) as? [Note]
+            let string = String(stringInterpolationSegment: noteList?.count);
+            print(string)
+        } catch {
+            fatalError("Failed to fetch Knowledge Base: \(error)")
+        }
+    }
+
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let count = noteList?.count {
+            return count
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+         let cell = tableView.dequeueReusableCell(withIdentifier: "notesCell", for: indexPath) as!
+        NotesTableViewCell
+        let note = noteList![indexPath.row]
+        cell.titleLabel.text = note.title
+        cell.timeLabel.text = convertDate(newDate: note.dateAdded!)
+        cell.contentLabel.text = note.content
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            managedContext?.delete(noteList![indexPath.row])
+            noteList!.remove(at: indexPath.row)
+            
+            // Delete the row from the data source
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.notesTableView.reloadSections(NSIndexSet(index:0) as IndexSet, with: .fade)
+            do{
+                try managedContext?.save()
+            }
+            catch let error{
+                print("Could not save: \(error)")
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       if(segue.identifier == "addNotes") {
+            let destination: addNotesViewController = segue.destination.childViewControllers[0] as! addNotesViewController
+            destination.noteDelegate = self
+        }
+    }
+    
+    func convertDate(newDate: NSDate) -> String {
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "yyy-MM-dd 'at' HH:mm:ss.SSS"
+        let strNowTime = timeFormatter.string(from: newDate as Date) as String
+        return strNowTime
+    }
+    
+    func addSampleNote(){
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        managedContext = appDelegate.persistentContainer.viewContext
+         let note1 = NSEntityDescription.insertNewObject(forEntityName: "Note", into: managedContext!) as! Note
+        note1.dateAdded = NSDate()
+        note1.title = "today's work"
+        note1.content = "Water and cutting"
+        note1.toPlant = plant
+        appDelegate.saveContext()
+        fetchAllNotes()
+        self.notesTableView.reloadData()
+        
+    }
+    
+    func addNote(note:newContent){
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        managedContext = appDelegate.persistentContainer.viewContext
+        let note1 = NSEntityDescription.insertNewObject(forEntityName: "Note", into: managedContext!) as! Note
+        note1.title = note.title
+        note1.content = note.content
+        note1.dateAdded = NSDate()
+        note1.plantName = plant.name
+        note1.toPlant = plant
+        appDelegate.saveContext()
+        fetchAllNotes()
+        self.notesTableView.reloadData()
+    }
+    
 
 }

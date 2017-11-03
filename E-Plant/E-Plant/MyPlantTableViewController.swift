@@ -50,7 +50,7 @@ class MyPlantTableViewController: UITableViewController,addPlantDelegate{
         let plant = plantList![indexPath.row]
         cell.nameLabel.text = plant.name
         cell.conditionLabel.text = plant.condition
-        print(plant.toKB?.title)
+        
         if (plant.toImage == nil){
            cell.plantImage.image = #imageLiteral(resourceName: "imagePlaceholder")
         }
