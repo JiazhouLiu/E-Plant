@@ -13,6 +13,8 @@ class OnlineWeather: NSObject {
     var _temperature: Double!
     var _pressure: Double!
     var _weather: String!
+    var _currentTempMin: Double!
+    var _currentTempMax: Double!
     
     var temperature: Double {
         if _temperature == nil {
@@ -35,6 +37,20 @@ class OnlineWeather: NSObject {
         return _weather
     }
     
+    var currentTempMin: Double {
+        if _currentTempMin == nil {
+            _currentTempMin = 0.0
+        }
+        return _currentTempMin
+    }
+    
+    var currentTempMax: Double {
+        if _currentTempMax == nil {
+            _currentTempMax = 0.0
+        }
+        return _currentTempMax
+    }
+    
     func downloadOnlineWeatherDetails(completed: @escaping DownloadComplete) {
         // Alamofire download
         let currentWeatherURL = URL(string: CURRENT_WEATHER_URL)!
@@ -53,6 +69,20 @@ class OnlineWeather: NSObject {
                     if let currentPressure = main["pressure"] as? Double {
                         let hpaToKpa = (currentPressure * 100).rounded() / 1000
                         self._pressure = hpaToKpa
+                    }
+                    
+                    if let curTempMin = main["temp_min"] as? Double {
+                        let kelvinToCelciusProDivision = (curTempMin - 273.15)
+                        
+                        let kelvinToCelcius = Double(round(10 * kelvinToCelciusProDivision/10))
+                        self._currentTempMin = kelvinToCelcius
+                    }
+                    
+                    if let curTempMax = main["temp_max"] as? Double {
+                        let kelvinToCelciusProDivision = (curTempMax - 273.15)
+                        
+                        let kelvinToCelcius = Double(round(10 * kelvinToCelciusProDivision/10))
+                        self._currentTempMax = kelvinToCelcius
                     }
                 }
                 if let apiWeather = dict["weather"] as? [Dictionary<String, AnyObject>] {

@@ -44,7 +44,7 @@ class LocalMoisture3: NSObject {
                     lastMoist = currentMoist
                 }
                 
-                self._moisture = lastMoist
+                self._moisture = lastMoist/10
             }
             completed()
         }

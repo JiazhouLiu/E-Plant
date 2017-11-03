@@ -303,4 +303,14 @@ class UpdateProfileTVC: UITableViewController, UIImagePickerControllerDelegate, 
             self.navigationController!.popViewController(animated: true)
         }
     }
+    // cancel button pressed
+    @IBAction func cancelBtnPressed(_ sender: Any) {
+        // Dismiss the view controller depending on the context it was presented
+        let isPresentingInAddMode = self.presentingViewController is UITabBarController
+        if isPresentingInAddMode {
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            self.navigationController!.popViewController(animated: true)
+        }
+    }
 }

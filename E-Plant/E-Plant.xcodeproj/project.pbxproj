@@ -30,6 +30,8 @@
 		8AD0F4331FA9BD0800C6D97F /* PlantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD0F4321FA9BD0800C6D97F /* PlantsViewController.swift */; };
 		D8541F9D1FA43FE100B1373C /* GardenAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8541F9C1FA43FE100B1373C /* GardenAddVC.swift */; };
 		D8541F9F1FA4400700B1373C /* GardenSettingsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8541F9E1FA4400700B1373C /* GardenSettingsTVC.swift */; };
+		D85F76AB1FACA69A00D8DF79 /* FencedAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85F76AA1FACA69A00D8DF79 /* FencedAnnotation.swift */; };
+		D85F76AD1FACB27F00D8DF79 /* OnlineWeatherForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85F76AC1FACB27F00D8DF79 /* OnlineWeatherForecast.swift */; };
 		D86893FB1FA313A30024D666 /* OnlineWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86893FA1FA313A30024D666 /* OnlineWeather.swift */; };
 		D86893FD1FA314230024D666 /* LocalTemperature1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86893FC1FA314230024D666 /* LocalTemperature1.swift */; };
 		D86893FF1FA314730024D666 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86893FE1FA314730024D666 /* Constants.swift */; };
@@ -74,6 +76,7 @@
 		D8A770DE1FA236F200E89805 /* UpdateProfileTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A770DD1FA236F200E89805 /* UpdateProfileTVC.swift */; };
 		D8A770E11FA2440600E89805 /* SettingsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A770E01FA2440600E89805 /* SettingsTVC.swift */; };
 		D8A770E31FA246A100E89805 /* Dashboard_PlantsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A770E21FA246A100E89805 /* Dashboard_PlantsVC.swift */; };
+		D8F751A91FAC98DF00034B06 /* PlantCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F751A81FAC98DF00034B06 /* PlantCVC.swift */; };
 		E518D97993BCF14C0BA5A12D /* Pods_E_Plant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6770DCF1556F0E7ECBE09E52 /* Pods_E_Plant.framework */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +126,8 @@
 		A9DB042C520C5D2799C0DDCA /* Pods-E-PlantTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-PlantTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-E-PlantTests/Pods-E-PlantTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D8541F9C1FA43FE100B1373C /* GardenAddVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GardenAddVC.swift; sourceTree = "<group>"; };
 		D8541F9E1FA4400700B1373C /* GardenSettingsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GardenSettingsTVC.swift; sourceTree = "<group>"; };
+		D85F76AA1FACA69A00D8DF79 /* FencedAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FencedAnnotation.swift; sourceTree = "<group>"; };
+		D85F76AC1FACB27F00D8DF79 /* OnlineWeatherForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineWeatherForecast.swift; sourceTree = "<group>"; };
 		D86893FA1FA313A30024D666 /* OnlineWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlineWeather.swift; sourceTree = "<group>"; };
 		D86893FC1FA314230024D666 /* LocalTemperature1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalTemperature1.swift; sourceTree = "<group>"; };
 		D86893FE1FA314730024D666 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -173,6 +178,7 @@
 		D8A770DD1FA236F200E89805 /* UpdateProfileTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateProfileTVC.swift; sourceTree = "<group>"; };
 		D8A770E01FA2440600E89805 /* SettingsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTVC.swift; sourceTree = "<group>"; };
 		D8A770E21FA246A100E89805 /* Dashboard_PlantsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dashboard_PlantsVC.swift; sourceTree = "<group>"; };
+		D8F751A81FAC98DF00034B06 /* PlantCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCVC.swift; sourceTree = "<group>"; };
 		E8E6D023BAF0CE37B866C864 /* Pods-E-PlantUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-PlantUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-E-PlantUITests/Pods-E-PlantUITests.release.xcconfig"; sourceTree = "<group>"; };
 		EA17FCECDEE9A0DBAAF7D182 /* Pods_E_PlantTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_E_PlantTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -247,6 +253,8 @@
 			children = (
 				D86894441FA3588E0024D666 /* MaterialView.swift */,
 				D86894491FA35B4F0024D666 /* GardenCell.swift */,
+				D8F751A81FAC98DF00034B06 /* PlantCVC.swift */,
+				D85F76AA1FACA69A00D8DF79 /* FencedAnnotation.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -267,6 +275,7 @@
 				8AA9BE1E1FA04ADC0018BD7F /* NewKnowledge.swift */,
 				D8A770D81FA2279700E89805 /* ApplicationUser.swift */,
 				D86893FA1FA313A30024D666 /* OnlineWeather.swift */,
+				D85F76AC1FACB27F00D8DF79 /* OnlineWeatherForecast.swift */,
 				D86893FC1FA314230024D666 /* LocalTemperature1.swift */,
 				D86894041FA34A1F0024D666 /* LocalTemperature2.swift */,
 				D86894061FA34A300024D666 /* LocalTemperature3.swift */,
@@ -764,12 +773,14 @@
 				8AA9BE381FA0AB130018BD7F /* Category+CoreDataClass.swift in Sources */,
 				D86894071FA34A300024D666 /* LocalTemperature3.swift in Sources */,
 				8AA9BE3D1FA0AF830018BD7F /* PlantTableViewController.swift in Sources */,
+				D85F76AB1FACA69A00D8DF79 /* FencedAnnotation.swift in Sources */,
 				D868943E1FA355100024D666 /* Image+CoreDataClass.swift in Sources */,
 				D868943C1FA355100024D666 /* KnowledgeBase+CoreDataClass.swift in Sources */,
 				D8A770D71FA224B200E89805 /* DataService.swift in Sources */,
 				D8A770D21FA2202200E89805 /* SignUpTVC.swift in Sources */,
 				D86894401FA355100024D666 /* Note+CoreDataClass.swift in Sources */,
 				8A2D548E1FA9CC5F00878490 /* MyPlantTableViewController.swift in Sources */,
+				D8F751A91FAC98DF00034B06 /* PlantCVC.swift in Sources */,
 				D8A770D01FA2200F00E89805 /* SignInVC.swift in Sources */,
 				D86893FD1FA314230024D666 /* LocalTemperature1.swift in Sources */,
 				8AA9BE161FA048170018BD7F /* soilKnowledgeCell.swift in Sources */,
@@ -796,6 +807,7 @@
 				8AA9BE471FA194FA0018BD7F /* WaterTableViewCell.swift in Sources */,
 				D86894011FA314B00024D666 /* Location.swift in Sources */,
 				D8A770DE1FA236F200E89805 /* UpdateProfileTVC.swift in Sources */,
+				D85F76AD1FACB27F00D8DF79 /* OnlineWeatherForecast.swift in Sources */,
 				D86893FF1FA314730024D666 /* Constants.swift in Sources */,
 				D8A770D51FA2244D00E89805 /* AuthService.swift in Sources */,
 				8AA9BE1A1FA0496A0018BD7F /* SoilKnowledgeTableViewController.swift in Sources */,
