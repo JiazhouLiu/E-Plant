@@ -26,6 +26,11 @@ class GardenListTVC: UITableViewController, NSFetchedResultsControllerDelegate {
         // first Fetch to initialize controller and get all gardens
         attemptFetch()
         
+        
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         if let sections = controller.sections {
             
             let sectionInfo = sections[0]
@@ -44,7 +49,6 @@ class GardenListTVC: UITableViewController, NSFetchedResultsControllerDelegate {
                 attemptFetch()
             }
         }
-
     }
 
     // MARK: - Table view data source
@@ -197,7 +201,7 @@ class GardenListTVC: UITableViewController, NSFetchedResultsControllerDelegate {
             let error = error as NSError
             print("\(error)")
         }
-        
+        self.tableView.reloadData()
     }
     
     

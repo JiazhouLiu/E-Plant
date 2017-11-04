@@ -82,6 +82,33 @@ class GardenViewTVC: UITableViewController, UICollectionViewDelegate, UICollecti
         centerMapOnLocation(location: loc)
     }
     
+    // change for view appear every time
+    override func viewDidAppear(_ animated: Bool) {
+        // setup navigation title
+        navigationItem.title = (selectedGarden?.name)!
+        
+        // refresh current date and print on screen
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM dd"
+        let todayFormatter = DateFormatter()
+        todayFormatter.dateFormat = "yyyy-MM-dd"
+        let today = todayFormatter.string(from: date)
+        let result = formatter.string(from: date)
+        let DOW = getDayOfWeek(today: today)
+        self.currentDate.text = "\(DOW!) \(result)"
+        
+        // setup spinner
+        self.spinner = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height:50))
+        self.spinner.color = UIColor.darkGray
+        self.spinner.center = CGPoint(x: self.view.frame.width / 2, y: 160)
+        self.tableView.addSubview(spinner)
+        self.spinner.hidesWhenStopped = true
+        self.spinner.startAnimating()
+        
+        startTimer()
+    }
+    
     func loadGardenData() {
         gardenLat = selectedGarden?.latitude
         gardenLong = selectedGarden?.longitude
@@ -188,32 +215,7 @@ class GardenViewTVC: UITableViewController, UICollectionViewDelegate, UICollecti
         mapView.setRegion(coordinateRegion, animated: false)
     }
     
-    // change for view appear every time
-    override func viewDidAppear(_ animated: Bool) {
-        // setup navigation title
-        navigationItem.title = (selectedGarden?.name)!
-        
-        // refresh current date and print on screen
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMMM dd"
-        let todayFormatter = DateFormatter()
-        todayFormatter.dateFormat = "yyyy-MM-dd"
-        let today = todayFormatter.string(from: date)
-        let result = formatter.string(from: date)
-        let DOW = getDayOfWeek(today: today)
-        self.currentDate.text = "\(DOW!) \(result)"
-        
-        // setup spinner
-        self.spinner = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height:50))
-        self.spinner.color = UIColor.darkGray
-        self.spinner.center = CGPoint(x: self.view.frame.width / 2, y: 160)
-        self.tableView.addSubview(spinner)
-        self.spinner.hidesWhenStopped = true
-        self.spinner.startAnimating()
-        
-        startTimer()
-    }
+    
     
     func startTimer(){
         if !timerStarted {
@@ -314,7 +316,7 @@ class GardenViewTVC: UITableViewController, UICollectionViewDelegate, UICollecti
         if segue.identifier == "plantsListFromGardenView" {
             if let destination = segue.destination as? MyPlantTableViewController {
                 if let garden = sender as? Garden {
-                    //destination.filterGarden = garden
+                    destination.filterGarden = garden
                 }
             }
         }

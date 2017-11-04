@@ -268,6 +268,7 @@
 			children = (
 				D86894441FA3588E0024D666 /* MaterialView.swift */,
 				D86894491FA35B4F0024D666 /* GardenCell.swift */,
+				8A2D548F1FA9CC8300878490 /* MyPlantTableViewCell.swift */,
 				D8F751A81FAC98DF00034B06 /* PlantCVC.swift */,
 				D85F76AA1FACA69A00D8DF79 /* FencedAnnotation.swift */,
 			);
@@ -352,7 +353,6 @@
 				8AD0F4321FA9BD0800C6D97F /* PlantsViewController.swift */,
 				8A2D548B1FA9CC1500878490 /* AddPlantViewController.swift */,
 				8A2D548D1FA9CC5F00878490 /* MyPlantTableViewController.swift */,
-				8A2D548F1FA9CC8300878490 /* MyPlantTableViewCell.swift */,
 			);
 			name = Plants;
 			sourceTree = "<group>";

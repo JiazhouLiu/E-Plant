@@ -22,10 +22,17 @@ class MyPlantTableViewController: UITableViewController,addPlantDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if filterGarden != nil {
+            // setup navigation title
+            navigationItem.title = (filterGarden?.name)!
+        }
+        
+        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         managedContext = appDelegate.persistentContainer.viewContext
         fetchAllPlants()
-           }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -106,12 +113,27 @@ class MyPlantTableViewController: UITableViewController,addPlantDelegate{
     // otherwise will show all plants
     func fetchAllPlants() {
         let plantFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Plant")
-        
+        plantList?.removeAll()
         do {
             if filterGarden?.name != nil{
-                filteredKnowledgeList = try managedContext?.fetch(plantFetch) as? [Plant]
-                plantList =  filteredKnowledgeList?.filter({ (plant) -> Bool in return
-                    (plant.toGarden?.isEqual(filterGarden))!})
+                
+                let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
+                fetchRequest.predicate = NSPredicate(format: "toGarden == %@", filterGarden!)
+                
+                let dateSort = NSSortDescriptor(key: "dateAdded", ascending: false)
+                
+                fetchRequest.sortDescriptors = [dateSort]
+                
+                do {
+                    self.plantList = try managedContext?.fetch(fetchRequest)
+                }catch {
+                    let error = error as NSError
+                    print("\(error)")
+                }
+                
+                //filteredKnowledgeList = try managedContext?.fetch(plantFetch) as? [Plant]
+                //plantList =  filteredKnowledgeList?.filter({ (plant) -> Bool in return
+                //    (plant.toGarden?.isEqual(filterGarden)!})
             }
             else{
               plantList = try managedContext?.fetch(plantFetch) as? [Plant]
