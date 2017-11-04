@@ -59,8 +59,8 @@ class Dashboard_PlantsVC: UIViewController, CLLocationManagerDelegate {
     
     // weather variables
     let locationManager = CLLocationManager()
+    var myTimer: Timer?
     var currentLocation: CLLocation!
-    var timerStarted = false
     var onlineWeather: OnlineWeather!
     
     // plant and water variable
@@ -137,6 +137,21 @@ class Dashboard_PlantsVC: UIViewController, CLLocationManagerDelegate {
         }) { (error) in
             print(error.localizedDescription)
         }
+        // re-enable timer if timer is off
+        if myTimer == nil {
+            startTimer()
+        }else{
+            if !((myTimer?.isValid)!) {
+                startTimer()
+            }
+        }
+        
+    }
+    
+    // invalidate timer after leaving this view to avoid duplicate timer
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        myTimer?.invalidate()
     }
     
     
@@ -172,18 +187,18 @@ class Dashboard_PlantsVC: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    // 2s timer to refresh online weather
     func startTimer(){
-        if !timerStarted {
-            _ = Timer.scheduledTimer(timeInterval: 1, target: self,selector: #selector(Dashboard_PlantsVC.refreshOnlineWeather), userInfo: nil, repeats: true)
-            timerStarted = true
-        }
+        myTimer = Timer.scheduledTimer(timeInterval: 2, target: self,selector: #selector(Dashboard_PlantsVC.refreshOnlineWeather), userInfo: nil, repeats: true)
     }
     
+    // refresh online weather
     func refreshOnlineWeather() {
         onlineWeather = OnlineWeather()
         onlineWeather.downloadOnlineWeatherDetails {
             self.updateOnlineUI()
         }
+        fetchPlantData()
     }
     
     // check auth status to make request if needed
@@ -242,6 +257,7 @@ class Dashboard_PlantsVC: UIViewController, CLLocationManagerDelegate {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    // segment change and show related views
     @IBAction func segmentChange(_ sender: Any) {
         if dashboardSegment.selectedSegmentIndex == 0 {
             showPlantSeg()
@@ -251,6 +267,7 @@ class Dashboard_PlantsVC: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    // if segment is on plant then show plant information
     func showPlantSeg() {
         currentPlantNumLabel.isHidden = false
         currentPlantNumFixedLabel.isHidden = false
@@ -273,6 +290,7 @@ class Dashboard_PlantsVC: UIViewController, CLLocationManagerDelegate {
         backgroundImage.image = #imageLiteral(resourceName: "plantsBackground")
     }
     
+    // if segment is on water then show water information
     func showWaterSeg() {
         currentPlantNumLabel.isHidden = true
         currentPlantNumFixedLabel.isHidden = true
@@ -295,6 +313,7 @@ class Dashboard_PlantsVC: UIViewController, CLLocationManagerDelegate {
         backgroundImage.image = #imageLiteral(resourceName: "waterBackground")
     }
     
+    // fetch plant data
     func fetchPlantData() {
         let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
         
@@ -311,14 +330,15 @@ class Dashboard_PlantsVC: UIViewController, CLLocationManagerDelegate {
             print("\(error)")
         }
 
+        // calculate condition and plant numbers
         for item in plants {
-            if item.condition == "good condition" {
+            if item.condition == "healthy condition" && item.toGarden != nil  {
                 healthyPlantsNo += 1
             }
-            if item.condition == "warning" {
+            if item.condition == "warning condition" && item.toGarden != nil  {
                 warningPlantsNo += 1
             }
-            if item.condition == "danger" {
+            if item.condition == "danger condition" && item.toGarden != nil  {
                 dangerPlantsNo += 1
             }
             if item.toGarden != nil {
@@ -333,7 +353,10 @@ class Dashboard_PlantsVC: UIViewController, CLLocationManagerDelegate {
         
     }
     
+    // fetch water data and calculate water usage
     func fetchWaterData() {
+        todayUsage = 0.0
+        totalUsage = 0.0
         let fetchRequest: NSFetchRequest<Garden> = Garden.fetchRequest()
         var earlistDate = Date()
         let currentDate = Date()
@@ -375,8 +398,6 @@ class Dashboard_PlantsVC: UIViewController, CLLocationManagerDelegate {
         todayUsageLabel.text = "\(todayUsage) L"
         dailyAveUsageLabel.text = "\(dailyUsage) L"
         monthlyUsageLabel.text = "\(monthlyUsage) kL"
-        
-        
     }
 
 }

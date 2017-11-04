@@ -10,10 +10,12 @@ import Foundation
 import Alamofire
 
 class LocalTemperature2: NSObject {
+    // local temperature data from local sensor 2
     var _temperature: Double!
     var _pressure: Double!
     var _received: Bool!
     
+    // define variables
     var temperature: Double {
         if _temperature == nil {
             _temperature = 0.0
@@ -36,24 +38,21 @@ class LocalTemperature2: NSObject {
         return _received
     }
     
-    
+    // download local sensor data from local server by Alamofire
     func downloadLocalWeatherDetails(completed: @escaping DownloadComplete) {
         // Alamofire download
-        
         let localTempURL = URL(string: CURRENT_LOCAL_TEMP_DATABASE_URL_2)!
         Alamofire.request(localTempURL).responseJSON { response in
             let result = response.result
-            //print(result.value)
             if let dict = result.value as? Dictionary<String, AnyObject> {
                 var lastTemp: Double = 0.0
                 var lastPress: Double = 0.0
                 self._received = true
                 
-                if let currentTemperature = dict["temperature"] as? Double {
-                    print(currentTemperature)
+                if let currentTemperature = dict["temperature"] as? Double { // get temperature
                     lastTemp = currentTemperature
                 }
-                if var currentPressure = dict["pressure"] as? Double{
+                if var currentPressure = dict["pressure"] as? Double{ // get pressure
                     currentPressure = (currentPressure * 100).rounded() / 100
                     lastPress = currentPressure
                 }

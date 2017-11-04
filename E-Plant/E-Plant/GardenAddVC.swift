@@ -12,6 +12,7 @@ import CoreLocation
 
 class GardenAddVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, CLLocationManagerDelegate {
 
+    // IBOutlet variables
     @IBOutlet weak var gardenImage: UIImageView!
     @IBOutlet weak var gardenNameTF: CustomizableTextField!
     @IBOutlet weak var gardenLatTF: CustomizableTextField!
@@ -81,54 +82,47 @@ class GardenAddVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     // pickerView configurations
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-
        return sensorArray[row]
-
     }
-    
+    // pickerview select item
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-
        sensorTF.text = sensorArray[row]
-
-        
     }
-    
+    // pickerview number of rows config
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-
         return sensorArray.count
-
     }
-    
+    // picker view title attribute config
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-
         let title = NSAttributedString(string: sensorArray[row], attributes: [NSForegroundColorAttributeName : UIColor.darkGray])
         return title
 
     }
     
+    // picker view component number
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
 
-    
+    // save garden button pressed
     @IBAction func saveBtnPressed(_ sender: Any) {
     
-        
+        // check all variables
         if let name = gardenNameTF.text, let lat = gardenLatTF.text, let long = gardenLongTF.text, let sensor = sensorTF.text{
             
-            if(name.characters.count <= 0){
+            if(name.characters.count <= 0){ // if name is empty
                 let alert = UIAlertController(title: "Garden Name Required", message: "Please enter a name for garden", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 present(alert, animated: true, completion: nil)
-            }else if (sensor.characters.count <= 0){
+            }else if (sensor.characters.count <= 0){ // if sensor is empty
                 let alert = UIAlertController(title: "Garden Sensor Info Required", message: "Please choose one of three sensors for this garden", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 present(alert, animated: true, completion: nil)
-            }else if (lat.characters.count <= 0){
+            }else if (lat.characters.count <= 0){ // if lat is empty
                 let alert = UIAlertController(title: "Garden Location Required", message: "Please enter a valid latitude for this garden", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 present(alert, animated: true, completion: nil)
-            }else if (long.characters.count <= 0){
+            }else if (long.characters.count <= 0){ // if long is empty
                 let alert = UIAlertController(title: "Category Location Required", message: "Please enter a valid longitude for this garden", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 present(alert, animated: true, completion: nil)
@@ -136,15 +130,15 @@ class GardenAddVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
                 
                 let latValue = Double(myCustomFormat:lat)
                 let longValue = Double(myCustomFormat:long)
-                if latValue == nil{
+                if latValue == nil{ // if lat is not double format
                     let alert = UIAlertController(title: "Latitude Format Error", message: "Please enter correct format for latitude (example: -37.888)", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                     present(alert, animated: true, completion: nil)
-                }else if longValue == nil {
+                }else if longValue == nil { // if long is not double format
                     let alert = UIAlertController(title: "Longitude Format Error", message: "Please enter correct format for longitude (example: 145.010101)", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                     present(alert, animated: true, completion: nil)
-                }else{
+                }else{ // all good
                     if (sensor == "1" || sensor == "2" || sensor == "3"){
                         var garden: Garden!
                         let picture = Image(context: context)
@@ -160,7 +154,7 @@ class GardenAddVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
                         
                         ad.saveContext()
                         navigationController?.popViewController(animated: true)
-                    }else{
+                    }else{ // if sensor is not from 1,2,3
                         let alert = UIAlertController(title: "Garden Sensor Info Required", message: "Please choose one of three sensors for this garden", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                         present(alert, animated: true, completion: nil)
@@ -171,6 +165,7 @@ class GardenAddVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
 
     }
     
+    // if user wants to go back to previous screen
     @IBAction func cancelBtnPressed(_ sender: Any) {
         // Dismiss the view controller depending on the context it was presented
         let isPresentingInAddMode = presentingViewController is UITabBarController
@@ -181,11 +176,13 @@ class GardenAddVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         }
     }
     
+    // get current location long and lat and input into text field box
     @IBAction func currentLocationBtnPressed(_ sender: Any) {
         gardenLatTF.text = "\(currentLocation.coordinate.latitude)"
         gardenLongTF.text = "\(currentLocation.coordinate.longitude)"
     }
     
+    // choose image button clicked
     @IBAction func chooseImage(_ sender: Any) {
         let pickerController = UIImagePickerController();
         pickerController.delegate = self

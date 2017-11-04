@@ -10,12 +10,14 @@ import Foundation
 import Alamofire
 
 class OnlineWeather: NSObject {
+    // online weather variables
     var _temperature: Double!
     var _pressure: Double!
     var _weather: String!
     var _currentTempMin: Double!
     var _currentTempMax: Double!
     
+    // define variables
     var temperature: Double {
         if _temperature == nil {
             _temperature = 0.0
@@ -51,6 +53,7 @@ class OnlineWeather: NSObject {
         return _currentTempMax
     }
     
+    // using alamofire to download http protocal json files
     func downloadOnlineWeatherDetails(completed: @escaping DownloadComplete) {
         // Alamofire download
         let currentWeatherURL = URL(string: CURRENT_WEATHER_URL)!
@@ -59,33 +62,33 @@ class OnlineWeather: NSObject {
             let result = response.result
             if let dict = result.value as? Dictionary<String, AnyObject> {
                 if let main = dict["main"] as? Dictionary<String, AnyObject> {
-                    if let currentTemperature = main["temp"] as? Double {
+                    if let currentTemperature = main["temp"] as? Double { // get temperature
                         let kelvinToCelciusProDivision = (currentTemperature - 273.15)
                         
                         let kelvinToCelcius = Double(round(10 * kelvinToCelciusProDivision/10))
                         self._temperature = kelvinToCelcius
                     }
                     
-                    if let currentPressure = main["pressure"] as? Double {
+                    if let currentPressure = main["pressure"] as? Double { // get pressure
                         let hpaToKpa = (currentPressure * 100).rounded() / 1000
                         self._pressure = hpaToKpa
                     }
                     
-                    if let curTempMin = main["temp_min"] as? Double {
+                    if let curTempMin = main["temp_min"] as? Double { // get minimum temperature
                         let kelvinToCelciusProDivision = (curTempMin - 273.15)
                         
                         let kelvinToCelcius = Double(round(10 * kelvinToCelciusProDivision/10))
                         self._currentTempMin = kelvinToCelcius
                     }
                     
-                    if let curTempMax = main["temp_max"] as? Double {
+                    if let curTempMax = main["temp_max"] as? Double { // get maximum temperature
                         let kelvinToCelciusProDivision = (curTempMax - 273.15)
                         
                         let kelvinToCelcius = Double(round(10 * kelvinToCelciusProDivision/10))
                         self._currentTempMax = kelvinToCelcius
                     }
                 }
-                if let apiWeather = dict["weather"] as? [Dictionary<String, AnyObject>] {
+                if let apiWeather = dict["weather"] as? [Dictionary<String, AnyObject>] { // get weather
                     if let currentWeather = apiWeather[0]["main"] as? String {
                         self._weather = currentWeather
                     }

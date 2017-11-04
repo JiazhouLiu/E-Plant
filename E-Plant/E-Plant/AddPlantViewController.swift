@@ -60,7 +60,7 @@ class AddPlantViewController: UIViewController,UIPickerViewDelegate, UIPickerVie
     }
     
     func tapped(_ button:UIButton){
-        kbPickerView.frame = CGRect(x: 60, y: 500, width: 300, height: 200)
+        kbPickerView.frame = CGRect(x: (self.view.frame.width - 300) / 2, y: (self.view.frame.height - 200), width: 300, height: 200)
         self.view.addSubview(kbPickerView)
     }
 
@@ -244,15 +244,16 @@ class AddPlantViewController: UIViewController,UIPickerViewDelegate, UIPickerVie
             else if(plantImage == nil){
                 plantImage.image = #imageLiteral(resourceName: "imagePlaceholder")
             }
-            else {
+            else if(knowledgeBase == nil){
+                showAlert(title: "Knowledge Base")
+            }else{
                 let newName = kbTF.text
                 let newGardenName = gardenTF.text
-                let newCondition = "Good Condition"
                 let newKbTitle = "Plant"
                 let picture = Image(context: context)
                 picture.image = plantImage.image
                 
-                let newItem = newPlant(name:newName!, condition:newCondition, gardenName:newGardenName!,toImage:picture,knowledgeBaseTitle:newKbTitle,toGarden:garden!,toKB:knowledgeBase!)
+                let newItem = newPlant(name:newName!, gardenName:newGardenName!,toImage:picture,knowledgeBaseTitle:newKbTitle,toGarden:garden!,toKB:knowledgeBase!)
                 self.plantDelegate!.addPlant(plant: newItem)
                 dismiss(animated: true, completion: nil)
              }

@@ -11,6 +11,7 @@ import Alamofire
 
 class OnlineWeatherForecast: NSObject {
 
+    // online weather 3 day forecast variables
     var _firstWeather: String!
     var _firstTempMin: Double!
     var _firstTempMax: Double!
@@ -23,6 +24,7 @@ class OnlineWeatherForecast: NSObject {
     var _thirdTempMin: Double!
     var _thirdTempMax: Double!
     
+    //define variables
     var firstWeather: String {
         if _firstWeather == nil {
             _firstWeather = "Clear"
@@ -86,6 +88,7 @@ class OnlineWeatherForecast: NSObject {
         return _thirdTempMax
     }
     
+    // using Alamofire to download json file from http get protocal for weather forecast
     func downloadOnlineWeatherDetails(completed: @escaping DownloadComplete) {
         // Alamofire download
         let forecastWeatherURL = URL(string: FORECAST_WEATHER_URL)!
@@ -95,69 +98,69 @@ class OnlineWeatherForecast: NSObject {
             if let dict = result.value as? Dictionary<String, AnyObject> {
                 if let list = dict["list"] as? [Dictionary<String, AnyObject>] {
                     
-                    if let firstForecast = list[8] as? Dictionary<String, AnyObject>{
+                    if let firstForecast = list[8] as? Dictionary<String, AnyObject>{ // 24 hours after now
                         if let main = firstForecast["main"] as? Dictionary<String, AnyObject> {
-                            if let curTempMin = main["temp_min"] as? Double {
+                            if let curTempMin = main["temp_min"] as? Double { // get min temperature
                                 let kelvinToCelciusProDivision = (curTempMin - 273.15)
                                 
                                 let kelvinToCelcius = Double(round(10 * kelvinToCelciusProDivision/10))
                                 self._firstTempMin = kelvinToCelcius
                             }
                             
-                            if let curTempMax = main["temp_max"] as? Double {
+                            if let curTempMax = main["temp_max"] as? Double { // get max temperature
                                 let kelvinToCelciusProDivision = (curTempMax - 273.15)
                                 
                                 let kelvinToCelcius = Double(round(10 * kelvinToCelciusProDivision/10))
                                 self._firstTempMax = kelvinToCelcius
                             }
                         }
-                        if let apiWeather = firstForecast["weather"] as? [Dictionary<String, AnyObject>] {
+                        if let apiWeather = firstForecast["weather"] as? [Dictionary<String, AnyObject>] { // get weather
                             if let currentWeather = apiWeather[0]["main"] as? String {
                                 self._firstWeather = currentWeather
                             }
                         }
                     }
                     
-                    if let secondForecast = list[16] as? Dictionary<String, AnyObject>{
+                    if let secondForecast = list[16] as? Dictionary<String, AnyObject>{ // 48 hours after now
                         if let main = secondForecast["main"] as? Dictionary<String, AnyObject> {
-                            if let curTempMin = main["temp_min"] as? Double {
+                            if let curTempMin = main["temp_min"] as? Double { // get min temperature
                                 let kelvinToCelciusProDivision = (curTempMin - 273.15)
                                 
                                 let kelvinToCelcius = Double(round(10 * kelvinToCelciusProDivision/10))
                                 self._secondTempMin = kelvinToCelcius
                             }
                             
-                            if let curTempMax = main["temp_max"] as? Double {
+                            if let curTempMax = main["temp_max"] as? Double { // get max temperature
                                 let kelvinToCelciusProDivision = (curTempMax - 273.15)
                                 
                                 let kelvinToCelcius = Double(round(10 * kelvinToCelciusProDivision/10))
                                 self._secondTempMax = kelvinToCelcius
                             }
                         }
-                        if let apiWeather = secondForecast["weather"] as? [Dictionary<String, AnyObject>] {
+                        if let apiWeather = secondForecast["weather"] as? [Dictionary<String, AnyObject>] { // get weather
                             if let currentWeather = apiWeather[0]["main"] as? String {
                                 self._secondWeather = currentWeather
                             }
                         }
                     }
                     
-                    if let thirdForecast = list[24] as? Dictionary<String, AnyObject>{
+                    if let thirdForecast = list[24] as? Dictionary<String, AnyObject>{ // 72 hours after now
                         if let main = thirdForecast["main"] as? Dictionary<String, AnyObject> {
-                            if let curTempMin = main["temp_min"] as? Double {
+                            if let curTempMin = main["temp_min"] as? Double { // get min temperature
                                 let kelvinToCelciusProDivision = (curTempMin - 273.15)
                                 
                                 let kelvinToCelcius = Double(round(10 * kelvinToCelciusProDivision/10))
                                 self._thirdTempMin = kelvinToCelcius
                             }
                             
-                            if let curTempMax = main["temp_max"] as? Double {
+                            if let curTempMax = main["temp_max"] as? Double { // get max temperature
                                 let kelvinToCelciusProDivision = (curTempMax - 273.15)
                                 
                                 let kelvinToCelcius = Double(round(10 * kelvinToCelciusProDivision/10))
                                 self._thirdTempMax = kelvinToCelcius
                             }
                         }
-                        if let apiWeather = thirdForecast["weather"] as? [Dictionary<String, AnyObject>] {
+                        if let apiWeather = thirdForecast["weather"] as? [Dictionary<String, AnyObject>] { // get weather
                             if let currentWeather = apiWeather[0]["main"] as? String {
                                 self._thirdWeather = currentWeather
                             }

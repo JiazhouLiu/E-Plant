@@ -112,9 +112,9 @@ class WaterTableViewController: UITableViewController,addWaterKnowledgeDelegate{
        
         let water = createManagedCategory(name: "Water")
         
-        water.addToMembers(createManagedKnowledge(title: "How to save water1", category: "Water", article: "Check all faucets, pipes and toilets for leaks."))
-        water.addToMembers(createManagedKnowledge(title: "How to save water2", category: "Water", article: "Install water saving showerheads and ultra-low-flush toilets."))
-        water.addToMembers(createManagedKnowledge(title: "How to save water3", category: "Water", article: "Take shorter showers."))
+        water.addToMembers(createManagedKnowledge(title: "Water Saving Tips 1", category: "Water", article: "Check all faucets, pipes and toilets for leaks."))
+        water.addToMembers(createManagedKnowledge(title: "Water Saving Tips 2", category: "Water", article: "Install water saving showerheads and ultra-low-flush toilets."))
+        water.addToMembers(createManagedKnowledge(title: "Water Saving Tips 3", category: "Water", article: "Take shorter showers."))
                 appDelegate?.saveContext()
     }
 

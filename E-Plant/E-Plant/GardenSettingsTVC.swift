@@ -11,6 +11,7 @@ import CoreData
 
 class GardenSettingsTVC: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
 
+    // IBOUtlet variables
     @IBOutlet weak var nameTF: UILabel!
     @IBOutlet weak var createdDateTF: UILabel!
     @IBOutlet weak var changeNameTF: UITextField!
@@ -19,6 +20,7 @@ class GardenSettingsTVC: UITableViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var changeLongTF: UITextField!
     @IBOutlet weak var waterUsageTF: UITextField!
     
+    // garden and image variables
     var selectedGarden: Garden?
     var selectedImage: UIImage?
     
@@ -40,10 +42,13 @@ class GardenSettingsTVC: UITableViewController, UIImagePickerControllerDelegate,
         changeSensorTF.inputView = sensorPickerView
 
     }
+    
+    // table view select function
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
     
+    // load garden information into fields
     func loadGarden() {
         nameTF.text = selectedGarden?.name
         changeNameTF.text = selectedGarden?.name
@@ -69,35 +74,27 @@ class GardenSettingsTVC: UITableViewController, UIImagePickerControllerDelegate,
     
     // pickerView configurations
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
         return sensorArray[row]
-        
     }
-    
+    // pickerview select function
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
         changeSensorTF.text = sensorArray[row]
     }
-    
-    
-    
+    // pickerview number of rows config
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        
         return sensorArray.count
-        
     }
-    
+    // pickerview title attribute config
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        
         let title = NSAttributedString(string: sensorArray[row], attributes: [NSForegroundColorAttributeName : UIColor.darkGray])
         return title
-        
     }
-    
+    // picker view number fo components config
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-
+    
+    // update an image for garden
     @IBAction func chooseImage(_ sender: Any) {
         let pickerController = UIImagePickerController();
         pickerController.delegate = self
@@ -150,6 +147,7 @@ class GardenSettingsTVC: UITableViewController, UIImagePickerControllerDelegate,
         }
     }
     
+    // go to previous screen
     @IBAction func backBtnPressed(_ sender: Any) {
         performSegue(withIdentifier: "gardenViewFromSettings", sender: selectedGarden)
     }
@@ -165,22 +163,24 @@ class GardenSettingsTVC: UITableViewController, UIImagePickerControllerDelegate,
         }
     }
     
+    // update function to update context item
     @IBAction func updateBtnPressed(_ sender: Any) {
+        // check all fields
         if let name = changeNameTF.text, let lat = changeLatTF.text, let long = changeLongTF.text, let sensor = changeSensorTF.text, let usage = waterUsageTF.text{
             
-            if(name.characters.count <= 0){
+            if(name.characters.count <= 0){ // if name is empty
                 let alert = UIAlertController(title: "Garden Name Required", message: "Please enter a name for garden", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 present(alert, animated: true, completion: nil)
-            }else if (sensor.characters.count <= 0){
+            }else if (sensor.characters.count <= 0){ // if sensor is empty
                 let alert = UIAlertController(title: "Garden Sensor Info Required", message: "Please choose one of three sensors for this garden", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 present(alert, animated: true, completion: nil)
-            }else if (lat.characters.count <= 0){
+            }else if (lat.characters.count <= 0){ // if lat is empty
                 let alert = UIAlertController(title: "Garden Location Required", message: "Please enter a valid latitude for this garden", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 present(alert, animated: true, completion: nil)
-            }else if (long.characters.count <= 0){
+            }else if (long.characters.count <= 0){ // if long is empty
                 let alert = UIAlertController(title: "Category Location Required", message: "Please enter a valid longitude for this garden", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 present(alert, animated: true, completion: nil)
@@ -189,26 +189,26 @@ class GardenSettingsTVC: UITableViewController, UIImagePickerControllerDelegate,
                 let latValue = Double(myCustomFormat:lat)
                 let longValue = Double(myCustomFormat:long)
                 
-                if latValue == nil{
+                if latValue == nil{ // if lat is not double format
                     let alert = UIAlertController(title: "Latitude Format Error", message: "Please enter correct format for latitude (example: -37.888)", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                     present(alert, animated: true, completion: nil)
-                }else if longValue == nil {
+                }else if longValue == nil { // if long is not double format
                     let alert = UIAlertController(title: "Longitude Format Error", message: "Please enter correct format for longitude (example: 145.010101)", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                     present(alert, animated: true, completion: nil)
-                }else{
+                }else{ // all good except water usage
                     if (sensor == "1" || sensor == "2" || sensor == "3"){
                         var unit = usage
                         if unit.characters.count <= 0 {
                             unit = "0.0"
                         }else {
                             let usageValue = Double(myCustomFormat:unit)
-                            if usageValue == nil {
+                            if usageValue == nil { // if water usage is not double
                                 let alert = UIAlertController(title: "Water Usage Format Error", message: "Please enter correct format for Water Usage (example: 20.5)", preferredStyle: .alert)
                                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                                 present(alert, animated: true, completion: nil)
-                            }else{
+                            }else{ // all good
                                 var garden: Garden!
                                 
                                 garden = selectedGarden
@@ -223,14 +223,13 @@ class GardenSettingsTVC: UITableViewController, UIImagePickerControllerDelegate,
                                 garden.sensorNo = Int16(sensor)!
                                 garden.latitude = latValue!
                                 garden.longitude = longValue!
+                                garden.waterUsageUnit = usageValue!
                                 
                                 ad.saveContext()
                                 navigationController?.popViewController(animated: true)
                             }
                         }
-                        
-                        
-                    }else{
+                    }else{ // sensor should be from 1,2,3
                         let alert = UIAlertController(title: "Garden Sensor Info Required", message: "Please choose one of three sensors for this garden", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                         present(alert, animated: true, completion: nil)
@@ -240,23 +239,8 @@ class GardenSettingsTVC: UITableViewController, UIImagePickerControllerDelegate,
         }
     }
 
-    
+    // removed garden
     @IBAction func removeBtnPressed(_ sender: Any) {
-        // get all plants under this garden and delete them
-//        var plants = [Plant]()
-//        let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
-//        fetchRequest.predicate = NSPredicate(format: "toGarden == %@", selectedGarden)
-//        
-//        do {
-//            plants = try context.fetch(fetchRequest)
-//        } catch {
-//            let error = error as NSError
-//            print("\(error)")
-//        }
-//        //print(plants.count)
-//        for item in plants{
-//            context.delete(item)
-//        }
         context.delete(selectedGarden!)
         ad.saveContext()
         performSegue(withIdentifier: "gardenListFromSettings", sender: nil)

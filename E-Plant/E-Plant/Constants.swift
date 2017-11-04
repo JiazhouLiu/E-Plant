@@ -5,7 +5,7 @@
 //  Created by Jiazhou Liu on 27/10/17.
 //  Copyright © 2017 Monash University. All rights reserved.
 //
-
+//  Contains all constant variables used for online and local server get http request
 import Foundation
 
 let BASE_URL = "http://api.openweathermap.org/data/2.5/weather?"

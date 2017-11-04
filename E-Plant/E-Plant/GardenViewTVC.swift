@@ -12,6 +12,7 @@ import MapKit
 
 class GardenViewTVC: UITableViewController, UICollectionViewDelegate, UICollectionViewDataSource, MKMapViewDelegate, CLLocationManagerDelegate, NSFetchedResultsControllerDelegate  {
 
+    // IBOutlet variables
     @IBOutlet weak var currentWeatherIcon: UIImageView!
     @IBOutlet weak var currentTemp: UILabel!
     @IBOutlet weak var currentDate: UILabel!
@@ -31,10 +32,13 @@ class GardenViewTVC: UITableViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet var mapView: MKMapView!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    // passed by variable
     var selectedGarden: Garden?
     
+    // FRC controller
     var controller: NSFetchedResultsController<Plant>!
     
+    // garden map variables
     var gardenLat: Double?
     var gardenLong: Double?
     var mapHasCenteredOnce = false
@@ -44,7 +48,7 @@ class GardenViewTVC: UITableViewController, UICollectionViewDelegate, UICollecti
     
     // weather variables
     var gardenLocation: CLLocation!
-    var timerStarted = false
+    var myTimer: Timer?
     var onlineWeather: OnlineWeather!
     var onlineForecast: OnlineWeatherForecast!
     var localTemp1: LocalTemperature1!
@@ -57,6 +61,7 @@ class GardenViewTVC: UITableViewController, UICollectionViewDelegate, UICollecti
     // plants variables
     var plants = [Plant]()
     
+    // begin view
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -74,8 +79,16 @@ class GardenViewTVC: UITableViewController, UICollectionViewDelegate, UICollecti
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        // setup spinner
+        self.spinner = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height:50))
+        self.spinner.color = UIColor.darkGray
+        self.spinner.center = CGPoint(x: self.view.frame.width / 2, y: 160)
+        self.tableView.addSubview(spinner)
+        self.spinner.hidesWhenStopped = true
+        self.spinner.startAnimating()
+        
         if let title = selectedGarden?.name, let subtitle = selectedGarden?.toPlant?.count, let lat = selectedGarden?.latitude, let long = selectedGarden?.longitude{
-            let gardenAnnotation = FencedAnnotation(newTitle: title, newSubtitle: "\(subtitle)", lat: lat, long: long)
+            let gardenAnnotation = FencedAnnotation(newTitle: title, newSubtitle: "\(subtitle) plants", lat: lat, long: long)
             mapView.addAnnotation(gardenAnnotation)
         }
         let loc: CLLocation = CLLocation(latitude: gardenLat!, longitude: gardenLong!)
@@ -98,17 +111,24 @@ class GardenViewTVC: UITableViewController, UICollectionViewDelegate, UICollecti
         let DOW = getDayOfWeek(today: today)
         self.currentDate.text = "\(DOW!) \(result)"
         
-        // setup spinner
-        self.spinner = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height:50))
-        self.spinner.color = UIColor.darkGray
-        self.spinner.center = CGPoint(x: self.view.frame.width / 2, y: 160)
-        self.tableView.addSubview(spinner)
-        self.spinner.hidesWhenStopped = true
-        self.spinner.startAnimating()
         
-        startTimer()
+        if myTimer == nil {
+            startTimer()
+        }else{
+            if !((myTimer?.isValid)!) {
+                startTimer()
+            }
+        }
+        
     }
     
+    // invalidate timer after leaving this view to avoid duplicate timer
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        myTimer?.invalidate()
+    }
+    
+    // load garden data from passed by garden
     func loadGardenData() {
         gardenLat = selectedGarden?.latitude
         gardenLong = selectedGarden?.longitude
@@ -164,6 +184,7 @@ class GardenViewTVC: UITableViewController, UICollectionViewDelegate, UICollecti
                 gardenPress.text = "\(localTemp1.pressure) kPa"
             }
         }else if selectedGarden?.sensorNo == 2 {
+            
             if localTemp2.pressure == 0.0{
                 gardenTemp.text =  "unknown"
                 gardenPress.text = "unknown"
@@ -215,15 +236,12 @@ class GardenViewTVC: UITableViewController, UICollectionViewDelegate, UICollecti
         mapView.setRegion(coordinateRegion, animated: false)
     }
     
-    
-    
+    // start a 1s timer to refresh online and local weather
     func startTimer(){
-        if !timerStarted {
-            _ = Timer.scheduledTimer(timeInterval: 1, target: self,selector: #selector(GardenViewTVC.refreshOnlineAndLocalWeather), userInfo: nil, repeats: true)
-            timerStarted = true
-        }
+        myTimer = Timer.scheduledTimer(timeInterval: 1, target: self,selector: #selector(GardenViewTVC.refreshOnlineAndLocalWeather), userInfo: nil, repeats: true)
     }
     
+    // refresh both online and local weather
     func refreshOnlineAndLocalWeather() {
         self.spinner.stopAnimating()
         onlineWeather = OnlineWeather()
@@ -283,7 +301,7 @@ class GardenViewTVC: UITableViewController, UICollectionViewDelegate, UICollecti
         let item = controller.object(at: indexPath as IndexPath)
         cell.plantImage.image = item.toImage?.image as? UIImage
         cell.plantCondition.text = item.condition
-        if item.condition == "good condition" {
+        if item.condition == "healthy condition" {
             cell.plantCondition.textColor = UIColor.green
         }else if item.condition == "warning condition" {
             cell.plantCondition.textColor = UIColor.orange
@@ -294,14 +312,61 @@ class GardenViewTVC: UITableViewController, UICollectionViewDelegate, UICollecti
         
         return cell
     }
+    // if select item from collection item, passed through segue to plant view
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let objs = controller.fetchedObjects, objs.count > 0 {
+            let plant = objs[indexPath.row]
+            performSegue(withIdentifier: "plantViewFromGardenView", sender: plant)
+        }
+    }
     
+    // passed through garden to plant list view by segue
     @IBAction func viewAllPlantsBtnPressed(_ sender: Any) {
         performSegue(withIdentifier: "plantsListFromGardenView", sender: selectedGarden)
     }
     
-    
+    // navigate to settings screen with garden object
     @IBAction func settingsBtnPressed(_ sender: Any) {
         performSegue(withIdentifier: "gardenSettingsFromView", sender: selectedGarden)
+    }
+    
+    // water button to update water information
+    @IBAction func waterBtnPressed(_ sender: Any) {
+        // show user success message and navigate back to root screen
+        let alert = UIAlertController(title: "Water this garden", message: "Please enter watering time below:", preferredStyle: .alert)
+        
+        alert.addTextField { (textField : UITextField) -> Void in
+            textField.placeholder = "...mins"
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel) { (result : UIAlertAction) -> Void in
+        }
+        let waterAction = UIAlertAction(title: "Save", style: .default, handler: { [weak alert] (_) in
+            let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
+            if let waterQty = Int((textField?.text)!){
+                if waterQty > 0{
+                    self.selectedGarden?.waterUsageQty += Int16(waterQty)
+                    self.selectedGarden?.lastWaterQty = Int16(waterQty)
+                    self.selectedGarden?.lastWaterTime = NSDate()
+                    ad.saveContext()
+                    let alertVC = UIAlertController(title: "Success", message: "You have successfully updated water information", preferredStyle: UIAlertControllerStyle.alert)
+                    let acSure = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (UIAlertAction) -> Void in
+                    }
+                    alertVC.addAction(acSure)
+                    self.present(alertVC, animated: true, completion: nil)
+                }
+            }else{
+                let alertVC = UIAlertController(title: "Failed", message: "Please enter a valid number", preferredStyle: UIAlertControllerStyle.alert)
+                let acSure = UIAlertAction(title: "OK", style: UIAlertActionStyle.destructive) { (UIAlertAction) -> Void in
+                }
+                alertVC.addAction(acSure)
+                self.present(alertVC, animated: true, completion: nil)
+            }
+            
+        })
+        cancelAction.setValue(UIColor.gray, forKey: "titleTextColor")
+        alert.addAction(cancelAction)
+        alert.addAction(waterAction)
+        self.present(alert, animated: true, completion: nil)
     }
 
     // prepare for single garden controller segue and take object selected object to the next screen
@@ -317,6 +382,13 @@ class GardenViewTVC: UITableViewController, UICollectionViewDelegate, UICollecti
             if let destination = segue.destination as? MyPlantTableViewController {
                 if let garden = sender as? Garden {
                     destination.filterGarden = garden
+                }
+            }
+        }
+        if segue.identifier == "plantViewFromGardenView" {
+            if let destination = segue.destination as? PlantsViewController {
+                if let plant = sender as? Plant {
+                    destination.plant = plant
                 }
             }
         }

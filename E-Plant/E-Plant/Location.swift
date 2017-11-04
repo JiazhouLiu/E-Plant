@@ -9,9 +9,14 @@
 import CoreLocation
 
 class Location {
+    // location static variable
     static var sharedInstance = Location()
-    private init() {}
+    private init() {
+        self.latitude = -37.876398
+        self.longitude = 145.0548502
+    }
     
+    // location variables
     var latitude: Double!
     var longitude: Double!
 }

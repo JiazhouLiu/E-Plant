@@ -9,6 +9,8 @@
 import UIKit
 
 class PlantCVC: UICollectionViewCell {
+    
+    // plant collection view cell variables
     @IBOutlet weak var plantImage: UIImageView!
     @IBOutlet weak var plantName: UILabel!
     @IBOutlet weak var plantCondition: UILabel!

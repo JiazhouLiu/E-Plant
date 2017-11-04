@@ -13,6 +13,7 @@ import FirebaseDatabase
 // user class and get attribute from database snapshot
 class ApplicationUser {
     
+    // application user variables
     var username: String!
     var email: String!
     var photoURL: String!
@@ -22,6 +23,7 @@ class ApplicationUser {
     var ref: DatabaseReference?
     var key: String?
     
+    // initiation
     init(snapshot: DataSnapshot){
         
         key = snapshot.key

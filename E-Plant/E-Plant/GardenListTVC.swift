@@ -20,14 +20,19 @@ class GardenListTVC: UITableViewController, NSFetchedResultsControllerDelegate {
     @IBOutlet weak var editBtn: UIBarButtonItem!
     var managedContext: NSManagedObjectContext?
     
+    // check sensor status
+    var myTimer: Timer?
+    var localTemp1: LocalTemperature1!
+    var localTemp2: LocalTemperature2!
+    var localTemp3: LocalTemperature3!
+    var sensor1On:Bool = false
+    var sensor2On:Bool = false
+    var sensor3On:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // first Fetch to initialize controller and get all gardens
         attemptFetch()
-        
-        
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -49,17 +54,65 @@ class GardenListTVC: UITableViewController, NSFetchedResultsControllerDelegate {
                 attemptFetch()
             }
         }
+        if myTimer == nil {
+            startTimer()
+        }else{
+            if !((myTimer?.isValid)!) {
+                startTimer()
+            }
+        }
     }
+    
+    // invalidate timer after leaving this view to avoid duplicate timer
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        myTimer?.invalidate()
+    }
+    
+    // start a 2s timer to refresh local weather
+    func startTimer(){
+        myTimer = Timer.scheduledTimer(timeInterval: 2, target: self,selector: #selector(GardenListTVC.refreshLocalWeather), userInfo: nil, repeats: true)
+    }
+    
+    // refresh local weather data from sensor
+    func refreshLocalWeather() {
+        localTemp1 = LocalTemperature1()
+        localTemp1.downloadLocalWeatherDetails {
+            if self.localTemp1.pressure > 0.0 {
+                self.sensor1On = true
+            }else{
+                self.sensor1On = false
+            }
+        }
 
-    // MARK: - Table view data source
+        localTemp2 = LocalTemperature2()
+        localTemp2.downloadLocalWeatherDetails {
+            if self.localTemp2.pressure > 0.0 {
+                self.sensor2On = true
+            }else{
+                self.sensor2On = false
+            }
+        }
 
+        localTemp3 = LocalTemperature3()
+        localTemp3.downloadLocalWeatherDetails {
+            if self.localTemp3.pressure > 0.0 {
+                self.sensor3On = true
+            }else{
+                self.sensor3On = false
+            }
+        }
+        tableView.reloadData()
+    }
+    
+    // number of sections for tableview
     override func numberOfSections(in tableView: UITableView) -> Int {
         if let sections = controller.sections {
             return sections.count
         }
         return 0
     }
-
+    // number of rows in section for tableview
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             if let sections = controller.sections {
                 
@@ -80,7 +133,7 @@ class GardenListTVC: UITableViewController, NSFetchedResultsControllerDelegate {
     // take garden object into cell model to configure cell UI elements
     func configureCell(cell: GardenCell, indexPath: NSIndexPath){
         let item = controller.object(at: indexPath as IndexPath)
-        cell.configureCell(item: item, order: indexPath.row)
+        cell.configureCell(item: item, order: indexPath.row, sensor1: sensor1On, sensor2: sensor2On, sensor3: sensor3On)
     }
     
     // if select row then perform segue to single garden controller
@@ -104,6 +157,7 @@ class GardenListTVC: UITableViewController, NSFetchedResultsControllerDelegate {
         }
     }
     
+    // height for row for tableview
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
     }
@@ -113,27 +167,12 @@ class GardenListTVC: UITableViewController, NSFetchedResultsControllerDelegate {
         return true
     }
     
+    // delete editing for tableview
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
             let deletedGarden = controller.object(at: indexPath as IndexPath)
-            // get all plants under this garden and delete them
-//            var plants = [Plant]()
-//            let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
-//            fetchRequest.predicate = NSPredicate(format: "toGarden == %@", deletedGarden)
-//            
-//            do {
-//                plants = try context.fetch(fetchRequest)
-//            } catch {
-//                let error = error as NSError
-//                print("\(error)")
-//            }
-//            //print(plants.count)
-//            for item in plants{
-//                context.delete(item)
-//            }
             context.delete(deletedGarden)
-            
             ad.saveContext()
             
         }else if editingStyle == .insert {
@@ -146,6 +185,7 @@ class GardenListTVC: UITableViewController, NSFetchedResultsControllerDelegate {
         return true
     }
     
+    // move row for tableview
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         attemptFetch()
         
@@ -205,14 +245,17 @@ class GardenListTVC: UITableViewController, NSFetchedResultsControllerDelegate {
     }
     
     
+    // controller begin update
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
     
+    // controller end update
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }
     
+    // handle controller update
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         switch(type) {
@@ -258,12 +301,11 @@ class GardenListTVC: UITableViewController, NSFetchedResultsControllerDelegate {
         
         let kb1 = KnowledgeBase(context: context)
         kb1.title = "Rose"
-        kb1.article = "Roses can withstand a wide range of temperatures. \n In general, hot, dry conditions are preferable to humid conditions. \n Roses adopt winter dormancy when temperatures fall below zero at night and less than 10°C in the day. \n With minimum night temperatures of 10°C and correspondingly warmer temperatures of 18°C to 25°C during the day, \n roses will happily flower non-stop for 12 months of the year, providing they have been watered, fertilized and groomed as required."
+        kb1.article = "Roses can withstand a wide range of temperatures.\n\nIn general, hot, dry conditions are preferable to humid conditions.\n\nRoses adopt winter dormancy when temperatures fall below zero at night and less than 10°C in the day.\n\nWith minimum night temperatures of 10°C and correspondingly warmer temperatures of 18°C to 25°C during the day, roses will happily flower non-stop for 12 months of the year, providing they have been watered, fertilized and groomed as required."
         kb1.category = "Plant"
         
         let plant1 = Plant(context: context)
         plant1.name = "Rose"
-        plant1.condition = "good condition"
         let picture3 = Image(context: context)
         picture3.image = #imageLiteral(resourceName: "rose")
         plant1.toImage = picture3
@@ -283,12 +325,11 @@ class GardenListTVC: UITableViewController, NSFetchedResultsControllerDelegate {
         
         let kb2 = KnowledgeBase(context: context)
         kb2.title = "Mint"
-        kb2.article = "The mints will grow in a wide range of climates as shown by their popularity in home gardens all over Australia. Ideally, \n they require plenty of sun, growing best in the long midsummer days of the higher latitudes. \n For this reason, the Australian mint industry has developed mostly in Tasmania, particularly for oil production. \n Ideal growing temperatures for mint are warm sunny days (25°C) and cool nights (15°C). \n This is why, in the hotter climates, mint generally grows better in the more shaded areas of the garden."
+        kb2.article = "The mints will grow in a wide range of climates as shown by their popularity in home gardens all over Australia.\n\nIdeally, they require plenty of sun, growing best in the long midsummer days of the higher latitudes.\n\nFor this reason, the Australian mint industry has developed mostly in Tasmania, particularly for oil production.\n\nIdeal growing temperatures for mint are warm sunny days (25°C) and cool nights (15°C).\n\nThis is why, in the hotter climates, mint generally grows better in the more shaded areas of the garden."
         kb2.category = "Plant"
         
         let plant2 = Plant(context: context)
         plant2.name = "Mint"
-        plant2.condition = "good condition"
         let picture4 = Image(context: context)
         picture4.image = #imageLiteral(resourceName: "mint")
         plant2.toImage = picture4
@@ -297,9 +338,4 @@ class GardenListTVC: UITableViewController, NSFetchedResultsControllerDelegate {
         
         ad.saveContext()
     }
-    
-    
-    
-    
-
 }

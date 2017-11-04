@@ -3,6 +3,7 @@
 //  E-Plant
 //
 //  Created by 郁雨润 on 1/11/17.
+//  Improved by Jiazhou Liu on 4/11/17.
 //  Copyright © 2017 Monash University. All rights reserved.
 //
 
@@ -16,6 +17,8 @@ class MyPlantTableViewController: UITableViewController,addPlantDelegate{
     var managedContext: NSManagedObjectContext?
     var appDelegate: AppDelegate?
     var filterGarden: Garden?
+    // check sensor status
+    var myTimer: Timer?
     
 
     @IBOutlet weak var editBtn: UIBarButtonItem!
@@ -33,7 +36,36 @@ class MyPlantTableViewController: UITableViewController,addPlantDelegate{
         managedContext = appDelegate.persistentContainer.viewContext
         fetchAllPlants()
     }
+    
+    // function for every time view appears
+    override func viewDidAppear(_ animated: Bool) {
+        fetchAllPlants()
+        
+        if myTimer == nil {
+            startTimer()
+        }else{
+            if !((myTimer?.isValid)!) {
+                startTimer()
+            }
+        }
+    }
+    
+    // invalidate timer after leaving this view to avoid duplicate timer
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        myTimer?.invalidate()
+    }
+    
+    // start a 2s timer to refresh table view
+    func startTimer(){
+        myTimer = Timer.scheduledTimer(timeInterval: 2, target: self,selector: #selector(MyPlantTableViewController.reload), userInfo: nil, repeats: true)
+    }
 
+    // refresh tableview
+    func reload(){
+        tableView.reloadData()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -58,7 +90,17 @@ class MyPlantTableViewController: UITableViewController,addPlantDelegate{
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyPlantCell", for: indexPath) as! MyPlantTableViewCell
         let plant = plantList![indexPath.row]
         cell.nameLabel.text = plant.name
+        
         cell.conditionLabel.text = plant.condition
+        
+        // setup condition label text color based on condition
+        if plant.condition == "healthy condition" {
+            cell.conditionLabel.textColor = UIColor.green
+        }else if plant.condition == "warning condition" {
+            cell.conditionLabel.textColor = UIColor.orange
+        }else if plant.condition == "danger condition" {
+            cell.conditionLabel.textColor = UIColor.red
+        }
         
         if (plant.toImage == nil){
            cell.plantImage.image = #imageLiteral(resourceName: "imagePlaceholder")
@@ -85,18 +127,23 @@ class MyPlantTableViewController: UITableViewController,addPlantDelegate{
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            managedContext?.delete(plantList![indexPath.row])
-            plantList!.remove(at: indexPath.row)
+            plantList?[indexPath.row].toGarden = nil
+            plantList?.remove(at: indexPath.row)
             
-            // Delete the row from the data source
             tableView.deleteRows(at: [indexPath], with: .automatic)
-            self.tableView.reloadSections(NSIndexSet(index:0) as IndexSet, with: .fade)
-            do{
-                try managedContext?.save()
-            }
-            catch let error{
-                print("Could not save: \(error)")
-            }
+            self.tableView.reloadData()
+//            managedContext?.delete(plantList![indexPath.row])
+//            plantList!.remove(at: indexPath.row)
+//            
+//            // Delete the row from the data source
+//            tableView.deleteRows(at: [indexPath], with: .automatic)
+//            self.tableView.reloadSections(NSIndexSet(index:0) as IndexSet, with: .fade)
+//            do{
+//                try managedContext?.save()
+//            }
+//            catch let error{
+//                print("Could not save: \(error)")
+//            }
         }
         
         
@@ -141,6 +188,7 @@ class MyPlantTableViewController: UITableViewController,addPlantDelegate{
         } catch {
             fatalError("Failed to fetch Knowledge Base: \(error)")
         }
+        tableView.reloadData()
     }
     
     func addPlant(plant:newPlant){
@@ -148,7 +196,6 @@ class MyPlantTableViewController: UITableViewController,addPlantDelegate{
         managedContext = appDelegate.persistentContainer.viewContext
         let plant1 = NSEntityDescription.insertNewObject(forEntityName: "Plant", into: managedContext!) as! Plant
         plant1.name = plant.name
-        plant1.condition = plant.condition
         plant1.dateAdded = getCurrentDate()!
         plant1.toImage = plant.toImage
         plant1.toGarden = plant.toGarden

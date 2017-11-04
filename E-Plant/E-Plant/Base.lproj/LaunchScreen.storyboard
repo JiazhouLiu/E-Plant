@@ -1,7 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,12 +20,36 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login1" translatesAutoresizingMaskIntoConstraints="NO" id="IAi-vX-u9U">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="e-plant-logo" translatesAutoresizingMaskIntoConstraints="NO" id="XAX-kP-OnH">
+                                <rect key="frame" x="33" y="268" width="308" height="130"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="130" id="3r1-iB-21M"/>
+                                    <constraint firstAttribute="width" constant="308" id="Hj4-Bo-S2m"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="XAX-kP-OnH" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="5ck-3Y-qgz"/>
+                            <constraint firstItem="IAi-vX-u9U" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="9Ag-lm-few"/>
+                            <constraint firstItem="IAi-vX-u9U" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="FOl-pU-i8C"/>
+                            <constraint firstItem="XAX-kP-OnH" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="a9c-dW-vkO"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="IAi-vX-u9U" secondAttribute="bottom" id="gSu-Cf-ac4"/>
+                            <constraint firstAttribute="trailing" secondItem="IAi-vX-u9U" secondAttribute="trailing" id="gpb-aA-dl5"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="e-plant-logo" width="321" height="84"/>
+        <image name="login1" width="800" height="600"/>
+    </resources>
 </document>

@@ -19,8 +19,10 @@ class SoilKnowledgeViewController: UIViewController {
         
         super.viewDidLoad()
         if let knowledge = knowledge{
-           titleLabel.text = knowledge.title
-           articleField.text = knowledge.article
+            titleLabel.text = knowledge.title
+            articleField.text = knowledge.article
+            articleField.isScrollEnabled = false
+            articleField.isScrollEnabled = true
         }
 
         // Do any additional setup after loading the view.

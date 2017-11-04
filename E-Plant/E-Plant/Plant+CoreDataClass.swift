@@ -15,5 +15,6 @@ public class Plant: NSManagedObject {
         super.awakeFromInsert()
         
         self.dateAdded = NSDate()
+        self.condition = "unknown condition"
     }
 }

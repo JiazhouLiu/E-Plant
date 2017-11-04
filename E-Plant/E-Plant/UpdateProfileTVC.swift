@@ -208,13 +208,26 @@ class UpdateProfileTVC: UITableViewController, UIImagePickerControllerDelegate, 
     // update Button pressed
     @IBAction func updateBtnPressed(_ sender: Any) {
         let imgData = UIImageJPEGRepresentation(self.userImageView.image!, 0.8)
-        
+        var messageString = ""
+        var messageTitle = ""
         if let email = email.text, let country = country.text, let gardeningKL = gardeningKLTF.text, let username = username.text, email.characters.count > 0 {   // all necessary attribute filled
-            var messageString = "You have successfully updated your profile"
-            var messageTitle = "Success"
+            
             if let password = newPasswordTF.text, password.characters.count > 0{
+                // check if contains space
+                var spaceFlag = false
+                let whitespace = NSCharacterSet.whitespaces
+                let range = password.rangeOfCharacter(from: whitespace)
                 
-                if (password.characters.count >= 6){
+                // range will be nil if no whitespace is found
+                if let _ = range {
+                    spaceFlag = true
+                }
+                else {
+                    spaceFlag = false
+                }
+                if (password.characters.count >= 6 && !spaceFlag){
+                    var messageString = "You have successfully updated your profile"
+                    var messageTitle = "Success"
                     DataService.instance.setUserInfo(user: Auth.auth().currentUser, username: username, password: password, country: country, gardeningKL: gardeningKL, data: imgData! as NSData)
                     
                     // change email
@@ -246,7 +259,7 @@ class UpdateProfileTVC: UITableViewController, UIImagePickerControllerDelegate, 
                 }else{
                     // password must be 6 chars or more
                     messageTitle = "Error"
-                    messageString = "Password must be at least 6 chars"
+                    messageString = "Password must be at least 6 chars without space"
                     let alertController = UIAlertController(title: messageTitle, message: messageString, preferredStyle: UIAlertControllerStyle.alert)
                     
                     let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in

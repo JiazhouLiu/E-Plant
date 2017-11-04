@@ -18,7 +18,8 @@ class WaterViewController: UIViewController {
         super.viewDidLoad()
         titleLabel.text = knowledge.title
         articleField.text = knowledge.article
-
+        articleField.isScrollEnabled = false
+        articleField.isScrollEnabled = true
         // Do any additional setup after loading the view.
     }
 

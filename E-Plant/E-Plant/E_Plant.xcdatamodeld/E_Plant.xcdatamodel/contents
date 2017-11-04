@@ -29,7 +29,7 @@
         <attribute name="article" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="toPlant" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Plant" inverseName="toKB" inverseEntity="Plant" syncable="YES"/>
+        <relationship name="toPlant" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Plant" inverseName="toKB" inverseEntity="Plant" syncable="YES"/>
         <relationship name="type" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="members" inverseEntity="Category" syncable="YES"/>
     </entity>
     <entity name="Note" representedClassName="Note" syncable="YES">

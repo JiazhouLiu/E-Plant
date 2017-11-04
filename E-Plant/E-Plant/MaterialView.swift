@@ -16,7 +16,7 @@ extension UIView {
         get {
             return materialKey
         }
-        
+        // set specific style for the item
         set {
             materialKey = newValue
             

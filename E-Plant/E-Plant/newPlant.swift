@@ -12,7 +12,6 @@ class newPlant: NSObject {
     
     
       var name: String?
-      var condition: String?
       var gardenName: String?
       var knowledgeBaseTitle: String?
       var toGarden: Garden?
@@ -22,16 +21,14 @@ class newPlant: NSObject {
     
     override init(){
         name = "undefiend"
-        condition = "undefined"
         gardenName = "undefined"
         toImage?.image =  #imageLiteral(resourceName: "imagePlaceholder")
         knowledgeBaseTitle = "undefined"
         
     }
     
-    init(name:String, condition:String, gardenName:String,toImage:Image,knowledgeBaseTitle:String,toGarden: Garden,toKB: KnowledgeBase){
+    init(name:String, gardenName:String,toImage:Image,knowledgeBaseTitle:String,toGarden: Garden,toKB: KnowledgeBase){
         self.name = name
-        self.condition = condition
         self.gardenName = gardenName
         self.toImage = toImage
         self.knowledgeBaseTitle = knowledgeBaseTitle

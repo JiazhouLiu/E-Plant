@@ -10,9 +10,11 @@ import Foundation
 import Alamofire
 
 class LocalMoisture1: NSObject {
+    // local moisture data variables from local sensor 1
     var _moisture: Int!
     var _received: Bool!
     
+    // define variables
     var moisture: Int {
         if _moisture == nil {
             _moisture = 0
@@ -27,20 +29,18 @@ class LocalMoisture1: NSObject {
         return _received
     }
     
-    
+    // download local sensor data from local server by Alamofire
     func downloadLocalMoistureDetails(completed: @escaping DownloadComplete) {
         // Alamofire download
         
         let localMoistURL = URL(string: CURRENT_LOCAL_MOIST_DATABASE_URL_1)!
         Alamofire.request(localMoistURL).responseJSON { response in
             let result = response.result
-            //print(result.value)
             if let dict = result.value as? Dictionary<String, AnyObject> {
                 var lastMoist: Int = 0
                 self._received = true
 
-                if let currentMoist = dict["moisture"] as? Int {
-                    print(currentMoist)
+                if let currentMoist = dict["moisture"] as? Int { // get moisture
                     lastMoist = currentMoist
                 }
 
