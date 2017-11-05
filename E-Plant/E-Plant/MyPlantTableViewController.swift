@@ -34,7 +34,7 @@ class MyPlantTableViewController: UITableViewController,addPlantDelegate{
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         managedContext = appDelegate.persistentContainer.viewContext
-        fetchAllPlants()
+        fetchAllPlants() // get all plants from db
     }
     
     // function for every time view appears
@@ -73,11 +73,12 @@ class MyPlantTableViewController: UITableViewController,addPlantDelegate{
 
     // MARK: - Table view data source
 
+    // set number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    // set number of rows
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if let count = plantList?.count {
@@ -86,6 +87,7 @@ class MyPlantTableViewController: UITableViewController,addPlantDelegate{
         return 0
     }
     
+    // configure the cell for each row
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyPlantCell", for: indexPath) as! MyPlantTableViewCell
         let plant = plantList![indexPath.row]
@@ -112,19 +114,24 @@ class MyPlantTableViewController: UITableViewController,addPlantDelegate{
         
     }
     
+    // pass data before jump to that view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "plantViewIdentifier") {
+            // pass a plant to the single plant view
             let selectedCategory = plantList![(tableView.indexPathForSelectedRow?.row)!]
             let destination: PlantsViewController = segue.destination as! PlantsViewController
             destination.plant = selectedCategory
         }
         else if(segue.identifier == "addPlantIdentifier") {
+            // pass a delegate to the add plant view
             let destination: AddPlantViewController = segue.destination.childViewControllers[0] as! AddPlantViewController
             destination.plantDelegate = self
         }
         
     }
     
+    
+    // function for edit the list 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             plantList?[indexPath.row].toGarden = nil
@@ -191,6 +198,7 @@ class MyPlantTableViewController: UITableViewController,addPlantDelegate{
         tableView.reloadData()
     }
     
+    //add plant to the db and refresh the table
     func addPlant(plant:newPlant){
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         managedContext = appDelegate.persistentContainer.viewContext
@@ -218,7 +226,7 @@ class MyPlantTableViewController: UITableViewController,addPlantDelegate{
         return date1 as NSDate
     }
     
-    
+    // the change the tile of the edit button
     @IBAction func editBtn(_ sender: Any) {
         self.isEditing = !self.isEditing
         if tableView.isEditing {

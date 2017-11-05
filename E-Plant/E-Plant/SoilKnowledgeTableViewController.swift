@@ -25,8 +25,9 @@ class SoilKnowledgeTableViewController: UITableViewController,UISearchBarDelegat
         super.viewDidLoad()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         managedContext = appDelegate.persistentContainer.viewContext
-        fetchAllKnowledges()
+        fetchAllKnowledges() //get all soil knowledge from db
         
+        // if no item in the db, create sample data
        if filteredKnowledgeList?.count == 0 {
           print("test11111")
           createDefaultItems()
@@ -41,11 +42,13 @@ class SoilKnowledgeTableViewController: UITableViewController,UISearchBarDelegat
 
     // MARK: - Table view data source
 
+    // set number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
+    // set number of rows
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if let count = filteredKnowledgeList?.count {
@@ -65,6 +68,7 @@ class SoilKnowledgeTableViewController: UITableViewController,UISearchBarDelegat
        
     }
     
+    // pass the data before jump to that view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "soilKnowledgeDetail") {
             let selectedCategory = filteredKnowledgeList![(tableView.indexPathForSelectedRow?.row)!]
@@ -81,6 +85,7 @@ class SoilKnowledgeTableViewController: UITableViewController,UISearchBarDelegat
         
     }
     
+    // delete item function
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             managedContext?.delete(filteredKnowledgeList![indexPath.row])
@@ -101,7 +106,7 @@ class SoilKnowledgeTableViewController: UITableViewController,UISearchBarDelegat
     }
     
     
-    
+    // create a category
     func createManagedCategory(name: String) -> Category {
         let category = NSEntityDescription.insertNewObject(forEntityName: "Category", into: managedContext!) as! Category
         category.name = name
@@ -111,7 +116,7 @@ class SoilKnowledgeTableViewController: UITableViewController,UISearchBarDelegat
 
     
     
-    
+    // create a knowledge
     func createManagedKnowledge(title: String,category: String, article:String) -> KnowledgeBase {
         let knowledge = NSEntityDescription.insertNewObject(forEntityName: "KnowledgeBase", into: managedContext!) as! KnowledgeBase
         knowledge.title = title
@@ -121,7 +126,7 @@ class SoilKnowledgeTableViewController: UITableViewController,UISearchBarDelegat
     }
     
     
-    
+    // create sample data
     func createDefaultItems() {
         let soil = createManagedCategory(name: "Soil")
         soil.addToMembers(createManagedKnowledge(title: "Soil Knowledge 1", category: "Soil", article: "Bark, ground: made from various tree barks. ..."))
@@ -131,14 +136,7 @@ class SoilKnowledgeTableViewController: UITableViewController,UISearchBarDelegat
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
+    // get all soil knowledge from db
     func fetchAllKnowledges() {
         let knowledgeFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "KnowledgeBase")
         
@@ -151,6 +149,7 @@ class SoilKnowledgeTableViewController: UITableViewController,UISearchBarDelegat
         }
     }
     
+    // add knowledge to db
     func addKnowledge(knowledge:NewKnowledge){
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         managedContext = appDelegate.persistentContainer.viewContext
@@ -164,6 +163,7 @@ class SoilKnowledgeTableViewController: UITableViewController,UISearchBarDelegat
         self.tableView.reloadData()
     }
     
+    // go back to previous view page
     @IBAction func backbutton(_ sender: UIBarButtonItem) {
         // Dismiss the view controller depending on the context it was presented
         let isPresentingInAddMode = presentingViewController is UITabBarController

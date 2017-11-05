@@ -32,22 +32,21 @@ class addNotesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        // for the edit mode, set the title and article
         if note != nil{
             titleField.text = note?.title
             contentField.text = note?.content
             editButton?.title = "edit"
         }
 
-        // Do any additional setup after loading the view.
-    }
+            }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    //back button method
     @IBAction func backbutton(_ sender: Any) {
         // Dismiss the view controller depending on the context it was presented
         let isPresentingInAddMode = presentingViewController is UITabBarController
@@ -71,7 +70,8 @@ class addNotesViewController: UIViewController {
         self.present(alertVC, animated: true, completion: nil)
     }
 
-
+    // if the user click the +, it will be create mode, it will create a new note and pass to note list
+    // if the user click the note cell, it will be edit mode, and change the value of note
     @IBAction func saveButton(_ sender: Any) {
         let isPresentingInAddMode = presentingViewController is UITabBarController
         if isPresentingInAddMode {

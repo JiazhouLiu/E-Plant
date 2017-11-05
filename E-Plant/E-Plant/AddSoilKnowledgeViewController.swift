@@ -9,16 +9,18 @@
 import UIKit
 import CoreData
 
+//connect to addknowledge function in soil table view class
 protocol addKnowledgeDelegate {
     func addKnowledge(knowledge: NewKnowledge)
-    
     }
 
+//connect to plant table view class
 protocol addPlantKnowledgeDelegate {
     func addPlantKnowledge(knowledge: NewKnowledge)
     
 }
 
+// connect to water table view class
 protocol addWaterKnowledgeDelegate {
     func addWaterKnowledge(knowledge: NewKnowledge)
     
@@ -48,6 +50,7 @@ class AddSoilKnowledgeViewController: UIViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(false)
     }
@@ -59,13 +62,14 @@ class AddSoilKnowledgeViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    // get the context from db
     func getContext () -> NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
     }
     
    
-    
+   // save the new knowledge and pass to the related  table view by delegate
     @IBAction func SaveButton(_ sender: UIBarButtonItem) {
         let isPresentingInAddMode = presentingViewController is UITabBarController
        
@@ -116,7 +120,7 @@ class AddSoilKnowledgeViewController: UIViewController, UITextFieldDelegate {
    
     
     
-   
+   // go back to previous view page
     @IBAction func cancelButton(_ sender: UIBarButtonItem) {
         // Dismiss the view controller depending on the context it was presented
         let isPresentingInAddMode = presentingViewController is UITabBarController

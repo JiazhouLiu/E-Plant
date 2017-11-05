@@ -15,6 +15,7 @@ class PlantViewController: UIViewController {
     @IBOutlet weak var articleField: UITextView!
     var knowledge: KnowledgeBase!
     
+    // set the items by using the passed data knowledge object
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.text = knowledge.title
@@ -30,7 +31,7 @@ class PlantViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+   // go back to previous view
     @IBAction func BackButton(_ sender: UIBarButtonItem) {
         // Dismiss the view controller depending on the context it was presented
         let isPresentingInAddMode = presentingViewController is UITabBarController

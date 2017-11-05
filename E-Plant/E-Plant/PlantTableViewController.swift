@@ -18,7 +18,7 @@ class PlantTableViewController: UITableViewController,addPlantKnowledgeDelegate 
     var newKnowledge: NewKnowledge?
     
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -35,12 +35,13 @@ class PlantTableViewController: UITableViewController,addPlantKnowledgeDelegate 
     }
 
     // MARK: - Table view data source
-
+    // number of sections in table
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
+    // the number of rows in section
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if let count = filteredKnowledgeList?.count {
@@ -50,6 +51,7 @@ class PlantTableViewController: UITableViewController,addPlantKnowledgeDelegate 
         return 0;
     }
     
+    // set the item in the cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlantKnowledgeCell", for: indexPath) as! PlantTableViewCell
         let knowledge = filteredKnowledgeList![indexPath.row]
@@ -59,7 +61,7 @@ class PlantTableViewController: UITableViewController,addPlantKnowledgeDelegate 
     }
 
     
-    
+    // get all plant knowledgebase from Knowledgebase in DB
     func fetchAllKnowledges() {
         let knowledgeFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "KnowledgeBase")
         
@@ -73,16 +75,17 @@ class PlantTableViewController: UITableViewController,addPlantKnowledgeDelegate 
         }
     }
     
+    // pass the data before jump to that view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "plantKnowledgeDetail") {
             let selectedCategory = filteredKnowledgeList![(tableView.indexPathForSelectedRow?.row)!]
             let destination: PlantViewController = segue.destination as! PlantViewController
-            destination.knowledge = selectedCategory
+            destination.knowledge = selectedCategory // pass a knowledge object
         }
             
         else if(segue.identifier == "addPlantKnowledge"){
             let destination: AddSoilKnowledgeViewController = segue.destination.childViewControllers[0] as! AddSoilKnowledgeViewController
-            destination.plantDelegate = self
+            destination.plantDelegate = self // pass a delegate
         }
         
         
@@ -110,7 +113,8 @@ class PlantTableViewController: UITableViewController,addPlantKnowledgeDelegate 
     
     
     
-    
+    //add plant knowledge to db
+    // refresh the table after add a plant
     func addPlantKnowledge(knowledge:NewKnowledge){
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         managedContext = appDelegate.persistentContainer.viewContext
@@ -125,7 +129,7 @@ class PlantTableViewController: UITableViewController,addPlantKnowledgeDelegate 
     }
     
     
-    
+    // go back to previous view
     @IBAction func cancelButton(_ sender: UIBarButtonItem) {
         // Dismiss the view controller depending on the context it was presented
         let isPresentingInAddMode = presentingViewController is UITabBarController

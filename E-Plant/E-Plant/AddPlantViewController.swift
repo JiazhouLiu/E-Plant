@@ -69,7 +69,8 @@ class AddPlantViewController: UIViewController,UIPickerViewDelegate, UIPickerVie
         // Dispose of any resources that can be recreated.
     }
     
-    
+    // get all garden and all knowledgebase list
+   
     func fetchAllKnowledges() {
         let gardenFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Garden")
         let knowledgeFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "KnowledgeBase")
@@ -80,7 +81,7 @@ class AddPlantViewController: UIViewController,UIPickerViewDelegate, UIPickerVie
             gardenList = try managedContext?.fetch(gardenFetch) as? [Garden]
             KnowledgeBaseList = try managedContext?.fetch(knowledgeFetch) as? [KnowledgeBase]
             filteredKnowledgeList = KnowledgeBaseList?.filter({ (knowledge) -> Bool in return
-                (knowledge.category?.contains("Plant"))!})
+                (knowledge.category?.contains("Plant"))!})   // filter the plant knowledge from knowledgebase
             
             for i in gardenList!{
                 gardenKLArray.append(i.name!)
@@ -108,6 +109,7 @@ class AddPlantViewController: UIViewController,UIPickerViewDelegate, UIPickerVie
         return nil
     }
     
+    // if the user pick one knowledgebase, it will get that knowledgebase object from the arraylist
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == kbPickerView {
             kbTF.text = kbArray[row]
@@ -118,6 +120,7 @@ class AddPlantViewController: UIViewController,UIPickerViewDelegate, UIPickerVie
                 }
             }
         }else if pickerView == gardenKLPickerView {
+             // if the user pick one garden, it will get that garden object from the arraylist
             gardenTF.text = gardenKLArray[row]
             for g in gardenList!{
                 if (g.name == gardenTF.text){
@@ -128,6 +131,7 @@ class AddPlantViewController: UIViewController,UIPickerViewDelegate, UIPickerVie
         
     }
     
+    // set the rows of the pickview
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView == kbPickerView {
             return kbArray.count
@@ -137,6 +141,7 @@ class AddPlantViewController: UIViewController,UIPickerViewDelegate, UIPickerVie
         return 0
     }
     
+    // set the items for each row
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         if pickerView == kbPickerView {
             let title = NSAttributedString(string: kbArray[row], attributes: [NSForegroundColorAttributeName : UIColor.darkGray])
@@ -151,15 +156,9 @@ class AddPlantViewController: UIViewController,UIPickerViewDelegate, UIPickerVie
         return 1
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+  
+    
+    // if user wants to go back to previous screen
     @IBAction func CancelButton(_ sender: UIBarButtonItem) {
         // Dismiss the view controller depending on the context it was presented
         let isPresentingInAddMode = presentingViewController is UITabBarController
@@ -174,7 +173,7 @@ class AddPlantViewController: UIViewController,UIPickerViewDelegate, UIPickerVie
 
     }
     
-    
+    // the function for upload a image
     @IBAction func chooseImage(_ sender: Any) {
         let pickerController = UIImagePickerController();
         pickerController.delegate = self
@@ -230,7 +229,7 @@ class AddPlantViewController: UIViewController,UIPickerViewDelegate, UIPickerVie
     
     
     
-    
+    // add function, it will create a newPlant object and pass to the plantTableListview
     @IBAction func addPlantButton(_ sender: Any) {
         
         let isPresentingInAddMode = presentingViewController is UITabBarController

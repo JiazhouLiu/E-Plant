@@ -17,6 +17,7 @@ class SoilKnowledgeViewController: UIViewController {
 
     override func viewDidLoad() {
         
+        //set the items by passed data - knowledge object
         super.viewDidLoad()
         if let knowledge = knowledge{
             titleLabel.text = knowledge.title
@@ -33,6 +34,7 @@ class SoilKnowledgeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //go back to previous view page
     @IBAction func cancelButton(_ sender: Any) {
         // Dismiss the view controller depending on the context it was presented
         let isPresentingInAddMode = presentingViewController is UITabBarController

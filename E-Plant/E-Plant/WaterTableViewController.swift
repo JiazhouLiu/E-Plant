@@ -17,14 +17,15 @@ class WaterTableViewController: UITableViewController,addWaterKnowledgeDelegate{
     var appDelegate: AppDelegate?
     var newKnowledge: NewKnowledge?
 
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         super.viewDidLoad()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         managedContext = appDelegate.persistentContainer.viewContext
-        fetchAllKnowledges()
+        fetchAllKnowledges() // get all water knowledge
         
+        // if there is no item in the db, create sample data
         if filteredKnowledgeList?.count == 0 {
             print("test11111")
             createDefaultItems()
@@ -39,13 +40,13 @@ class WaterTableViewController: UITableViewController,addWaterKnowledgeDelegate{
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
-
+    // number of sections in table
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
+    // number of rows in section
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if let count = filteredKnowledgeList?.count {
@@ -53,7 +54,7 @@ class WaterTableViewController: UITableViewController,addWaterKnowledgeDelegate{
         }
         
         return 0;    }
-    
+    // configure the cell for each row
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "waterKnowledgeCell", for: indexPath) as! WaterTableViewCell
         let knowledge = filteredKnowledgeList![indexPath.row]
@@ -61,7 +62,7 @@ class WaterTableViewController: UITableViewController,addWaterKnowledgeDelegate{
         return cell
         
     }
-    
+    // get all water knowledge from db
     func fetchAllKnowledges() {
         let knowledgeFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "KnowledgeBase")
         
@@ -74,6 +75,7 @@ class WaterTableViewController: UITableViewController,addWaterKnowledgeDelegate{
         }
     }
     
+    // pass the data before jump to that view page
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "waterKnowledgeDetail") {
             let selectedCategory = filteredKnowledgeList![(tableView.indexPathForSelectedRow?.row)!]
@@ -90,6 +92,7 @@ class WaterTableViewController: UITableViewController,addWaterKnowledgeDelegate{
         
     }
     
+    // create a knowledge
     func createManagedKnowledge(title: String,category: String, article:String) -> KnowledgeBase {
         let knowledge = NSEntityDescription.insertNewObject(forEntityName: "KnowledgeBase", into: managedContext!) as! KnowledgeBase
         knowledge.title = title
@@ -99,7 +102,7 @@ class WaterTableViewController: UITableViewController,addWaterKnowledgeDelegate{
     }
     
     
-    
+    // create a category
     func createManagedCategory(name: String) -> Category {
         let category = NSEntityDescription.insertNewObject(forEntityName: "Category", into: managedContext!) as! Category
         category.name = name
@@ -107,7 +110,7 @@ class WaterTableViewController: UITableViewController,addWaterKnowledgeDelegate{
         return category
     }
 
-    
+    // create the sample data
     func createDefaultItems() {
        
         let water = createManagedCategory(name: "Water")
@@ -118,7 +121,8 @@ class WaterTableViewController: UITableViewController,addWaterKnowledgeDelegate{
                 appDelegate?.saveContext()
     }
 
-    
+    // add the water knowledge to dbby received object NoewKnowledge
+    // refresh the list after add a water knwledge
     func addWaterKnowledge(knowledge:NewKnowledge){
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         managedContext = appDelegate.persistentContainer.viewContext
@@ -132,6 +136,7 @@ class WaterTableViewController: UITableViewController,addWaterKnowledgeDelegate{
         self.tableView.reloadData()
     }
     
+    // delete function
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             managedContext?.delete(filteredKnowledgeList![indexPath.row])
@@ -154,7 +159,7 @@ class WaterTableViewController: UITableViewController,addWaterKnowledgeDelegate{
 
     
     
-    
+    // go back to previous view
     @IBAction func backButton(_ sender: Any) {
         // Dismiss the view controller depending on the context it was presented
         let isPresentingInAddMode = presentingViewController is UITabBarController

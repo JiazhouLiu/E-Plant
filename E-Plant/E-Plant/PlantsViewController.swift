@@ -44,11 +44,14 @@ class PlantsViewController: UIViewController,UITableViewDataSource,UITableViewDe
     // Activity Indicator
     var spinner: UIActivityIndicatorView!
     
+    // set the value of the plant view
     override func viewDidLoad() {
         super.viewDidLoad()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         managedContext = appDelegate.persistentContainer.viewContext
-        fetchAllNotes()
+        
+        fetchAllNotes() // all notes from the database
+        // the plant list pass a plant in the prepare function
         plantImage.image = plant.toImage?.image as? UIImage
         conditionLabel.text = plant.condition
         self.title = plant.name
@@ -237,6 +240,7 @@ class PlantsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         }
     }
     
+    // show all items in plant status view and hide others
     func showPlantStatus() {
         articleField.isHidden = true
         notesTableView.isHidden = true
@@ -245,6 +249,7 @@ class PlantsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         self.navigationController?.navigationItem.rightBarButtonItem?.tintColor = UIColor.clear;
     }
     
+    // show all items in plant profile view and hide others
     func showPlantProfile() {
         articleField.isHidden = false
         articleField.isScrollEnabled = false
@@ -255,6 +260,7 @@ class PlantsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         conditionLabel.isHidden = true
     }
     
+    // show all items in plant note view and hide others
     func showNotes() {
         articleField.isHidden = true
         conditionLabel.isHidden = true
@@ -264,6 +270,7 @@ class PlantsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         self.navigationController?.navigationItem.rightBarButtonItem?.tintColor = UIColor.blue;
     }
 
+    // back button function
     @IBAction func backButton(_ sender: Any) {
         // Dismiss the view controller depending on the context it was presented
         let isPresentingInAddMode = presentingViewController is UITabBarController
@@ -277,6 +284,7 @@ class PlantsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         }
     }
     
+    // change the view by tao the segment controller
     @IBAction func changeView(_ sender: UISegmentedControl) {
         if plantViewSegment.selectedSegmentIndex == 0 {
             showPlantStatus()
@@ -288,7 +296,8 @@ class PlantsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         }
     }
     
-    
+    // get all notes from database
+    // filter the note list by match the note.plantName and current plant name
     func fetchAllNotes() {
         let noteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
         
@@ -317,6 +326,7 @@ class PlantsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         return 0
     }
     
+    // configure cell for the note table list
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          let cell = tableView.dequeueReusableCell(withIdentifier: "notesCell", for: indexPath) as!
         NotesTableViewCell
@@ -328,6 +338,7 @@ class PlantsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         return cell
     }
     
+    // delete the items function
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             managedContext?.delete(noteList![indexPath.row])
@@ -345,6 +356,8 @@ class PlantsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         }
     }
     
+    // prepare function, pass a deletegate to addNotesView
+    // pass a note to editeNotesView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        if(segue.identifier == "addNotes") {
             let destination: addNotesViewController = segue.destination.childViewControllers[0] as! addNotesViewController
@@ -359,6 +372,7 @@ class PlantsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         }
     }
     
+    // convert the NSDate to string
     func convertDate(newDate: NSDate) -> String {
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "yyy-MM-dd 'at' HH:mm:ss.SSS"
@@ -366,6 +380,7 @@ class PlantsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         return strNowTime
     }
     
+    // add some sample data
     func addSampleNote(){
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         managedContext = appDelegate.persistentContainer.viewContext
@@ -381,6 +396,8 @@ class PlantsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         
     }
     
+    // the add function, the addnoteView will pass a newContent to here
+    // it will refresh the list once a new item has been added
     func addNote(note:newContent){
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         managedContext = appDelegate.persistentContainer.viewContext
@@ -395,6 +412,7 @@ class PlantsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         self.notesTableView.reloadData()
     }
     
+    // refresh the table list after edit the note
     func editNote(){
         fetchAllNotes()
         self.notesTableView.reloadData()
