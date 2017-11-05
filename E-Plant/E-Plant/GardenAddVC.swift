@@ -58,7 +58,7 @@ class GardenAddVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
             currentLocation = locationManager.location
             let lat = currentLocation.coordinate.latitude
             let long = currentLocation.coordinate.longitude
-            if lat != nil && long != nil {
+            if lat != nil && long != nil { // simulator location bug
                 Location.sharedInstance.latitude = lat
                 Location.sharedInstance.longitude = long
             }else {

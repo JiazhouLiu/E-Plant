@@ -145,23 +145,29 @@ class SignUpTVC: UITableViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func signUpPressed(_ sender: Any) {
         let imgData = UIImageJPEGRepresentation(self.userImageView.image!, 0.8)
         
-        if let email = emailTF.text, let pass = passwordTF.text, let username = usernameTF.text, let country = countryTF.text, let gardeningKL = gardenKLTF.text, (email.characters.count > 0 && pass.characters.count > 0){   // check if email and password are filled
-            //call the login service
-            AuthService.instance.signup(email: email, username: username, password: pass, country: country, gardeningKL: gardeningKL, data: imgData! as NSData, onComplete: { (errMsg, data) in
-                guard errMsg == nil else {  // error handler
-                    let alert = UIAlertController(title: "Error Authentication", message: errMsg, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler:nil))
-                    self.present(alert, animated:true, completion: nil)
-                    return
-                }
-                // success signup and show it to user, then navigate back to root screen
-                let alertController = UIAlertController(title: "Success", message: "You have successfully signed up!", preferredStyle: UIAlertControllerStyle.alert)
-                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
-                    self.performSegue(withIdentifier: "signUpToHomeSegue", sender: nil)
-                }
-                alertController.addAction(okAction)
-                self.present(alertController, animated: true, completion: nil)
-            })
+        if let email = emailTF.text, let pass = passwordTF.text, let passConfirm = confirmPasswordTF.text, let username = usernameTF.text, let country = countryTF.text, let gardeningKL = gardenKLTF.text, (email.characters.count > 0 && pass.characters.count > 0){   // check if email and password are filled
+            if passConfirm != pass {
+                let alert = UIAlertController(title: "Password Confirmation Error", message: "The password and confirm password do not match", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                present(alert, animated: true, completion: nil)
+            }else{
+                //call the login service
+                AuthService.instance.signup(email: email, username: username, password: pass, country: country, gardeningKL: gardeningKL, data: imgData! as NSData, onComplete: { (errMsg, data) in
+                    guard errMsg == nil else {  // error handler
+                        let alert = UIAlertController(title: "Error Authentication", message: errMsg, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler:nil))
+                        self.present(alert, animated:true, completion: nil)
+                        return
+                    }
+                    // success signup and show it to user, then navigate back to root screen
+                    let alertController = UIAlertController(title: "Success", message: "You have successfully signed up!", preferredStyle: UIAlertControllerStyle.alert)
+                    let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+                        self.performSegue(withIdentifier: "signUpToHomeSegue", sender: nil)
+                    }
+                    alertController.addAction(okAction)
+                    self.present(alertController, animated: true, completion: nil)
+                })
+            }
         }
         else {  // error handling
             let alert = UIAlertController(title: "Email and Password Required", message: "You must enter both an email and a password", preferredStyle: .alert)
