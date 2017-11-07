@@ -48,7 +48,8 @@ class GardenViewTVC: UITableViewController, UICollectionViewDelegate, UICollecti
     
     // weather variables
     var gardenLocation: CLLocation!
-    var myTimer: Timer?
+    var myTimerLocal: Timer?
+    var myTimerOnline: Timer?
     var onlineWeather: OnlineWeather!
     var onlineForecast: OnlineWeatherForecast!
     var localTemp1: LocalTemperature1!
@@ -112,10 +113,10 @@ class GardenViewTVC: UITableViewController, UICollectionViewDelegate, UICollecti
         self.currentDate.text = "\(DOW!) \(result)"
         
         
-        if myTimer == nil {
+        if (myTimerLocal == nil && myTimerOnline == nil) {
             startTimer()
         }else{
-            if !((myTimer?.isValid)!) {
+            if !((myTimerLocal?.isValid)!) && !((myTimerOnline?.isValid)!){
                 startTimer()
             }
         }
@@ -125,7 +126,8 @@ class GardenViewTVC: UITableViewController, UICollectionViewDelegate, UICollecti
     // invalidate timer after leaving this view to avoid duplicate timer
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        myTimer?.invalidate()
+        myTimerLocal?.invalidate()
+        myTimerOnline?.invalidate()
     }
     
     // load garden data from passed by garden
@@ -238,45 +240,61 @@ class GardenViewTVC: UITableViewController, UICollectionViewDelegate, UICollecti
     
     // start a 1s timer to refresh online and local weather
     func startTimer(){
-        myTimer = Timer.scheduledTimer(timeInterval: 1, target: self,selector: #selector(GardenViewTVC.refreshOnlineAndLocalWeather), userInfo: nil, repeats: true)
+        refreshLocalWeather()
+        refreshOnlineWeather()
+        myTimerLocal = Timer.scheduledTimer(timeInterval: 1, target: self,selector: #selector(GardenViewTVC.refreshLocalWeather), userInfo: nil, repeats: true)
+        myTimerOnline = Timer.scheduledTimer(timeInterval: 30, target: self,selector: #selector(GardenViewTVC.refreshLocalWeather), userInfo: nil, repeats: true)
+        
     }
     
-    // refresh both online and local weather
-    func refreshOnlineAndLocalWeather() {
-        self.spinner.stopAnimating()
+    // refresh online weather
+    func refreshOnlineWeather() {
         onlineWeather = OnlineWeather()
         onlineWeather.downloadOnlineWeatherDetails {
+            self.spinner.stopAnimating()
             self.updateOnlineUI()
         }
         onlineForecast = OnlineWeatherForecast()
         onlineForecast.downloadOnlineWeatherDetails {
+            self.spinner.stopAnimating()
             self.updateOnlineForecastUI()
         }
+    }
+    
+    // refresh local weather
+    func refreshLocalWeather() {
+        
         if selectedGarden?.sensorNo == 1 {
             localTemp1 = LocalTemperature1()
             localTemp1.downloadLocalWeatherDetails {
+                self.spinner.stopAnimating()
                 self.updateLocalTempUI()
             }
             localMoist1 = LocalMoisture1()
             localMoist1.downloadLocalMoistureDetails {
+                self.spinner.stopAnimating()
                 self.updateLocalMoistUI()
             }
         }else if selectedGarden?.sensorNo == 2 {
             localTemp2 = LocalTemperature2()
             localTemp2.downloadLocalWeatherDetails {
+                self.spinner.stopAnimating()
                 self.updateLocalTempUI()
             }
             localMoist2 = LocalMoisture2()
             localMoist2.downloadLocalMoistureDetails {
+                self.spinner.stopAnimating()
                 self.updateLocalMoistUI()
             }
         }else if selectedGarden?.sensorNo == 3 {
             localTemp3 = LocalTemperature3()
             localTemp3.downloadLocalWeatherDetails {
+                self.spinner.stopAnimating()
                 self.updateLocalTempUI()
             }
             localMoist3 = LocalMoisture3()
             localMoist3.downloadLocalMoistureDetails {
+                self.spinner.stopAnimating()
                 self.updateLocalMoistUI()
             }
         }else{

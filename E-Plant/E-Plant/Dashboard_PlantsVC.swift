@@ -189,7 +189,9 @@ class Dashboard_PlantsVC: UIViewController, CLLocationManagerDelegate {
     
     // 2s timer to refresh online weather
     func startTimer(){
-        myTimer = Timer.scheduledTimer(timeInterval: 2, target: self,selector: #selector(Dashboard_PlantsVC.refreshOnlineWeather), userInfo: nil, repeats: true)
+        refreshOnlineWeather()
+        
+        myTimer = Timer.scheduledTimer(timeInterval: 30, target: self,selector: #selector(Dashboard_PlantsVC.refreshOnlineWeather), userInfo: nil, repeats: true)
     }
     
     // refresh online weather
@@ -199,6 +201,7 @@ class Dashboard_PlantsVC: UIViewController, CLLocationManagerDelegate {
             self.updateOnlineUI()
         }
         fetchPlantData()
+        fetchWaterData() 
     }
     
     // check auth status to make request if needed

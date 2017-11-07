@@ -18,9 +18,9 @@ class MainTBC: UITabBarController, UITabBarControllerDelegate {
 
     // select tab bar item to go to top hierarchy view
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        if let vc = viewController as? UINavigationController {
-            vc.popViewController(animated: false);
-        }
+//        if let vc = viewController as? UINavigationController {
+//            vc.popViewController(animated: false);
+//        }
     }
 
 }
